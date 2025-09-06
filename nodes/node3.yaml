@@ -3,3 +3,13 @@ machine:
     disk: /dev/nvme0n1
   network:
     hostname: node3
+    interfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true # Configured in OPNsense
+        vip:
+          ip: 10.0.2.50
+cluster:
+  apiServer:
+    certSANs:
+      - 10.0.2.53
