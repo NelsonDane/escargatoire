@@ -1,0 +1,22 @@
+creation_rules:
+  - path_regex: manifests/.*\.ya?ml$
+    # encrypted_regex: ^(data|stringData)$
+    encrypted_regex: ^data$
+    pgp: EA202DD680C3621ACE5D23171EE414C5597BC9A2 # Flux's key
+    age: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf # My key
+
+  - path_regex: talosconfig
+    encrypted_regex: ^key$
+    age: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+
+  - path_regex: kubeconfig
+    encrypted_regex: ^client-key-data$
+    age: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+
+  - path_regex: secrets.yaml
+    encrypted_regex: ^(secret|bootstraptoken|secretboxencryptionsecret|token|key)$
+    age: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+
+  - path_regex: controlplane.yaml
+    encrypted_regex: ^(secret|bootstraptoken|secretboxEncryptionSecret|token|key|password)$
+    age: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
