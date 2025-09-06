@@ -1,0 +1,7 @@
+# curl -X POST --data-binary @bare-metal.yaml https://factory.talos.dev/schematics
+customization:
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/iscsi-tools
+      - siderolabs/util-linux-tools
+      - siderolabs/i915
