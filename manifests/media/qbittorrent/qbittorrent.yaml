@@ -1,0 +1,177 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: qbittorrent
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      securityContext:
+        runAsNonRoot: false
+        runAsUser: 0
+        fsGroup: 0
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: gluetun
+          image: qmcgaw/gluetun
+          restartPolicy: Always
+          ports:
+            - containerPort: 6514
+              protocol: UDP
+          env:
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
+            - name: VPN_SERVICE_PROVIDER
+              value: "airvpn"
+            - name: VPN_TYPE
+              value: "wireguard"
+            - name: WIREGUARD_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-secrets
+                  key: WIREGUARD_PRIVATE_KEY
+            - name: WIREGUARD_PRESHARED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-secrets
+                  key: WIREGUARD_PRESHARED_KEY
+            - name: WIREGUARD_ADDRESSES
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun-secrets
+                  key: WIREGUARD_ADDRESSES
+            - name: FIREWALL_VPN_PORTS
+              value: "6514"
+            - name: TZ
+              value: "America/New_York"
+            - name: UPDATER_PERIOD
+              value: "24h"
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              add: ["NET_ADMIN"]
+            runAsNonRoot: false
+            privileged: true
+            runAsUser: 0
+        - name: ping
+          image: busybox
+          command:
+          - sh
+          - -c
+          - |
+            while ! /bin/ping -c 1 9.9.9.9; do
+              echo "Ping failed, retrying in 5"
+              sleep 5
+            done
+            echo "ping successful, exiting"
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              add: ["NET_RAW"]
+            runAsUser: 0
+            runAsNonRoot: false
+      containers:
+        - name: qbittorrent
+          image: linuxserver/qbittorrent
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "4Gi"
+            requests:
+              memory: "1Gi"
+          securityContext:
+            allowPrivilegeEscalation: true
+            runAsUser: 0
+            runAsNonRoot: false
+            privileged: true
+            capabilities:
+              drop: ["ALL"]
+          env:
+            - name: PUID
+              value: "0"
+            - name: PGID
+              value: "0"
+            - name: TZ
+              value: "America/New_York"
+            - name: WEBUI_PORT
+              value: "8080"
+            - name: TORRENTING_PORT
+              value: "6514"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: qbittorrent-media
+              mountPath: /downloads
+              subPath: qbittorrent_downloads
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
+        - name: qbittorrent-media
+          persistentVolumeClaim:
+            claimName: qbittorrent-media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config
+  namespace: qbittorrent
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: qbittorrent
+spec:
+  selector:
+    app: qbittorrent
+  ports:
+    - name: webui
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-ingress
+  namespace: qbittorrent
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: qbittorrent.cluster.nelsondane.com
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: qbittorrent
+              port:
+                number: 8080
