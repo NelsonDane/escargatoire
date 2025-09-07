@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: 11notes/radarr:5.27.5
+          image: 11notes/radarr:5.26.2
           ports:
             - containerPort: 7878
           securityContext:
@@ -23,7 +23,6 @@ spec:
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
-            runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
           env:
