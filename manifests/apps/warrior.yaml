@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: archive
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archive
+  namespace: archive
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: archive
+  template:
+    metadata:
+      labels:
+        app: archive
+    spec:
+      containers:
+        - name: archive
+          image: atdr.meo.ws/archiveteam/warrior-dockerfile
+          env:
+            - name: DOWNLOADER
+              value: "GamerSnail"
+            - name: SELECTED_PROJECT
+              value: "auto"
+            - name: CONCURRENT_ITEMS
+              value: "6"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          ports:
+            - containerPort: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: archive
+  namespace: archive
+spec:
+  selector:
+    app: archive
+  ports:
+    - name: http
+      port: 8001
+      targetPort: 8001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: archive
+  namespace: archive
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: archive.cluster.nelsondane.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: archive
+                port:
+                  number: 8001
