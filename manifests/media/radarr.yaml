@@ -31,10 +31,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /radarr/etc
+            - name: media
+              mountPath: /media
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: radarr-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
 ---
 apiVersion: v1
 kind: Service

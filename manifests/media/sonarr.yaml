@@ -31,10 +31,15 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /sonarr/etc
+            - name: media
+              mountPath: /media
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: sonarr-config
+        - name: media
+          persistentVolumeClaim:
+            claimName: media
 ---
 apiVersion: v1
 kind: Service
