@@ -1,3 +1,4 @@
+# Media
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -28,4 +29,37 @@ spec:
     requests:
       storage: 14Ti
   volumeName: media
+  storageClassName: ""
+# qBittorrent Media
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: qbittorrent-media
+spec:
+  capacity:
+    storage: 14Ti
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/Shell/media
+    server: 10.0.2.20
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=3
+  storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-media
+  namespace: qbittorrent
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 14Ti
+  volumeName: qbittorrent-media
   storageClassName: ""
