@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: archive
-          image: atdr.meo.ws/archiveteam/warrior-dockerfile
+          image: atdr.meo.ws/archiveteam/warrior-dockerfile@sha256:0404579c23edf10f722d6efc02d026721936ffd3531e303b8f9c071cc8de4788
           env:
             - name: DOWNLOADER
               value: "GamerSnail"
