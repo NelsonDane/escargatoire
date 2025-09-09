@@ -1,4 +1,4 @@
-# curl -X POST --data-binary @bare-metal.yaml https://factory.talos.dev/schematics
+# curl -X POST --data-binary @extensions.yaml https://factory.talos.dev/schematics
 customization:
   systemExtensions:
     officialExtensions:
