@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: prowlarr
-          image: 11notes/prowlarr:2.0.5
+          image: 11notes/prowlarr:2.0.5@sha256:1cc6c752647e7e734c09a838bab63cba851a963ba49693e40fe26d2831563c9f
           ports:
             - containerPort: 9696
           securityContext:
@@ -32,7 +32,7 @@ spec:
             - name: config
               mountPath: /prowlarr/etc
         - name: flaresolverr
-          image: flaresolverr/flaresolverr:v3.4.0
+          image: flaresolverr/flaresolverr:v3.4.0@sha256:ab535d1fef5d7f1654c2756949798442ae4bbecee99d4338128aa137fd8eca0e
           ports:
             - containerPort: 8191
           securityContext:
