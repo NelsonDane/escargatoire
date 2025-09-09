@@ -59,7 +59,7 @@ spec:
                 secretKeyRef:
                   name: gluetun-secrets
                   key: WIREGUARD_ADDRESSES
-            - name: FIREWALL_VPN_PORTS
+            - name: FIREWALL_VPN_INPUT_PORTS
               value: "6514"
             - name: TZ
               value: "America/New_York"
