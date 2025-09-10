@@ -1,51 +1,11 @@
----
-# NodeFeature CRD
-apiVersion: apiextensions.k8s.io/v1
-kind: CustomResourceDefinition
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: nodefeatures.nfd.kubernetes.io
-  annotations:
-    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1111"
-spec:
-  group: nfd.kubernetes.io
-  names:
-    kind: NodeFeature
-    listKind: NodeFeatureList
-    plural: nodefeatures
-    singular: nodefeature
-  scope: Cluster
-  versions:
-    - name: v1alpha1
-      served: true
-      storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
-          x-kubernetes-preserve-unknown-fields: true
----
-# NodeFeatureRule CRD
-apiVersion: apiextensions.k8s.io/v1
-kind: CustomResourceDefinition
-metadata:
-  name: nodefeaturerules.nfd.kubernetes.io
-  annotations:
-    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1111"
-spec:
-  group: nfd.kubernetes.io
-  names:
-    kind: NodeFeatureRule
-    listKind: NodeFeatureRuleList
-    plural: nodefeaturerules
-    singular: nodefeaturerule
-  scope: Cluster
-  versions:
-    - name: v1alpha1
-      served: true
-      storage: true
-      schema:
-        openAPIV3Schema:
-          type: object
-          x-kubernetes-preserve-unknown-fields: true
+  name: node-feature-discovery
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
@@ -53,13 +13,8 @@ metadata:
   name: nfd
   namespace: flux-system
 spec:
-  interval: 30m0s
+  interval: 30m
   url: https://kubernetes-sigs.github.io/node-feature-discovery/charts
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: node-feature-discovery
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -68,7 +23,7 @@ metadata:
   namespace: node-feature-discovery
 spec:
   interval: 15m
-  timeout: 5m
+  timeout: 10m # allow more time for daemonset rollout
   releaseName: node-feature-discovery
   chart:
     spec:
@@ -83,4 +38,8 @@ spec:
   upgrade:
     remediation:
       retries: 3
-  values: {}
+  values:
+    worker:
+      securityContext:
+        privileged: true
+        runAsUser: 0
