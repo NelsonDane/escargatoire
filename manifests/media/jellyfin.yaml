@@ -51,7 +51,10 @@ kind: Service
 metadata:
   name: jellyfin
   namespace: media
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.2.36"
 spec:
+  type: LoadBalancer
   selector:
     app: jellyfin
   ports:
@@ -85,7 +88,7 @@ metadata:
   namespace: media
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 16Gi
