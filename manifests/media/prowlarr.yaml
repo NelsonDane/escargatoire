@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: prowlarr
-          image: 11notes/prowlarr:2.0.5@sha256:1cc6c752647e7e734c09a838bab63cba851a963ba49693e40fe26d2831563c9f
+          image: 11notes/prowlarr:2.0.5@sha256:d109eaa7dbb6011f652f6d87322a42d9cc52691de90e8987ee76149de499c0e6
           ports:
             - containerPort: 9696
           securityContext:
