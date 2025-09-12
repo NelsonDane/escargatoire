@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: 11notes/sonarr:4.0.15@sha256:7482c7b19855df845ccc3f7ada79c66999210165cc9f5430222ac107b7bc38e3
+          image: 11notes/sonarr:4.0.15@sha256:297b06c281d6da18c083d81689ad2d14447fe9d1ed4d49d2fca8003f61ffef12
           ports:
             - containerPort: 8989
           securityContext:
