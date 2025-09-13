@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: radarr
-          image: 11notes/radarr:5.26.2@sha256:e1f22c7cd0a18e725f686576891c30dba195911f2cd4e1eff77567de0563f597
+          image: 11notes/radarr:5.27.5@sha256:61d72c8c27054941f83450337ee4434a8f8385db13715c9ecf00977f05122ad2
           ports:
             - containerPort: 7878
           securityContext:
