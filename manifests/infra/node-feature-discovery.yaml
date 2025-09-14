@@ -23,7 +23,7 @@ metadata:
   namespace: node-feature-discovery
 spec:
   interval: 15m
-  timeout: 10m # allow more time for daemonset rollout
+  timeout: 10m
   releaseName: node-feature-discovery
   chart:
     spec:
@@ -43,3 +43,5 @@ spec:
       securityContext:
         privileged: true
         runAsUser: 0
+        runAsNonRoot: false
+        readOnlyRootFilesystem: false

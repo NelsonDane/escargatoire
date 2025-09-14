@@ -82,7 +82,8 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - 10.0.2.36/32 # single IP for Jellyfin
+    - 10.0.2.23/32 # Jellyseerr
+    - 10.0.2.36/32 # Jellyfin
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1
