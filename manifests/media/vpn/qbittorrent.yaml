@@ -1,0 +1,141 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+        - name: gluetun
+          image: qmcgaw/gluetun:latest
+          securityContext:
+            privileged: true
+            capabilities:
+              add: ["NET_ADMIN"]
+          envFrom:
+            - secretRef:
+                name: gluetun-secrets
+          env:
+            - name: VPN_SERVICE_PROVIDER
+              value: airvpn
+            - name: VPN_TYPE
+              value: wireguard
+            - name: FIREWALL_VPN_INPUT_PORTS
+              value: "6514"
+            - name: WIREGUARD_MTU
+              value: "1280"
+            - name: SERVER_COUNTRIES
+              value: "United States"
+            - name: TZ
+              value: "America/New_York"
+            - name: DNS_ADDRESS
+              value: "9.9.9.9"
+          ports:
+            - name: torrent
+              containerPort: 6514
+              protocol: TCP
+            - name: torrent-udp
+              containerPort: 6514
+              protocol: UDP
+            - name: webui
+              containerPort: 8080
+              protocol: TCP
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
+
+        - name: qbittorrent
+          image: lscr.io/linuxserver/qbittorrent:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "America/New_York"
+            - name: WEBUI_PORT
+              value: "8080"
+            - name: TORRENTING_PORT
+              value: "6514"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: vpn-media
+              mountPath: /downloads
+              subPath: qbittorrent_downloads
+          securityContext:
+            runAsUser: 0
+            runAsNonRoot: false
+
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
+        - name: vpn-media
+          persistentVolumeClaim:
+            claimName: vpn-media
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config
+  namespace: vpn
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: longhorn
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: vpn
+spec:
+  selector:
+    app: qbittorrent
+  ports:
+    - name: webui
+      port: 8080
+      targetPort: 8080
+    - name: torrent-tcp
+      port: 6514
+      targetPort: 6514
+      protocol: TCP
+    - name: torrent-udp
+      port: 6514
+      targetPort: 6514
+      protocol: UDP
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-ingress
+  namespace: vpn
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: qbittorrent.cluster.nelsondane.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
