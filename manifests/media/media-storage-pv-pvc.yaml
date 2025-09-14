@@ -1,5 +1,14 @@
 # Media
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: media
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+---
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: media
@@ -30,12 +39,21 @@ spec:
       storage: 14Ti
   volumeName: media
   storageClassName: ""
-# qBittorrent Media
+# Local Client Media
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vpn
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: qbittorrent-media
+  name: vpn-media
 spec:
   capacity:
     storage: 14Ti
@@ -53,13 +71,13 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: qbittorrent-media
-  namespace: qbittorrent
+  name: vpn-media
+  namespace: vpn
 spec:
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 14Ti
-  volumeName: qbittorrent-media
+  volumeName: vpn-media
   storageClassName: ""
