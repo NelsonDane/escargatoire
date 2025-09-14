@@ -13,6 +13,19 @@ spec:
       labels:
         app: jellyfin
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                # Node must have Intel Quicksync GPU
+                - key: intel.feature.node.kubernetes.io/gpu
+                  operator: In
+                  values:
+                    - "true"
+                # Node must also have the Talos i915 extension
+                - key: extensions.talos.dev/i915
+                  operator: Exists
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
