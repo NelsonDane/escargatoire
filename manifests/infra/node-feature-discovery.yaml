@@ -40,6 +40,7 @@ spec:
     worker:
       securityContext:
         privileged: true
+        allowPrivilegeEscalation: true
         runAsUser: 0
         runAsNonRoot: false
         readOnlyRootFilesystem: false
