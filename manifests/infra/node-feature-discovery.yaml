@@ -33,8 +33,6 @@ spec:
         kind: HelmRepository
         name: nfd
         namespace: flux-system
-  install:
-    createNamespace: true
   upgrade:
     remediation:
       retries: 3
