@@ -14,9 +14,12 @@ spec:
         app: jellyseerr
     spec:
       securityContext:
+        runAsNonRoot: true
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: jellyseerr
           image: fallenbagel/jellyseerr:latest
@@ -26,9 +29,6 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-            runAsNonRoot: true
-            seccompProfile:
-              type: RuntimeDefault
           env:
             - name: TZ
               value: "America/New_York"

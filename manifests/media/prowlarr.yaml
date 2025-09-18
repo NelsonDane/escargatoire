@@ -13,24 +13,27 @@ spec:
       labels:
         app: prowlarr
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: prowlarr
-          image: 11notes/prowlarr:2.0.5@sha256:1cc6c752647e7e734c09a838bab63cba851a963ba49693e40fe26d2831563c9f
+          image: ghcr.io/home-operations/prowlarr:2.1.1
           ports:
             - containerPort: 9696
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-            runAsNonRoot: true
-            seccompProfile:
-              type: RuntimeDefault
           env:
             - name: TZ
               value: "America/New_York"
           volumeMounts:
             - name: config
-              mountPath: /prowlarr/etc
+              mountPath: /config
         - name: flaresolverr
           image: flaresolverr/flaresolverr:v3.4.0@sha256:ab535d1fef5d7f1654c2756949798442ae4bbecee99d4338128aa137fd8eca0e
           ports:
@@ -39,10 +42,6 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-            runAsNonRoot: true
-            runAsUser: 1000
-            seccompProfile:
-              type: RuntimeDefault
           env:
             - name: TZ
               value: "America/New_York"
