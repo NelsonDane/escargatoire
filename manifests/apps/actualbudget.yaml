@@ -65,6 +65,8 @@ kind: Ingress
 metadata:
   name: actual-ingress
   namespace: apps
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
