@@ -21,7 +21,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: prowlarr
-          image: ghcr.io/home-operations/prowlarr:2.1.1
+          image: ghcr.io/home-operations/prowlarr:2.1.1@sha256:23c5597e203af76e42696c5cbb503493ab6b983cb042636c2a78d26b88a5a23d
           ports:
             - containerPort: 9696
           securityContext:
