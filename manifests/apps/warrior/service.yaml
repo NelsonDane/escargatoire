@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: archive
+  namespace: apps
+spec:
+  selector:
+    app: archive
+  ports:
+    - name: http
+      port: 8001
+      targetPort: 8001

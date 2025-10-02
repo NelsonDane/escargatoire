@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: archive
+  namespace: apps
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: archive.cluster.nelsondane.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: archive
+                port:
+                  number: 8001
