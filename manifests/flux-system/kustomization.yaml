@@ -6,6 +6,7 @@ resources:
   - gotk-sync.yaml
   # Infra
   - metallb.yaml
+  - renovate.yaml
   # Apps
   - actual.yaml
   - warrior.yaml

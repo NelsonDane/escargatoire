@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-config
+  namespace: renovate
+data:
+  config.json: |-
+    {
+      "extends": ["config:best-practices"],
+      "labels": ["renovate", "dependencies"],
+      "kubernetes": {
+        "fileMatch": ["^manifests/.+\\.yaml$"]
+      },
+      "flux": {
+        "fileMatch": ["^manifests/.+\\.yaml$"]
+      }
+    }
