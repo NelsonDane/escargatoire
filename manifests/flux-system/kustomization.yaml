@@ -4,6 +4,8 @@ resources:
   # Flux
   - gotk-components.yaml
   - gotk-sync.yaml
+  # Infra
+  - metallb.yaml
   # Apps
   - actual.yaml
   - warrior.yaml
