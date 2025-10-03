@@ -77,8 +77,8 @@ machine:
             # Use the host DNS resolver as upstream for Kubernetes CoreDNS pods.
             forwardKubeDNSToHost: true
     # Configures the node labels for the machine.
-    nodeLabels:
-        node.kubernetes.io/exclude-from-external-load-balancers: ""
+    # nodeLabels:
+    #     node.kubernetes.io/exclude-from-external-load-balancers: ""
 # Provides cluster specific configuration options.
 cluster:
     # Globally unique identifier for this cluster (base64 encoded random 32 bytes).
