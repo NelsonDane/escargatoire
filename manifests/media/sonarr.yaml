@@ -21,7 +21,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: sonarr
-          image: ghcr.io/home-operations/sonarr:4.0.15
+          image: ghcr.io/home-operations/sonarr:4.0.15@sha256:ca6c735014bdfb04ce043bf1323a068ab1d1228eea5bab8305ca0722df7baf78
           ports:
             - containerPort: 8989
           securityContext:
