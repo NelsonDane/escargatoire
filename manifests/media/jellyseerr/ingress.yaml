@@ -1,0 +1,19 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyseerr-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: jellyseerr.cluster.nelsondane.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: jellyseerr
+            port:
+              number: 5055

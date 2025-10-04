@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jellyseerr
+  namespace: media
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: "10.0.2.23"
+spec:
+  type: LoadBalancer
+  selector:
+    app: jellyseerr
+  ports:
+    - name: http
+      port: 5055
+      targetPort: 5055

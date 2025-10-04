@@ -12,3 +12,4 @@ resources:
   - warrior.yaml
   # Media
   - jellyfin.yaml
+  - jellyseerr.yaml
