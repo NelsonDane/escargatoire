@@ -10,3 +10,5 @@ resources:
   # Apps
   - actual.yaml
   - warrior.yaml
+  # Media
+  - jellyfin.yaml

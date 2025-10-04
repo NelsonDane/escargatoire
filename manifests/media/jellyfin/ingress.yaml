@@ -1,0 +1,19 @@
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jellyfin-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: jellyfin.cluster.nelsondane.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: jellyfin
+            port:
+              number: 8096
