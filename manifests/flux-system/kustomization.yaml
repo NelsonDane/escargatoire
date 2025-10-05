@@ -6,6 +6,7 @@ resources:
   - gotk-sync.yaml
   # Infra
   - ingress-nginx.yaml
+  - gpu-daemon.yaml
   - metallb.yaml
   - renovate.yaml
   # Apps
