@@ -50,11 +50,12 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /media
-              readOnly: true
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
         - name: media
-          persistentVolumeClaim:
-            claimName: media
+          nfs:
+            server: 10.0.2.20
+            path: /mnt/Shell/media
+            readOnly: true
