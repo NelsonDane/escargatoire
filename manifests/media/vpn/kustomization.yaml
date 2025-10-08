@@ -5,5 +5,5 @@ resources:
   - ingress.yaml
   - namespace.yaml
   - pvc.yaml
-  - secret.yaml
+  - gluetun-secrets.yaml
   - service.yaml
