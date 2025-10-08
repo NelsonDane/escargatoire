@@ -40,6 +40,10 @@ spec:
               value: "America/New_York"
             - name: DNS_ADDRESS
               value: "9.9.9.9"
+            - name: VPN_PORT_FORWARDING_UP_COMMAND
+              value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
+            - name: VPN_PORT_FORWARDING_DOWN_COMMAND
+              value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":123}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
           ports:
             - name: torrent
               containerPort: 6514
@@ -71,7 +75,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
-            - name: vpn-media
+            - name: media
               mountPath: /downloads
               subPath: qbittorrent_downloads
           securityContext:
@@ -82,60 +86,7 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: qbittorrent-config
-        - name: vpn-media
-          persistentVolumeClaim:
-            claimName: vpn-media
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: qbittorrent-config
-  namespace: vpn
-spec:
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 4Gi
-  storageClassName: longhorn
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: qbittorrent
-  namespace: vpn
-spec:
-  selector:
-    app: qbittorrent
-  ports:
-    - name: webui
-      port: 8080
-      targetPort: 8080
-    - name: torrent-tcp
-      port: 6514
-      targetPort: 6514
-      protocol: TCP
-    - name: torrent-udp
-      port: 6514
-      targetPort: 6514
-      protocol: UDP
-  type: LoadBalancer
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: qbittorrent-ingress
-  namespace: vpn
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: qbittorrent.cluster.nelsondane.com
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: qbittorrent
-                port:
-                  number: 8080
+        - name: media
+          nfs:
+            server: 10.0.2.20
+            path: /mnt/Shell/media

@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent-ingress
+  namespace: vpn
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: qbittorrent.cluster.nelsondane.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: qbittorrent
+                port:
+                  number: 8080
