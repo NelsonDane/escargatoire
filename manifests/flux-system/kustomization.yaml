@@ -21,3 +21,4 @@ resources:
   - prowlarr.yaml
   - radarr.yaml
   - sonarr.yaml
+  - vpn.yaml
