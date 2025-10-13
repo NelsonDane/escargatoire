@@ -5,10 +5,11 @@ resources:
   - gotk-components.yaml
   - gotk-sync.yaml
   # Infra
-  - ingress-nginx.yaml
   - gpu-daemon.yaml
+  - ingress-nginx.yaml
   - metallb.yaml
   - nfd.yaml
+  - postgresql.yaml
   - renovate.yaml
   # Apps
   - apps-ns.yaml

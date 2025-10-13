@@ -32,6 +32,12 @@ spec:
         name: longhorn-repo
       version: v1.9.1
   interval: 1m0s
+  values:
+    defaultSettings:
+      orphanAutoDeletion: false
+      autoDeletePodWhenVolumeDetachedUnexpectedly: true
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      nodeDrainPolicy: always-allow
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
