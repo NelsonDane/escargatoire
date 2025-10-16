@@ -9,6 +9,7 @@ spec:
     matchLabels:
       app: sonarr
   strategy:
+    rollingUpdate: null
     type: Recreate
   template:
     metadata:

@@ -9,6 +9,7 @@ spec:
     matchLabels:
       app: radarr
   strategy:
+    rollingUpdate: null
     type: Recreate
   template:
     metadata:
