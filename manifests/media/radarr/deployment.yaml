@@ -31,6 +31,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"
@@ -44,6 +45,5 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: media
-          nfs:
-            server: 10.0.2.20
-            path: /mnt/Shell/media
+          persistentVolumeClaim:
+            claimName: media

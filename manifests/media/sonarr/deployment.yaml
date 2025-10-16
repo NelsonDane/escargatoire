@@ -44,6 +44,5 @@ spec:
           persistentVolumeClaim:
             claimName: sonarr-config
         - name: media
-          nfs:
-            server: 10.0.2.20
-            path: /mnt/Shell/media
+          persistentVolumeClaim:
+            claimName: media
