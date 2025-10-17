@@ -39,7 +39,7 @@ spec:
             - name: config
               mountPath: /config
         - name: flaresolverr
-          image: flaresolverr/flaresolverr:v3.4.0@sha256:ab535d1fef5d7f1654c2756949798442ae4bbecee99d4338128aa137fd8eca0e
+          image: flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
           ports:
             - containerPort: 8191
           securityContext:
