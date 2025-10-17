@@ -8,6 +8,9 @@ spec:
   selector:
     matchLabels:
       app: prowlarr
+  strategy:
+    rollingUpdate: null
+    type: Recreate
   template:
     metadata:
       labels:
@@ -28,6 +31,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"
@@ -42,6 +46,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"
