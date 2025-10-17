@@ -55,7 +55,5 @@ spec:
           persistentVolumeClaim:
             claimName: jellyfin-config
         - name: media
-          nfs:
-            server: 10.0.2.20
-            path: /mnt/Shell/media
-            readOnly: true
+          persistentVolumeClaim:
+            claimName: media
