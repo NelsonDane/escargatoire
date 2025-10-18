@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: huntarr-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: huntarr.cluster.nelsondane.com
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: huntarr-svc
+              port:
+                number: 9705
