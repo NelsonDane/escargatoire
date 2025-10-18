@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: actual
   namespace: apps
 spec:
+  serviceName: actual
   replicas: 1
   selector:
     matchLabels:
@@ -41,7 +42,12 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 10
             failureThreshold: 3
-      volumes:
-        - name: actual-data
-          persistentVolumeClaim:
-            claimName: actual-config
+  volumeClaimTemplates:
+    - metadata:
+        name: actual-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn

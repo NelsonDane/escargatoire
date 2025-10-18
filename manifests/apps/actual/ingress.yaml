@@ -8,13 +8,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: actual.cluster.nelsondane.com
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: actual-svc
-            port:
-              number: 5006
+    - host: actual.cluster.nelsondane.com
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: actual-svc
+              port:
+                number: 5006

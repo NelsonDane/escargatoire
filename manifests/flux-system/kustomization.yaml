@@ -12,9 +12,7 @@ resources:
   - postgresql.yaml
   - renovate.yaml
   # Apps
-  - apps-ns.yaml
-  - actual.yaml
-  - warrior.yaml
+  - apps.yaml
   # Media
   - media-ns.yaml
   - jellyfin.yaml
