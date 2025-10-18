@@ -1,11 +1,11 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: renovate
+  name: infra
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./manifests/infra/renovate
+  path: ./manifests/infra
   prune: true
   sourceRef:
     kind: GitRepository
