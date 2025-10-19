@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: actual
   namespace: apps
 spec:
+  serviceName: actual
   replicas: 1
   selector:
     matchLabels:
@@ -19,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:edge@sha256:2ab51d18c46c1a61c4c6e5f45e85717e32c1e345aad79b7558adf7cfc1e8a849
+          image: docker.io/actualbudget/actual-server:edge@sha256:2c501aeba3310e51a187628ce4ed11c94e20dab0738b5c26850f48b301d46d0d
           ports:
             - containerPort: 5006
           securityContext:
@@ -41,7 +42,12 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 10
             failureThreshold: 3
-      volumes:
-        - name: actual-data
-          persistentVolumeClaim:
-            claimName: actual-config
+  volumeClaimTemplates:
+    - metadata:
+        name: actual-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn
