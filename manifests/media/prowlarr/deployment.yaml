@@ -8,6 +8,9 @@ spec:
   selector:
     matchLabels:
       app: prowlarr
+  strategy:
+    rollingUpdate: null
+    type: Recreate
   template:
     metadata:
       labels:
@@ -21,13 +24,14 @@ spec:
           type: RuntimeDefault
       containers:
         - name: prowlarr
-          image: ghcr.io/home-operations/prowlarr:2.1.1@sha256:23c5597e203af76e42696c5cbb503493ab6b983cb042636c2a78d26b88a5a23d
+          image: ghcr.io/home-operations/prowlarr:2.1.3@sha256:236a73dad45baeedd1eba40a457de63a644695728a2ce28f0d254b1fe9a05822
           ports:
             - containerPort: 9696
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"
@@ -35,13 +39,14 @@ spec:
             - name: config
               mountPath: /config
         - name: flaresolverr
-          image: flaresolverr/flaresolverr:v3.4.0@sha256:ab535d1fef5d7f1654c2756949798442ae4bbecee99d4338128aa137fd8eca0e
+          image: flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
           ports:
             - containerPort: 8191
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"

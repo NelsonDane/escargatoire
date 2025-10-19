@@ -5,20 +5,9 @@ resources:
   - gotk-components.yaml
   - gotk-sync.yaml
   # Infra
-  - ingress-nginx.yaml
-  - gpu-daemon.yaml
-  - metallb.yaml
-  - nfd.yaml
-  - renovate.yaml
+  - capacitor.yaml
+  - infra.yaml
   # Apps
-  - apps-ns.yaml
-  - actual.yaml
-  - warrior.yaml
+  - apps.yaml
   # Media
-  - media-ns.yaml
-  - jellyfin.yaml
-  - jellyseerr.yaml
-  - prowlarr.yaml
-  - radarr.yaml
-  - sonarr.yaml
-  - vpn.yaml
+  - media.yaml

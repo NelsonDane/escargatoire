@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest@sha256:14cc0004058f148c4b97a7f0afdfa9b2bf76bd3fd18633db94864e2c7834efad
+          image: qmcgaw/gluetun:latest@sha256:a599f0e5ae7df4fa933d2802b0676ce59122383d6e772ac9f01ef414cf5c252f
           securityContext:
             privileged: true
             capabilities:
@@ -60,7 +60,7 @@ spec:
                 command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
 
         - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:latest@sha256:5f3785f8d8cd27d509cd948a06195306c3d951b1e1e123e46c7be40ecfb6965f
+          image: lscr.io/linuxserver/qbittorrent:latest@sha256:884b9b6e9c6467d9c1fb16551e03cb1f66ad32c412ce4bb492e206e0bd0f55b5
           env:
             - name: PUID
               value: "1000"
