@@ -8,6 +8,9 @@ spec:
   selector:
     matchLabels:
       app: radarr
+  strategy:
+    rollingUpdate: null
+    type: Recreate
   template:
     metadata:
       labels:
@@ -21,13 +24,14 @@ spec:
           type: RuntimeDefault
       containers:
         - name: radarr
-          image: ghcr.io/home-operations/radarr:5.28.0@sha256:80dec94f1eea0715471853011efdf2c49cf92f8fe3b17b722ad8f8a637e3fead
+          image: ghcr.io/home-operations/radarr:6.0.2@sha256:12b8348c57c556d837d28bbc73a8837fb7f402a29aba40385a0513dbd068881b
           ports:
             - containerPort: 7878
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+            runAsNonRoot: true
           env:
             - name: TZ
               value: "America/New_York"
@@ -41,6 +45,5 @@ spec:
           persistentVolumeClaim:
             claimName: radarr-config
         - name: media
-          nfs:
-            server: 10.0.2.20
-            path: /mnt/Shell/media
+          persistentVolumeClaim:
+            claimName: media
