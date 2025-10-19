@@ -5,4 +5,5 @@ resources:
   - ./actual
   - ./auto-rsa
   - ./filestash
+  - ./sponsors-bot
   - ./warrior
