@@ -6,7 +6,7 @@ resources:
   # CNPG Cluster
   - db-cluster.yaml
   - helm-release.yaml
-  # - helm-repo.yaml
+  - helm-repo.yaml
   - storageclass.yaml
   - postgres-creds.yaml
   - user-creds.yaml
