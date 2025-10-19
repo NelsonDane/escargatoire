@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # CNPG Operator
+  - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.27/releases/cnpg-1.27.0.yaml
+  # CNPG Cluster
+  - db-cluster.yaml
+  # - helm-release.yaml
+  # - helm-repo.yaml
+  - storageclass.yaml
+  - postgres-creds.yaml
+  - user-creds.yaml

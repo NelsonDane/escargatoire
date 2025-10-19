@@ -7,11 +7,9 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m0s
+  url: https://github.com/NelsonDane/escargatoire.git
   ref:
     branch: main
-  secretRef:
-    name: flux-system
-  url: ssh://git@github.com/NelsonDane/escargatoire
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -25,7 +23,3 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-gpg

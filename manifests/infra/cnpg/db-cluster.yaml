@@ -1,0 +1,67 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: db-cluster
+  namespace: cnpg-system
+  labels:
+    app.kubernetes.io/component: database
+spec:
+  instances: 3
+  description: "PostgreSQL cluster for applications"
+
+  storage:
+    storageClass: longhorn-postgres-replica-storage
+    size: 16Gi
+  walStorage:
+    storageClass: longhorn-postgres-replica-storage
+    size: 8Gi
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:14
+  primaryUpdateStrategy: unsupervised
+
+  monitoring:
+    enablePodMonitor: true
+
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: postgres-creds
+
+  nodeMaintenanceWindow:
+    reusePVC: false # rebuild from other replica instead
+
+  bootstrap:
+    initdb:
+      database: appdb
+      owner: user
+      secret:
+        name: user-creds
+
+  postgresql:
+    parameters:
+      timezone: "America/New_York"
+
+  managed:
+
+    roles:
+      - name: read
+        passwordSecret:
+          name: read-creds
+        ensure: present
+        comment: Read Only user
+        login: true
+        inherit: true
+        inRoles:
+          - pg_read_all_data
+
+    services:
+      disabledDefaultServices: [ "ro" ]
+      additional:
+        - selectorType: rw
+          updateStrategy: patch
+          serviceTemplate:
+            metadata:
+              name: db-cluster-lb
+              annotations:
+                metallb.universe.tf/loadBalancerIPs: "10.0.2.14"
+            spec:
+              type: LoadBalancer
