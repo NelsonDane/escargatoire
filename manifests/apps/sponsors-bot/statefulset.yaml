@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: sponsors-bot-worker
-          image: ghcr.io/nelsondane/sponsors-bot:latest
+          image: ghcr.io/nelsondane/sponsors-bot:latest@sha256:34aaa93b97f2675095379554215717f0f81b6002782a9370693c38f19653521e
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -33,7 +33,7 @@ spec:
               mountPath: /app/config.yaml
               subPath: config.yaml
         - name: sponsors-bot-web
-          image: ghcr.io/nelsondane/sponsors-bot-web:latest
+          image: ghcr.io/nelsondane/sponsors-bot-web:latest@sha256:7972372a50c1ff0374174e802f0cd9c18294c8d6675bcaaf98dbb25228541922
           ports:
             - containerPort: 8000
           securityContext:
@@ -48,7 +48,7 @@ spec:
               mountPath: /app/config.yaml
               subPath: config.yaml
         - name: cloudflare
-          image: cloudflare/cloudflared:latest
+          image: cloudflare/cloudflared:latest@sha256:396cd2e6f021275ad09969a1b4f1a7e62ca5349fde62781ce082bb2c18105c70
           command: ["cloudflared", "tunnel", "--no-autoupdate", "run", "--token", "$(TUNNEL_TOKEN)"]
           env:
             - name: TUNNEL_TOKEN
