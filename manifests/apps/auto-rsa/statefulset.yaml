@@ -1,28 +1,30 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: actual
+  name: auto-rsa
   namespace: apps
 spec:
-  serviceName: actual
+  serviceName: auto-rsa
   replicas: 1
   selector:
     matchLabels:
-      app: actual
+      app: auto-rsa
   template:
     metadata:
       labels:
-        app: actual
+        app: auto-rsa
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-        - name: actual
-          image: docker.io/actualbudget/actual-server:edge@sha256:2c501aeba3310e51a187628ce4ed11c94e20dab0738b5c26850f48b301d46d0d
-          ports:
-            - containerPort: 5006
+        - name: auto-rsa
+          image: docker.io/nelsondane/auto-rsa:latest@sha256:87db68e9e7954c55e98e805f55a2015bf5d575f2d867d857bd8fd71dd9894e55
+          tty: true
+          envFrom:
+            - secretRef:
+                name: rsa-secrets
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -31,20 +33,11 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
-            - name: actual-data
-              mountPath: /data
-          livenessProbe:
-            exec:
-              command:
-                - node
-                - src/scripts/health-check.js
-            initialDelaySeconds: 20
-            periodSeconds: 60
-            timeoutSeconds: 10
-            failureThreshold: 3
+            - name: rsa-data
+              mountPath: /app/creds
   volumeClaimTemplates:
     - metadata:
-        name: actual-data
+        name: rsa-data
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

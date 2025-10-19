@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: actual
-  namespace: apps
+  name: huntarr
+  namespace: media
 spec:
-  serviceName: actual
+  serviceName: huntarr
   replicas: 1
   selector:
     matchLabels:
-      app: actual
+      app: huntarr
   template:
     metadata:
       labels:
-        app: actual
+        app: huntarr
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
       containers:
-        - name: actual
-          image: docker.io/actualbudget/actual-server:edge@sha256:2c501aeba3310e51a187628ce4ed11c94e20dab0738b5c26850f48b301d46d0d
+        - name: huntarr
+          image: docker.io/huntarr/huntarr:latest
           ports:
-            - containerPort: 5006
+            - containerPort: 9705
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -31,20 +31,11 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
-            - name: actual-data
-              mountPath: /data
-          livenessProbe:
-            exec:
-              command:
-                - node
-                - src/scripts/health-check.js
-            initialDelaySeconds: 20
-            periodSeconds: 60
-            timeoutSeconds: 10
-            failureThreshold: 3
+            - name: huntarr-config
+              mountPath: /config
   volumeClaimTemplates:
     - metadata:
-        name: actual-data
+        name: huntarr-config
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

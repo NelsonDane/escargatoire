@@ -14,6 +14,7 @@ parameters:
   staleReplicaTimeout: "1440" # 1 day
   fsType: "ext4"
   diskSelector: "nvme"
+  # dataLocality: "best-effort"
   dataLocality: "strict-local"
   recurringJobSelector: '[
       {

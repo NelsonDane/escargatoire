@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ./actual
+  - ./auto-rsa
   - ./filestash
+  - ./sponsors-bot
   - ./warrior
