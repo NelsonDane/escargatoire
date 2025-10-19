@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: sponsors-bot-config
+    namespace: apps
+type: Opaque
+stringData:
+    CLOUDFLARE_TUNNEL_TOKEN: ENC[AES256_GCM,data:LstsstPGNwJ9kc+grCBKf+ByCwLhscEcAi92ScnZCloqQ8WRbt+q+8Li+XKKulLC1jfeFqH72RgUSr+hHkWUPOxQP6jkJmFrGoXVJw814YK28oVcWnJiGWPlKPXJwVkelmP1kSphAwDFQdX+NscCGF+iFC6iuGU7V9ipHcXUNsAe8i63LC1IzRn24k6bEFGR1xxsRVeKib3A3e20L8FtIOiOunzLHgydKqCrelvUIIgRHYepeAng8g==,iv:xMjnm9UtshGu0B8Ov32LZfin3pSF3vtvWxo0L+OMBOE=,tag:oDcjwR6qGgOK4dMcR4XPPg==,type:str]
+    config.yaml: ENC[AES256_GCM,data:0elDVVQ9S06BN+UhaZsl/9Y9kW2Rj5npnNmm6Q8HxoLbdpkyx1FD6aYfoY02U7HtyOD3ss/oR4cx28uBcjb21fJtmRg4FpflDfNF4792PMb90u2dNK8aAyIFsNfTg05LfPN/9CX5CTfqXUnVkOiBR1mK4nC+Z/3c9SqtK+Zeppee7MYR7vgJqmLr6MKIuzM531mTkpeBqRofgrNJyBizlmdijE3Gp1V89NR9nriiycYKFIGeOZ1WC5uwZ3uwpIwpkHrvCcXOIccPMmFPv8qd6qk99AIb8qsJhcYo2Q9odfwURFF6Mf186zMrrLEYaEUwW3vyDs2ZSB2Lvy4fngdwdPLLnCrcsq1EPo0yJardWir/i5tpFIQfNRyBiTD5zhpIr7tm8mwl1zd1EQ4mof8sJInJ7kAIccWkNEQ1NpZDp5UmD5Cobfv7OIvADZjs3Suq/owBxKylLcTmR03MabkY4BAtqUZhAb/MWZuK5KeZNG879HD7fV8/NWa06JJNGEnmkfc1af2vMSqL49XFclb2fo/bfg/KPviyODTwA9ps/bmSw6cGqn+qZPnNhxVDg/P6uBCpqe554luNWOLjJj1UdVkn4M3UBhX6sFBldhqrQiEZFj0RC+lXpwE3xCHcmF+So/JJEnOVo/amfVbfhgFMHt/WdGQcHrDB+01QpQMiGfuSFd0eP3ywh+0NEMZxymjxOVtdmZ2z5A4PDUDzRNyPpdDIw4aG4RH5dj/DyxMXXqd6406sQrW/QPf+/v1dlYirDYhRDte6zNAm4cZ0EdkamRRL1ApK+1FU6kf1GxEOGr0LvPi6tuvuSqj3Y66TZN9/TkZC98DoqXmT1kn6PQe/5obZqS8Ei7LoDkiWaiBoX9Od8KtLTdIJdqYob5uMUP243uTjDF8TKiKpjAt5p23Lu9IbE9nvwKqFJgG182bjSmZhfv6uEDAO0lmqEjR+1leLAYcRnRBFIA+QMd+4pV6lZwozoCv4n5y+66971q7tHLCT99I62gsVqhQHwujH5dkwfrNGuNhmapsI6F7KSWKH2+O6eXGN0FhYD88F5nOGExHB4RfFjCSZlIOs2BFogSQlXCUUUXYmEpzGuhgKleLowNxnMn7QKFDB3Q56WpyJ+2yRgDhcHxZeFGvDupgpVWSdznZ1MtAnYfwcG3FTVR2PsWM4F1Ggh1fk/jYh3zvo3RrIMOhlt6XzA/4u13/tTKtOyIJDPM5Pd6PnXTdpcfpMESFZ6zytEVg8o32C0K7qUMZSTFE1qwb6otVKBuY9O51P3x8nTDbhMihJWUSApe9YjdgzwalkSkukA+ky7ycxHcohVlgSwBwaoxcpRz+0Dm+Px+k8X1sYj6iA3Wi2/KDHoCNNV5tUcK4/EwPRU6UHs14jgQ1/1PdqsxODK5Ha/shMZ2w7KubmNuzneinxRCninCNhY2pe7FEIwQ2yR1nfyzyYvBlZ7+RRIiXjx2Lf3oZqCmt98UxtIdfRTZrx8Pke/UOhO024rawuyQRx2tDr/playU5ZpNXsO1mMyDfb5TVNNQ5VnN8VPQ8Ba1dNmbzdc6c0MNEQ5wNJ49/wejcEPNqILkSaNxBMgwQulfIXbH4WMgYBGdcyLtOpbtUveqdId6r74GNDrEBl1lrQsl8MD6aTqCHmp3WKfJChtjytDYvm1oHcDMqwBI3+6AwBOJw3KSq7nUHZq30a6UuD1tZvk1TwU/FU/6WWqn7GwUIObEQbqFInk2bgtI8YNBRfkaQ6OSUpuwT1fgx19rL8c7rl6gKxQ685enL8oLSOen8Z7OysIHR1hOQoxX2TOUd/Wl2rnva3JdBTTgwsrdXndLbZSSnXhY1yk8QNB02z0CHYAFcfakhUlFIrxqpWlAyHszB04rCQ2X7QUPS+lN9v4ZYyhbbn/SGKXryd8VlVmfVl2ktF,iv:qen24KUiF59oP48CFrE3aWmtSRkr25F7aMd9PrnI0yg=,tag:SMW8WgVepEfWFiC8/DOLAA==,type:str]
+sops:
+    age:
+        - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBway9uQ3VkdkZYdlJjd3Rw
+            ZkFCWTBIRUJicE40bmk1NTRnZ2ZZL2ZwRmhFCitZa3BzTk14Wi9aZGRRcjhXZi8w
+            Z0xZZmNwQU8rZGplQTFiQ3BrUHI2NDgKLS0tIDFVRUxlVXM0SVZIUU1ocXI0K25x
+            MEVHYk5mWCttb3BEb3loYk1sL1lnMHMKY7RG3Z+TcmTKKx+Kca3JgHoxQaoUyvhu
+            jfn+s0nkuFlaak9tAO1G3EQjmlEBo5D0ZcKGWdy4CA7vZ9xakXmesg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-10-19T02:58:19Z"
+    mac: ENC[AES256_GCM,data:HIbvvi5On9xo1oWZ0w41J6Xcf2VDb3v4cLip4rdO5X6vL8aprRanl4A70gc0aLrHsdiW+QDPqap4vgEUGAzih9gflv+3Pc1Hay9YOyUfvBaKTKr7qjOWmukLtsNC1J1ky2IFr2pj7NsfyimjwiTmmgRbJ7qagajFXmf1OYTRCX4=,iv:Asta8Ol+dcW0f1WCHTZBoEaIOln0OPQN5GuusEhyjoE=,tag:5f+kAq0SBRDTIseZxttaoA==,type:str]
+    pgp:
+        - created_at: "2025-10-19T02:58:19Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DedmP+m+bgeISAQdAFpYFWMOR7+vvEqOOnj7V5JwmPhudox+UMt191duHsgsw
+            9TohcL6bXorUZHcnSFOCiedFztfhI9q909zXIrlVdyEBtQVvLQdJ88WAhIBMS2ao
+            1GgBCQIQSsAEYCkr49hPy1cotW9i3y00LA1ZlRTV2C01Yx3E+pnu/rysX26m0FIw
+            XwvHHF66V2ZEr8/IS0t3hYPlvDd9gph50TuKo9oXk2VYPrOa9KSLZH+LJmnPtt25
+            cJd1VDbKde+mFg==
+            =Vy9Y
+            -----END PGP MESSAGE-----
+          fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

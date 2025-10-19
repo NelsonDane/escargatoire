@@ -65,7 +65,3 @@ spec:
                 metallb.universe.tf/loadBalancerIPs: "10.0.2.14"
             spec:
               type: LoadBalancer
-              ports:
-                - name: postgresql
-                  port: 5432
-                  targetPort: 5432

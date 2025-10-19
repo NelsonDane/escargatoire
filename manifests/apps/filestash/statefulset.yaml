@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: files
+  namespace: apps
+  labels:
+    app: files
+spec:
+  serviceName: files
+  replicas: 1
+  selector:
+    matchLabels:
+      app: files
+  template:
+    metadata:
+      labels:
+        app: files
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: filestash
+          image: machines/filestash:latest
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: filestash-config
+              mountPath: /app/data/state
+            - name: media
+              mountPath: /media
+          ports:
+            - containerPort: 8334
+      volumes:
+        - name: media
+          persistentVolumeClaim:
+            claimName: media-apps
+  volumeClaimTemplates:
+    - metadata:
+        name: filestash-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn
