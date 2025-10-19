@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest@sha256:14cc0004058f148c4b97a7f0afdfa9b2bf76bd3fd18633db94864e2c7834efad
+          image: qmcgaw/gluetun:latest@sha256:a599f0e5ae7df4fa933d2802b0676ce59122383d6e772ac9f01ef414cf5c252f
           securityContext:
             privileged: true
             capabilities:
