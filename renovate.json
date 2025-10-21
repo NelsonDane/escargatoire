@@ -11,6 +11,6 @@
     ]
   },
   "ignorePaths": [
-    "manifests/flux-system/gotk-components.yaml",
+    "manifests/flux-system/gotk-components.yaml"
   ]
 }
