@@ -1,4 +1,5 @@
 # curl -X POST --data-binary @extensions.yaml https://factory.talos.dev/schematics
+# https://factory.talos.dev/?arch=amd64&cmdline-set=true&extensions=-&extensions=siderolabs%2Fi915&extensions=siderolabs%2Fiscsi-tools&extensions=siderolabs%2Futil-linux-tools&platform=metal&secureboot=true&target=metal&version=1.11.3
 customization:
   systemExtensions:
     officialExtensions:
