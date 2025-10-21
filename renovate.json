@@ -1,9 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "kubernetes": {
-    "fileMatch": ["^manifests/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/^manifests/.+\\.yaml$/"
+    ]
   },
   "flux": {
-    "fileMatch": ["^manifests/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/^manifests/.+\\.yaml$/"
+    ]
   }
 }
