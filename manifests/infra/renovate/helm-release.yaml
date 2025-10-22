@@ -22,11 +22,9 @@ spec:
       allowPrivilegeEscalation: false
       capabilities:
         drop: ["ALL"]
+    existingSecret: renovate-env
     renovate:
       existingConfigFile: /usr/src/app/config.js
-      extraEnvFrom:
-        - secretRef:
-          name: renovate-env
     extraVolumes:
       - name: renovate-config
         configMap:
