@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - configmap.yaml
   - namespace.yaml
-  - renovate.yaml
+  - helm-repo.yaml
+  - helm-release.yaml
   - secret.yaml
