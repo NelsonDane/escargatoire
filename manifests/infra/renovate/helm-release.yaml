@@ -23,7 +23,9 @@ spec:
       capabilities:
         drop: ["ALL"]
     renovate:
-      - secretRef:
+      existingConfigFile: /usr/src/app/config.js
+      extraEnvFrom:
+        - secretRef:
           name: renovate-env
     extraVolumes:
       - name: renovate-config
