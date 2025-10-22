@@ -23,8 +23,8 @@ spec:
       capabilities:
         drop: ["ALL"]
     existingSecret: renovate-env
-    renovate:
-      existingConfigFile: /usr/src/app/config.js
+    # renovate:
+      # existingConfigFile: /usr/src/app/config.js
     extraVolumes:
       - name: renovate-config
         configMap:
