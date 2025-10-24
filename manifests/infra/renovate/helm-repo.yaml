@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: mend-renovate-ce-ee
-  namespace: renovate
-spec:
-  interval: 1h
-  url: https://mend.github.io/renovate-ce-ee
