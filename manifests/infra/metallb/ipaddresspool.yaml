@@ -5,7 +5,6 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-    - 10.0.2.14/32 # Postgres CNPG
     - 10.0.2.23/32 # Jellyseerr
     - 10.0.2.36/32 # Jellyfin
   autoAssign: false
