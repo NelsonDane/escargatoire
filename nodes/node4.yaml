@@ -9,7 +9,3 @@ machine:
         dhcp: true # Configured in OPNsense
         vip:
           ip: 10.0.2.50
-cluster:
-  apiServer:
-    certSANs:
-      - 10.0.2.54

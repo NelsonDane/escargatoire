@@ -12,12 +12,40 @@ spec:
     spec:
       template:
         spec:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            fsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          initContainers:
+            - name: token-generator
+              image: nelsondane/renovate-token-injector:latest@sha256:5f80dac2c0db74af4eb1d3286b9d481f16c4006f3d89f5bfb6c3651a3761cff2
+              envFrom:
+                - secretRef:
+                    name: renovate-env
+              volumeMounts:
+                - name: tmp
+                  mountPath: /app/out
+              securityContext:
+                allowPrivilegeEscalation: false
+                capabilities:
+                  drop: ["ALL"]
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           containers:
             - name: renovate
               image: renovate/renovate:41.152.5@sha256:d3eff91631e970f94b8d99c81bc518ae1566d2a96c942d18d8bdc6c9f927b409
               env:
                 - name: LOG_LEVEL
                   value: debug
+                - name: RENOVATE_TOKEN
+                  valueFrom:
+                    fileKeyRef:
+                      path: config.env
+                      volumeName: tmp
+                      key: GH_TOKEN
               envFrom:
                 - secretRef:
                     name: renovate-env
@@ -25,7 +53,7 @@ spec:
                 - name: config
                   mountPath: /opt/renovate/
                   readOnly: true
-                - name: work-volume
+                - name: tmp
                   mountPath: /tmp/renovate/
               securityContext:
                 allowPrivilegeEscalation: false
@@ -39,5 +67,5 @@ spec:
             - name: config
               configMap:
                 name: renovate-config
-            - name: work-volume
+            - name: tmp
               emptyDir: {}
