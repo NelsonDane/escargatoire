@@ -20,7 +20,7 @@ spec:
               type: RuntimeDefault
           initContainers:
             - name: token-generator
-              image: nelsondane/renovate-token-injector:latest@sha256:5f80dac2c0db74af4eb1d3286b9d481f16c4006f3d89f5bfb6c3651a3761cff2
+              image: nelsondane/renovate-token-injector:latest@sha256:9f0489ce28f871fc6be8230200c9a3dae5c4e8f4449c25982c1dd89eebfe18b1
               envFrom:
                 - secretRef:
                     name: renovate-env
