@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cleanuparr
+  namespace: media
+spec:
+  serviceName: cleanuparr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cleanuparr
+  template:
+    metadata:
+      labels:
+        app: cleanuparr
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: cleanuparr
+          image: ghcr.io/cleanuparr/cleanuparr:latest
+          command: ["./Cleanuparr"]
+          workingDir: /app
+          ports:
+            - containerPort: 11011
+          env:
+            - name: TZ
+              value: "America/New_York"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: cleanuparr-config
+              mountPath: /config
+  volumeClaimTemplates:
+    - metadata:
+        name: cleanuparr-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: longhorn

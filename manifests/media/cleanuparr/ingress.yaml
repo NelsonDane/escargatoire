@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cleanuparr-ingress
+  namespace: media
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: cleanuparr.cluster.nelsondane.com
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: cleanuparr-svc
+              port:
+                number: 11011
