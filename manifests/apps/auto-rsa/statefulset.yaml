@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: auto-rsa
-          image: docker.io/nelsondane/auto-rsa:latest@sha256:a3ed948885aa3edf56f6fbe4a1092844eda7596e12ab7cd6942b14ca78fb7ff4
+          image: docker.io/nelsondane/auto-rsa:latest@sha256:0c8b6a2465d709e9e05437a918b4396b2e45d695f60e2035099707ed89766af4
           tty: true
           envFrom:
             - secretRef:
