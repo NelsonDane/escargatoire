@@ -24,7 +24,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: prowlarr
-          image: ghcr.io/home-operations/prowlarr:2.1.3@sha256:236a73dad45baeedd1eba40a457de63a644695728a2ce28f0d254b1fe9a05822
+          image: ghcr.io/home-operations/prowlarr:2.1.5@sha256:affb671fa367f4b7029d58f4b7d04e194e887ed6af1cf5a678f3c7aca5caf6ca
           ports:
             - containerPort: 9696
           securityContext:
@@ -39,7 +39,7 @@ spec:
             - name: config
               mountPath: /config
         - name: flaresolverr
-          image: flaresolverr/flaresolverr:v3.4.2@sha256:42ffb1cc56088899e91a7382bc611b00fa7cbd016accfed12c0695275ca18451
+          image: flaresolverr/flaresolverr:v3.4.3@sha256:057eedf25a22905685c55be78b2dd70bcd617a921384cd17cb3f4e8901753331
           ports:
             - containerPort: 8191
           securityContext:
