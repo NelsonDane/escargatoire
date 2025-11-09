@@ -60,13 +60,15 @@ spec:
                 command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
 
         - name: qbittorrent
-          image: 11notes/qbittorrent:5.1.2@sha256:aff054f9d3b7ccfb0055265315079b1d90df7a7264ffb01a7cd80ec4af505811
+          image: ghcr.io/home-operations/qbittorrent:5.1.2@sha256:31ac39705e31f7cdcc04dc46c1c0b0cdf8dc6f9865d4894efc097a33adc41524
           env:
             - name: TZ
               value: "America/New_York"
           volumeMounts:
             - name: config
-              mountPath: /qbittorrent
+              mountPath: /config
+            - name: tmp
+              mountPath: /tmp
             - name: media
               mountPath: /downloads
               subPath: qbittorrent_downloads
@@ -82,6 +84,8 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: qbittorrent-config
+        - name: tmp
+          emptyDir: {}
         - name: media
           nfs:
             server: 10.0.2.20
