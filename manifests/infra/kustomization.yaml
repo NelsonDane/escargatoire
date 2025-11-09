@@ -7,4 +7,5 @@ resources:
   - ./longhorn
   - ./metallb
   - ./nfd
+  - ./pangolin
   - ./renovate
