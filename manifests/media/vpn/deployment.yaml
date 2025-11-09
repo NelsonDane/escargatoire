@@ -60,28 +60,24 @@ spec:
                 command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
 
         - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:latest@sha256:098d4340c0709a9ddbc7010ca21900238388454e20182d52b9723b40a2a44293
+          image: 11notes/qbittorrent:5.1.2@sha256:aff054f9d3b7ccfb0055265315079b1d90df7a7264ffb01a7cd80ec4af505811
           env:
-            - name: PUID
-              value: "1000"
-            - name: PGID
-              value: "1000"
             - name: TZ
               value: "America/New_York"
-            - name: WEBUI_PORT
-              value: "8080"
-            - name: TORRENTING_PORT
-              value: "6514"
           volumeMounts:
             - name: config
-              mountPath: /config
+              mountPath: /qbittorrent
             - name: media
               mountPath: /downloads
               subPath: qbittorrent_downloads
           securityContext:
-            runAsUser: 0
-            runAsNonRoot: false
-
+            runAsUser: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+      restartPolicy: Always
       volumes:
         - name: config
           persistentVolumeClaim:
