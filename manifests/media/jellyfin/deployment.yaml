@@ -8,6 +8,9 @@ spec:
   selector:
     matchLabels:
       app: jellyfin
+  strategy:
+    rollingUpdate: null
+    type: Recreate
   template:
     metadata:
       labels:

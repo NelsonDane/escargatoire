@@ -3,10 +3,7 @@ kind: Service
 metadata:
   name: jellyseerr
   namespace: media
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: "10.0.2.23"
 spec:
-  type: LoadBalancer
   selector:
     app: jellyseerr
   ports:

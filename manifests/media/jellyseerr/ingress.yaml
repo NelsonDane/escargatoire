@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: jellyseerr.cluster.nelsondane.com
+  - host: overseerr.cluster.nelsondane.com
     http:
       paths:
       - pathType: Prefix
