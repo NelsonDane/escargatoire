@@ -5,6 +5,7 @@ resources:
   - media-storage.yaml
   - namespace.yaml
   # Apps
+  - ./cleanuparr
   - ./huntarr
   - ./jellyfin
   - ./jellyseerr
