@@ -9,6 +9,7 @@ resources:
   - ./huntarr
   - ./jellyfin
   - ./jellyseerr
+  - ./profilarr
   - ./prowlarr
   - ./radarr
   - ./sonarr

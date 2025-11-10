@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: profilarr
+  namespace: media
+spec:
+  serviceName: profilarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profilarr
+  template:
+    metadata:
+      labels:
+        app: profilarr
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: profilarr
+          image: santiagosayshey/profilarr:latest
+          command: ["gunicorn", "--bind", "0.0.0.0:6868", "--timeout", "600", "app.main:create_app()"]
+          workingDir: /app
+          ports:
+            - containerPort: 6868
+          env:
+            - name: TZ
+              value: "America/New_York"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: profilarr-config
+              mountPath: /config
+  volumeClaimTemplates:
+    - metadata:
+        name: profilarr-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: longhorn
