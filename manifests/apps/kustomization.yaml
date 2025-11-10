@@ -4,6 +4,9 @@ resources:
   - namespace.yaml
   - ./actual
   - ./auto-rsa
+  - ./brave
+  - ./code
+  - ./discord
   - ./filestash
   - ./sponsors-bot
   - ./warrior
