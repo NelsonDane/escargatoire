@@ -17,6 +17,8 @@ spec:
     newtInstances:
       - name: main
         enabled: true
+        service:
+          type: ClusterIP
         auth:
           existingSecretName: pangolin-secrets
           keys:
