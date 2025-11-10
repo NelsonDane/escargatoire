@@ -4,7 +4,7 @@ metadata:
   name: pangolin
   namespace: newt
 spec:
-  interval: 3m
+  interval: 5m
   chart:
     spec:
       chart: newt
@@ -12,7 +12,7 @@ spec:
         kind: HelmRepository
         name: fossorial
         namespace: newt
-      version: "1.1.0"
+      version: 1.1.0
   values:
     newtInstances:
       - name: main
