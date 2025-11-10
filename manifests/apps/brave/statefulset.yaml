@@ -36,10 +36,16 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
             - name: brave-config
               mountPath: /home/kasm-user
           ports:
             - containerPort: 6901
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
   volumeClaimTemplates:
     - metadata:
         name: brave-config
