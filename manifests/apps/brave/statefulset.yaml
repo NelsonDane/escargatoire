@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: brave
+  namespace: apps
+  labels:
+    app: brave
+spec:
+  serviceName: brave
+  replicas: 1
+  selector:
+    matchLabels:
+      app: brave
+  template:
+    metadata:
+      labels:
+        app: brave
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: brave
+          image: kasmweb/brave:1.17.0
+          env:
+            - name: VNCOPTIONS
+              value: "-disableBasicAuth"
+            - name: TZ
+              value: "America/New_York"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: brave-config
+              mountPath: /home/kasm-user
+          ports:
+            - containerPort: 6901
+  volumeClaimTemplates:
+    - metadata:
+        name: brave-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: longhorn
