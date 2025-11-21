@@ -8,7 +8,8 @@ spec:
   chart:
     spec:
       chart: cilium
-      version: 1.18.4
+      # Broken in versions above: https://github.com/cilium/cilium/issues/42786
+      version: 1.18.2
       sourceRef:
         kind: HelmRepository
         name: cilium
@@ -23,10 +24,6 @@ spec:
       ui:
         enabled: true
     kubeProxyReplacement: true
-    l2announcements:
-      enabled: true
-    externalIPs:
-      enabled: true
     securityContext:
       capabilities:
         ciliumAgent:
@@ -51,19 +48,21 @@ spec:
       hostRoot: /sys/fs/cgroup
     k8sServiceHost: localhost
     k8sServicePort: 7445
-    # Increase rate limits
-    k8sClientRateLimit:
-      qps: 50
-      burst: 100
-    # Allow binding to ports 80 and 443
-    nodePort:
-      bindProtection: false
+    rollOutCiliumPods: true
     # Gateway API
     gatewayAPI:
       enabled: true
-      gatewayClass:
-        create: "true"
       enableAlpn: true
       enableAppProtocol: true
       hostNetwork:
         enabled: true
+    envoy:
+      enabled: true
+      securityContext:
+        capabilities:
+          keepCapNetBindService: true
+          envoy:
+            # Needed to bind to privileged ports
+            - NET_ADMIN
+            - SYS_ADMIN
+            - NET_BIND_SERVICE
