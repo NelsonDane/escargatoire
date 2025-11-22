@@ -8,6 +8,7 @@ spec:
   listeners:
     - name: http
       protocol: HTTP
+      hostname: "*.cluster.nelsondane.com"
       port: 80
       allowedRoutes:
         namespaces:
@@ -17,17 +18,7 @@ spec:
       hostname: "*.nelsondane.com"
       port: 443
       tls:
-        certificateRefs:
-          - kind: Secret
-            name: wildcard-cert-tls
-      allowedRoutes:
-        namespaces:
-          from: All
-    - name: https-domain-gateway
-      protocol: HTTPS
-      hostname: "nelsondane.com"
-      port: 443
-      tls:
+        mode: Terminate
         certificateRefs:
           - kind: Secret
             name: wildcard-cert-tls
