@@ -25,10 +25,6 @@ spec:
       ui:
         enabled: true
     kubeProxyReplacement: true
-    # l2announcements:
-    #   enabled: true
-    # externalIPs:
-    #   enabled: true
     securityContext:
       capabilities:
         ciliumAgent:
