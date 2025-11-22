@@ -14,13 +14,14 @@ spec:
       labels:
         app: actual
     spec:
+      enableServiceLinks: false # https://github.com/actualbudget/actual/issues/4920#issuecomment-2858039347
       securityContext:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:latest@sha256:8f72d73e68958566850325c1f9fe780a4477340979969bd6979649dc519723ab
+          image: docker.io/actualbudget/actual-server:edge@sha256:2203620a9b71ec1e4f917b5d8ae5dc1a74771e13f44a59ee25ad828708567621
           ports:
             - containerPort: 5006
           securityContext:
