@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - certificate.yaml
   - cluster-issuer.yaml
-  - gateway.yaml
   - helm-release.yaml
   - helm-repo.yaml
   - namespace.yaml
