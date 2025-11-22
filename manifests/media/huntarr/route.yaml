@@ -15,5 +15,5 @@ spec:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: huntarr-svc
+        - name: huntarr
           port: 9705

@@ -1,19 +1,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: cleanuparr
+  name: profilarr
   namespace: media
 spec:
   parentRefs:
     - name: cilium-gateway
       namespace: cert-manager
   hostnames:
-    - cleanuparr.cluster.nelsondane.com
+    - profilarr.cluster.nelsondane.com
   rules:
     - matches:
       - path:
           type: PathPrefix
           value: /
       backendRefs:
-        - name: cleanuparr
-          port: 11011
+        - name: profilarr
+          port: 6868
