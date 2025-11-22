@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: actual
+  namespace: apps
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cert-manager
+  hostnames:
+    - actual.cluster.nelsondane.com
+  rules:
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: actual
+          port: 5006

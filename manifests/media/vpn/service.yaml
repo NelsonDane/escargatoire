@@ -18,4 +18,3 @@ spec:
       port: 6514
       targetPort: 6514
       protocol: UDP
-  type: LoadBalancer

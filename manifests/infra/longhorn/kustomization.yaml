@@ -6,6 +6,6 @@ metadata:
 resources:
   - helmrepository.yaml
   - helmrelease.yaml
-  - ingress.yaml
   - longhorn-secret.yaml
   - namespace.yaml
+  - route.yaml
