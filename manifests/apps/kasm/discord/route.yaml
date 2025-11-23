@@ -1,0 +1,28 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: discord
+  namespace: apps
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cilium
+  hostnames:
+    - discord.cluster.nelsondane.com
+    - discord.nelsondane.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: Connection
+                value: "upgrade"
+              - name: Upgrade
+                value: "websocket"
+      backendRefs:
+        - name: discord
+          port: 6901

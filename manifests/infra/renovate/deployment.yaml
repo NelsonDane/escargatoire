@@ -36,7 +36,7 @@ spec:
                   type: RuntimeDefault
           containers:
             - name: renovate
-              image: renovate/renovate:42.13.0@sha256:33d4261a2c086be22674ca9e069c5187e0dd7352df333f870eded7d3ab4de0b5
+              image: renovate/renovate:42.19.3@sha256:0f129ba37673d828fd03de6a9dd548492bfb7a11da33245c43cbb5a1078a8bab
               env:
                 - name: LOG_LEVEL
                   value: debug
