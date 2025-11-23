@@ -6,7 +6,7 @@ metadata:
 spec:
   parentRefs:
     - name: cilium-gateway
-      namespace: cert-manager
+      namespace: cilium
   hostnames:
     - cleanuparr.cluster.nelsondane.com
   rules:

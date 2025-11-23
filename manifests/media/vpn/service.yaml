@@ -10,11 +10,3 @@ spec:
     - name: webui
       port: 8080
       targetPort: 8080
-    - name: torrent-tcp
-      port: 6514
-      targetPort: 6514
-      protocol: TCP
-    - name: torrent-udp
-      port: 6514
-      targetPort: 6514
-      protocol: UDP
