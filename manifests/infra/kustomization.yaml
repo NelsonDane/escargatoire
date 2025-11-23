@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
   - ./capacitor
   - ./cert-manager
+  - ./cilium
   - ./gpu-daemon
-  - ./ingress-nginx
   - ./longhorn
   - ./nfd
   - ./rathole

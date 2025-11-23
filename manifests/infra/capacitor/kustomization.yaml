@@ -4,5 +4,5 @@ metadata:
   name: capacitor
   namespace: flux-system
 resources:
-  - ingress.yaml
   - ocirepository.yaml
+  - route.yaml

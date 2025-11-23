@@ -40,14 +40,6 @@ spec:
           image: jellyfin/jellyfin@sha256:1edf3f17997acbe139718f252a7d2ded2706762390d787a34204668498dbc5f6
           ports:
             - containerPort: 8096
-          resources:
-            requests:
-              cpu: "1"
-              memory: "2Gi"
-            limits:
-              squat.ai/gpu: "1"
-              memory: "4Gi"
-              cpu: "2"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -67,6 +59,7 @@ spec:
         - name: cache
           emptyDir:
             medium: Memory
+            sizeLimit: 4Gi
         - name: media
           persistentVolumeClaim:
             claimName: media
