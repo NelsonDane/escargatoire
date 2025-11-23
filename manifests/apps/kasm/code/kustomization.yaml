@@ -3,6 +3,3 @@ kind: Kustomization
 resources:
   - statefulset.yaml
   - service.yaml
-  - pv.yaml
-  - pvc.yaml
-  - route.yaml
