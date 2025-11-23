@@ -2,24 +2,26 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: cilium-gateway
-  namespace: gateway
+  namespace: cilium
 spec:
   gatewayClassName: cilium
   listeners:
     - name: http
       protocol: HTTP
+      hostname: "*.cluster.nelsondane.com"
       port: 80
       allowedRoutes:
         namespaces:
           from: All
-    - name: https
+    - name: https-gateway
       protocol: HTTPS
+      hostname: "*.nelsondane.com"
       port: 443
-      # tls:
-      #   mode: Terminate
-      #   certificateRefs:
-      #     - kind: Secret
-      #       name: wildcard-cert-tls
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-cert-tls
       allowedRoutes:
         namespaces:
           from: All
