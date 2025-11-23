@@ -10,3 +10,5 @@ spec:
     - name: http
       port: 6901
       targetPort: 6901
+      protocol: TCP
+      appProtocol: kubernetes.io/ws

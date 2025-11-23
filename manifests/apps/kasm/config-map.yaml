@@ -1,0 +1,18 @@
+# https://github.com/kasmtech/workspaces-images/issues/16#issuecomment-1362565447
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vncserver-shim
+  namespace: apps
+data:
+  vncserver: |
+    #!/bin/bash
+    mkdir -p ~/.vnc
+
+    cat << EOF > ~/.vnc/kasmvnc.yaml
+    network:
+      ssl:
+        require_ssl: false
+    EOF
+
+    exec /usr/bin/vncserver "${@/-sslOnly/-FreeKeyMappings}"
