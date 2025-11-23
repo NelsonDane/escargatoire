@@ -37,12 +37,9 @@ spec:
           type: RuntimeDefault
       containers:
         - name: jellyfin
-          image: jellyfin/jellyfin@sha256:d43a8878689311f841a1967f899f54db56877bf6b426fd7ff870ac1a6fd1dce4
+          image: jellyfin/jellyfin@sha256:1edf3f17997acbe139718f252a7d2ded2706762390d787a34204668498dbc5f6
           ports:
             - containerPort: 8096
-          resources:
-            limits:
-              squat.ai/gpu: "1"
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -51,12 +48,18 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: cache
+              mountPath: /cache
             - name: media
               mountPath: /media
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
+        - name: cache
+          emptyDir:
+            medium: Memory
+            sizeLimit: 4Gi
         - name: media
           persistentVolumeClaim:
             claimName: media
