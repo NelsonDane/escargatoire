@@ -15,52 +15,65 @@ spec:
       labels:
         app: qbittorrent
     spec:
-      containers:
+      initContainers:
         - name: gluetun
           image: qmcgaw/gluetun:latest@sha256:7beb357f2b9e0e181812b6f408812e00ef85334bf2dd1b9b6d2df6c5b0bf8957
+          restartPolicy: Always # Keep container running
           securityContext:
-            privileged: true
             capabilities:
               add: ["NET_ADMIN"]
           envFrom:
             - secretRef:
                 name: gluetun-secrets
           env:
-            - name: VPN_SERVICE_PROVIDER
-              value: airvpn
-            - name: VPN_TYPE
-              value: wireguard
+            # Firewall: https://github.com/qdm12/gluetun-wiki/blob/main/setup/options/firewall.md
             - name: FIREWALL_VPN_INPUT_PORTS
               value: "6514"
-            - name: WIREGUARD_MTU
-              value: "1280"
+            - name: FIREWALL_INPUT_PORTS
+              value: "8080"
             - name: SERVER_COUNTRIES
               value: "United States"
             - name: TZ
               value: "America/New_York"
-            - name: DNS_ADDRESS
-              value: "9.9.9.9"
+            - name: UPDATER_PERIOD
+              value: "24h"
             - name: VPN_PORT_FORWARDING_UP_COMMAND
               value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
             - name: VPN_PORT_FORWARDING_DOWN_COMMAND
               value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":123}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
           ports:
-            - name: torrent
-              containerPort: 6514
-              protocol: TCP
-            - name: torrent-udp
-              containerPort: 6514
-              protocol: UDP
             - name: webui
               containerPort: 8080
               protocol: TCP
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
+            initialDelaySeconds: 5
+            periodSeconds: 3
+            timeoutSeconds: 2
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 2
+            failureThreshold: 3
           lifecycle:
             postStart:
               exec:
                 command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
 
+      containers:
         - name: qbittorrent
           image: ghcr.io/home-operations/qbittorrent:5.1.4@sha256:25fc7caf22101f85276ede9b1f76a46b7a93971bb6b70b6c58d14d6ab7f51415
+          restartPolicy: Always
           env:
             - name: TZ
               value: "America/New_York"
@@ -79,7 +92,7 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-      restartPolicy: Always
+
       volumes:
         - name: config
           persistentVolumeClaim:
