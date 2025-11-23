@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: discord
-          image: kasmweb/discord:1.17.0@sha256:b6f573241de61e289bed6a3bbaeb98abc65b89d02d8c3c0f3295233e15583086
+          image: kasmweb/discord:1.18.0@sha256:1c3e34a38f34aec62ca09c2ccee4e4269236bc30b14be569d75680eada5d3c0a
           env:
             - name: VNCOPTIONS
               value: "-disableBasicAuth"
