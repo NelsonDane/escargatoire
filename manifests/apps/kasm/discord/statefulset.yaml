@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: discord
+  namespace: apps
+  labels:
+    app: discord
+spec:
+  serviceName: discord
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discord
+  template:
+    metadata:
+      labels:
+        app: discord
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      containers:
+        - name: discord
+          image: kasmweb/discord:1.17.0@sha256:b6f573241de61e289bed6a3bbaeb98abc65b89d02d8c3c0f3295233e15583086
+          env:
+            - name: VNCOPTIONS
+              value: "-disableBasicAuth"
+            - name: TZ
+              value: "America/New_York"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: dshm
+              mountPath: /dev/shm
+            - name: discord-config
+              mountPath: /home/kasm-user
+            - name: vncserver-shim
+              mountPath: /usr/local/bin/vncserver
+              subPath: vncserver
+          ports:
+            - containerPort: 6901
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+        - name: vncserver-shim
+          configMap:
+            name: vncserver-shim
+            defaultMode: 0755
+
+  volumeClaimTemplates:
+    - metadata:
+        name: discord-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: longhorn

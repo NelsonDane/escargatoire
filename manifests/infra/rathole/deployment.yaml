@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rathole
+  namespace: rathole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rathole
+  template:
+    metadata:
+      labels:
+        app: rathole
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: rathole
+          image: rapiz1/rathole:latest
+          command: ["/app/rathole", "/app/config.toml"]
+          resources:
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.toml
+              subPath: config.toml
+      volumes:
+        - name: config
+          configMap:
+            name: rathole-config
