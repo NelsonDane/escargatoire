@@ -40,12 +40,20 @@ spec:
               mountPath: /dev/shm
             - name: discord-config
               mountPath: /home/kasm-user
+            - name: vncserver-shim
+              mountPath: /usr/local/bin/vncserver
+              subPath: vncserver
           ports:
             - containerPort: 6901
       volumes:
         - name: dshm
           emptyDir:
             medium: Memory
+        - name: vncserver-shim
+          configMap:
+            name: vncserver-shim
+            defaultMode: 0755
+
   volumeClaimTemplates:
     - metadata:
         name: discord-config
