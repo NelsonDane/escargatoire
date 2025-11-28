@@ -52,14 +52,13 @@ spec:
               mountPath: /cache
             - name: media
               mountPath: /media
+              readOnly: true
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
         - name: cache
-          emptyDir:
-            medium: Memory
-            sizeLimit: 4Gi
+          emptyDir: {}
         - name: media
           persistentVolumeClaim:
             claimName: media
