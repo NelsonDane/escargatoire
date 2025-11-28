@@ -17,7 +17,7 @@ spec:
     spec:
       initContainers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest@sha256:870a9d5880182a3902004c32d3827d0b098e30a4f74d3cc7742512e23d3888df
+          image: qmcgaw/gluetun:latest@sha256:6a59b7901068b7c50ef52200152db3afd4b9cebc13e272b2169de4cdcad91006
           restartPolicy: Always # Keep container running
           securityContext:
             capabilities:
