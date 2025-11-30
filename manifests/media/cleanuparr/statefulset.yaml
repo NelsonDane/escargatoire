@@ -20,7 +20,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: cleanuparr
-          image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:83771985faca07e3fe35f52d2278d9eadd5c63b2e138afb5579887d2d5f0150d
+          image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:4d387adbb67b8c181a6a71e07a9093a250a3d7b6c70570a95077e45037f62738
           command: ["./Cleanuparr"]
           workingDir: /app
           ports:
