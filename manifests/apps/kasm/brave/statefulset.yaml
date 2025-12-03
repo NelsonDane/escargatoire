@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: brave
-          image: kasmweb/brave:1.17.0@sha256:e3c96c3f67fd0a13c3961bc7400d9c43180cb86392c0483a4302895d5b5a6d5c
+          image: kasmweb/brave:1.18.0@sha256:305780560fe87ef06c1ed8c56cd91af2344bc5dfa281e4961a1174604a298448
           env:
             - name: VNCOPTIONS
               value: "-disableBasicAuth"
