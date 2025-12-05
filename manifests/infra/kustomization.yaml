@@ -4,7 +4,7 @@ resources:
   - ./capacitor
   - ./cert-manager
   - ./cilium
-  - ./gpu-daemon
+  - ./gpu-resource-driver
   - ./longhorn
   - ./nfd
   - ./rathole
