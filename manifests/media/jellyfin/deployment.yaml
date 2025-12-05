@@ -16,19 +16,6 @@ spec:
       labels:
         app: jellyfin
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                # Node must have Intel Quicksync GPU
-                - key: intel.feature.node.kubernetes.io/gpu
-                  operator: In
-                  values:
-                    - "true"
-                # Node must also have the Talos i915 extension
-                - key: extensions.talos.dev/i915
-                  operator: Exists
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -45,6 +32,9 @@ spec:
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
+          resources:
+            claims:
+              - name: i915
           volumeMounts:
             - name: config
               mountPath: /config
@@ -62,3 +52,6 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: media
+      resourceClaims:
+        - name: i915
+          resourceClaimTemplateName: i915
