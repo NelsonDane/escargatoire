@@ -22,7 +22,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: filestash
-          image: machines/filestash:latest@sha256:48e43e009350c2764fc9c6fd29b32a50b4b10720dd671a534bedd5894caadf75
+          image: machines/filestash:latest@sha256:d6c6c2fc564b328bac757979ae81019a96f9800d57d5b8a0966c28c70f6aea68
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
