@@ -1,0 +1,9 @@
+apiVersion: longhorn.io/v1beta2
+kind: BackupTarget
+metadata:
+  name: default
+  namespace: longhorn-system
+spec:
+  backupTargetURL: "nfs://10.0.2.20:/mnt/Shell/kube-backup?nfsOptions=soft,timeo=330,retrans=3"
+  credentialSecret: ""
+  pollInterval: 5m0s
