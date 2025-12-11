@@ -3,7 +3,9 @@ kind: Kustomization
 metadata:
   name: longhorn
 resources:
+  - backup-target.yaml
   - helm-release.yaml
   - helm-repo.yaml
   - namespace.yaml
+  - recurring-job.yaml
   - route.yaml
