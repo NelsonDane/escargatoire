@@ -21,7 +21,7 @@ spec:
         fsGroup: 1000
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:edge@sha256:5dd75d351920a544f320fed9e3cf74a9a5d6e112a120eb59f3802b298512d288
+          image: docker.io/actualbudget/actual-server:edge@sha256:5690d8dbf8d469b3726d70438812ef1080a810d903b3c3da7c6f27139e87d67c
           ports:
             - containerPort: 5006
           securityContext:
