@@ -39,6 +39,11 @@ spec:
           volumeMounts:
             - name: profilarr-config
               mountPath: /config
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: profilarr-config
