@@ -1,0 +1,117 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gatus
+  namespace: monitoring
+spec:
+  chart:
+    spec:
+      chart: gatus
+      version: 1.4.4
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: twin-repo
+  interval: 5m0s
+  values:
+    image:
+      tag: v5.33.1
+    config:
+      storage:
+        type: memory
+      ui:
+        title: "Escargatoire Health Dashboard"
+        description: "Monitoring the health of services in the Escargatoire cluster"
+        dashboard-heading: "Escargatoire Health Status"
+        dashboard-subheading: "What goes up must come down"
+        default-sort-by: group
+
+      alerting:
+        discord:
+          webhook-url: https://discord.com/api/webhooks/1450536334761525452/An5SadqXOZ5GGhaxEByZxk93Zg0WEHSlwStWJwysRsbYl28JTDF6PTMFOwyifwTAD9Rp
+
+      default-endpoint: &defaults
+        interval: 1m
+        conditions:
+          - "[STATUS] == 200"
+        alerts:
+          - type: discord
+            description: "Service is down"
+            send-on-resolve: true
+      endpoints:
+        # Media
+        - name: Jellyfin (External)
+          group: media
+          url: https://jellyfin.nelsondane.com
+          <<: *defaults
+        - name: Jellyfin (Internal)
+          group: media
+          url: http://jellyfin.media.svc.cluster.local:8096
+          <<: *defaults
+        - name: Seerr (External)
+          group: media
+          url: https://overseerr.nelsondane.com
+          <<: *defaults
+        - name: Seerr Family (External)
+          group: media
+          url: https://family.nelsondane.com
+          <<: *defaults
+        - name: Radarr
+          group: media
+          url: https://radarr.cluster.nelsondane.com/ping
+          <<: *defaults
+        - name: Sonarr
+          group: media
+          url: https://sonarr.cluster.nelsondane.com/ping
+          <<: *defaults
+        - name: Prowlarr
+          group: media
+          url: https://prowlarr.cluster.nelsondane.com/ping
+          <<: *defaults
+        - name: Profilarr
+          group: media
+          url: https://profilarr.cluster.nelsondane.com
+          <<: *defaults
+        - name: Huntarr
+          group: media
+          url: https://huntarr.cluster.nelsondane.com
+          <<: *defaults
+        - name: Cleanuparr
+          group: media
+          url: https://cleanuparr.cluster.nelsondane.com
+          <<: *defaults
+        - name: qbBttorrent
+          group: media
+          url: https://qbittorrent.cluster.nelsondane.com
+          <<: *defaults
+        # Infra
+        - name: Talos VIP
+          group: infra
+          url: icmp://10.0.2.50
+          <<: *defaults
+          conditions:
+            - "[CONNECTED] == true"
+        - name: Node 1
+          group: infra
+          url: icmp://10.0.2.51
+          <<: *defaults
+          conditions:
+            - "[CONNECTED] == true"
+        - name: Node 2
+          group: infra
+          url: icmp://10.0.2.52
+          <<: *defaults
+          conditions:
+            - "[CONNECTED] == true"
+        - name: Node 3
+          group: infra
+          url: icmp://10.0.2.53
+          <<: *defaults
+          conditions:
+            - "[CONNECTED] == true"
+        - name: Node 4
+          group: infra
+          url: icmp://10.0.2.54
+          <<: *defaults
+          conditions:
+            - "[CONNECTED] == true"

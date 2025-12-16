@@ -6,6 +6,7 @@ resources:
   - ./cilium
   - ./gpu-resource-driver
   - ./longhorn
+  - ./monitoring
   - ./nfd
   - ./rathole
   - ./reflector
