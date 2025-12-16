@@ -29,6 +29,7 @@ spec:
             - containerPort: 9696
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
@@ -44,6 +45,7 @@ spec:
             - containerPort: 8191
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true

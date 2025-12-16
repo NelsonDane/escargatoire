@@ -29,6 +29,7 @@ spec:
             - containerPort: 8989
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
           env:

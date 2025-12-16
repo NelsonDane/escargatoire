@@ -30,6 +30,7 @@ spec:
               value: "America/New_York"
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
