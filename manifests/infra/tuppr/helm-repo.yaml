@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: tuppr-helm
+  namespace: system-upgrade
+spec:
+  interval: 1h
+  url: oci://ghcr.io/home-operations/charts/tuppr
+  ref:
+    semver: 0.0.47
