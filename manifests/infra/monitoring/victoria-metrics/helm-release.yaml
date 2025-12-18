@@ -1,0 +1,192 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-crds
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: victoria-metrics-operator-crds
+      sourceRef:
+        kind: HelmRepository
+        name: victoria-metrics
+        namespace: monitoring
+      version: 0.6.1
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: victoria-metrics-k8s-stack
+      sourceRef:
+        kind: HelmRepository
+        name: victoria-metrics
+        namespace: monitoring
+      version: 0.66.0
+  values:
+    nameOverride: "vmks" # Shorten name to avoid long name issues
+    alertmanager:
+      enabled: false
+    coreDns:
+      enabled: true
+      service:
+        enabled: true
+
+    # Grafana Config
+    grafana:
+      enabled: true
+      admin:
+        existingSecret: grafana-admin-password
+      persistence:
+        type: pvc
+        enabled: true
+        storageClassName: longhorn
+        size: 500Mi
+      sidecar:
+        datasources:
+          enabled: true
+          initDatasources: true
+          label: grafana_datasource
+        dashboards:
+          provider:
+            name: default
+            orgid: 1
+          folder: /var/lib/grafana/dashboards
+          defaultFolderName: default
+          enabled: true
+          multicluster: false
+          searchNamespace: "ALL"
+      forceDeployDatasource: false
+      vmScrape:
+        enabled: true
+        spec:
+          selector:
+            matchLabels:
+              app.kubernetes.io/name: '{{ include "grafana.name" .Subcharts.grafana }}'
+          endpoints:
+            - port: '{{ .Values.grafana.service.portName }}'
+    defaultDatasources:
+      victoriametrics:
+        perReplica: false
+        datasources:
+          - name: VictoriaMetrics
+            type: prometheus
+            isDefault: true
+          - name: VictoriaMetrics (DS)
+            isDefault: false
+            type: victoriametrics-metrics-datasource
+
+    kube-state-metrics:
+      enabled: true
+      replicas: 1
+    kubeApiServer:
+      enabled: true
+      vmScrape:
+        spec:
+          endpoints:
+            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+              port: https
+              scheme: https
+              tlsConfig:
+                caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                serverName: kubernetes
+          jobLabel: component
+          namespaceSelector:
+            matchNames:
+              - default
+          selector:
+            matchLabels:
+              component: apiserver
+              provider: kubernetes
+    kubeControllerManager:
+      enabled: true
+      service:
+        enabled: true
+      vmScrape:
+        spec:
+          jobLabel: jobLabel
+          namespaceSelector:
+            matchNames:
+              - kube-system
+          endpoints:
+            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+              # bearerTokenSecret:
+              #   key: ""
+              port: http-metrics
+              scheme: https
+              tlsConfig:
+                caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                serverName: localhost
+                insecureSkipVerify: true
+    kubeEtcd:
+      enabled: false
+      service:
+        enabled: false
+    kubeProxy:
+      # We use cilium instead
+      enabled: false
+      service:
+        enabled: false
+    kubeScheduler:
+      enabled: true
+      service:
+        enabled: true
+      vmScrape:
+        spec:
+          jobLabel: jobLabel
+          namespaceSelector:
+            matchNames: [kube-system]
+          endpoints:
+            - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+              port: http-metrics
+              scheme: https
+              tlsConfig:
+                caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+                serverName: 127.0.0.1
+                insecureSkipVerify: true
+
+    victoria-metrics-operator:
+      crds:
+        enabled: true
+        plain: false
+    vmagent:
+      spec:
+        scrapeInterval: 10s
+        replicaCount: 2
+    vmalert:
+      enabled: false
+    vmcluster:
+      enabled: true
+      spec:
+        retentionPeriod: "1"
+        replicationFactor: 2
+        vmselect:
+          extraArgs:
+            dedup.minScrapeInterval: 10s
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: longhorn
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 2Gi
+        vmstorage:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: longhorn
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 10Gi
+    vmsingle:
+      enabled: false

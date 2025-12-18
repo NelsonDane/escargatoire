@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: victoria-metrics-grafana
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cilium
+  hostnames:
+    - grafana.cluster.nelsondane.com
+  rules:
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: victoria-metrics-grafana
+          port: 80
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: victoria-metrics-targets
+  namespace: monitoring
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cilium
+  hostnames:
+    - targets.cluster.nelsondane.com
+  rules:
+    - matches:
+      - path:
+          type: PathPrefix
+          value: /
+      backendRefs:
+        - name: vmagent-victoria-metrics-vmks
+          port: 8429
