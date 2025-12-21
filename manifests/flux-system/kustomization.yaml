@@ -4,6 +4,7 @@ resources:
   # Flux
   - gotk-components.yaml
   - gotk-sync.yaml
+  - gpg-secret.yaml
   # Infra
   - infra.yaml
   # Apps
