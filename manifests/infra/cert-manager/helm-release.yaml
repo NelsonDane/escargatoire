@@ -14,7 +14,8 @@ spec:
         namespace: cert-manager
       version: v1.19.2
   values:
-    installCRDs: true
+    crds:
+      enabled: true
     ingressShim:
       defaultIssuerName: letsencrypt-dns
       defaultIssuerKind: ClusterIssuer
