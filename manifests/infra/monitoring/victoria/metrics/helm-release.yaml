@@ -41,6 +41,8 @@ spec:
     # Grafana Config
     grafana:
       enabled: true
+      plugins:
+        - https://github.com/VictoriaMetrics/victorialogs-datasource/releases/download/v0.23.1/victoriametrics-logs-datasource-v0.23.1.zip;victoriametrics-logs-datasource
       admin:
         existingSecret: grafana-admin-password
       persistence:
