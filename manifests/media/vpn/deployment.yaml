@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: qbittorrent
   namespace: vpn
+  annotations:
+    ignore-check.kube-linter.io/drop-net-raw-capability: "This is required for WireGuard to function properly."
+    ignore-check.kube-linter.io/run-as-non-root: "The gluetun container requires root privileges to set up the VPN connection."
 spec:
   replicas: 1
   selector:
@@ -20,6 +23,7 @@ spec:
           image: qmcgaw/gluetun:latest@sha256:6a59b7901068b7c50ef52200152db3afd4b9cebc13e272b2169de4cdcad91006
           restartPolicy: Always # Keep container running
           securityContext:
+            readOnlyRootFilesystem: true
             capabilities:
               add: ["NET_ADMIN"]
           envFrom:
