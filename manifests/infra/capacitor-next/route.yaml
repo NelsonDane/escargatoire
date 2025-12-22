@@ -10,10 +10,7 @@ spec:
   hostnames:
     - next.cluster.nelsondane.com
   rules:
-    - matches:
-      - path:
-          type: PathPrefix
-          value: /
-      backendRefs:
-        - name: capacitor-next
+    - backendRefs:
+        - kind: Service
+          name: capacitor-next
           port: 80
