@@ -23,7 +23,7 @@ spec:
           image: qmcgaw/gluetun:latest@sha256:390e1253bf56465bb971dd7549feba15757231bd1d792699e4a54e5287014874
           restartPolicy: Always # Keep container running
           securityContext:
-            readOnlyRootFilesystem: true
+            # readOnlyRootFilesystem: true
             capabilities:
               add: ["NET_ADMIN"]
           envFrom:
@@ -92,7 +92,7 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsNonRoot: true
-            readOnlyRootFilesystem: true
+            # readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
