@@ -29,6 +29,7 @@ spec:
                   mountPath: /app/out
               securityContext:
                 allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
                 capabilities:
                   drop: ["ALL"]
                 runAsNonRoot: true
@@ -57,6 +58,7 @@ spec:
                   mountPath: /tmp/renovate/
               securityContext:
                 allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
                 capabilities:
                   drop: ["ALL"]
                 runAsNonRoot: true
