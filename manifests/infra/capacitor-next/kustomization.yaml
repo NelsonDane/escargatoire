@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 resources:
   - helm-release.yaml
+  - policy.yaml
   - route.yaml
   - repo.yaml
   - secret.yaml
