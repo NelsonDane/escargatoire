@@ -20,7 +20,7 @@ spec:
     spec:
       initContainers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest@sha256:d2be1b0ab4337b4e360a87f51214792e06ac5f2b84f31331b290dbd60bc5283e
+          image: qmcgaw/gluetun:latest@sha256:9a0df7af20e305cd89756bb9787f0732135eb9ba93d436b2b1ccdd50af578224
           restartPolicy: Always # Keep container running
           securityContext:
             # readOnlyRootFilesystem: true
