@@ -8,4 +8,4 @@ resources:
   # Monitoring
   - namespace.yaml
   - ./gatus
-  # - ./victoria
+  - ./victoria

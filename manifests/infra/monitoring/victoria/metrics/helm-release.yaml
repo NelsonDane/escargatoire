@@ -174,7 +174,7 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: longhorn
+                storageClassName: longhorn-strict-local
                 accessModes:
                   - ReadWriteOnce
                 resources:
@@ -184,7 +184,7 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: longhorn
+                storageClassName: longhorn-strict-local
                 accessModes:
                   - ReadWriteOnce
                 resources:
