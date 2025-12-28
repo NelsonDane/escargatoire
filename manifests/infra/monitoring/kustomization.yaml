@@ -8,4 +8,5 @@ resources:
   # Monitoring
   - namespace.yaml
   - ./gatus
+  - ./speedtest
   - ./victoria

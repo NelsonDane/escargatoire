@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: speedtest-tracker
+  namespace: monitoring
+  annotations:
+    ignore-check.kube-linter.io/drop-net-raw-capability: "Required for ping and speedtest functionality"
+    ignore-check.kube-linter.io/run-as-non-root: "I hate s6-overlay"
+    ignore-check.kube-linter.io/no-read-only-root-fs: "I hate s6-overlay"
+    ignore-check.kube-linter.io/privilege-escalation-container: "I hate s6-overlay"
+spec:
+  serviceName: speedtest-tracker
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedtest-tracker
+  template:
+    metadata:
+      labels:
+        app: speedtest-tracker
+    spec:
+      containers:
+        - name: speedtest-tracker
+          image: lscr.io/linuxserver/speedtest-tracker:latest@sha256:d3a733cb62b67866fcae7d8e982feeeee48635dc09a5ecf730c37088de55803c
+          ports:
+            - containerPort: 80
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: APP_URL
+              value: "https://speedtest.cluster.nelsondane.com"
+            - name: ASSET_URL
+              value: "https://speedtest.cluster.nelsondane.com"
+            - name: FORCE_HTTPS
+              value: "true"
+            - name: APP_TIMEZONE
+              value: "America/New_York"
+            - name: APP_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: speedtest-tracker-app-key
+                  key: app-key
+            - name: DB_CONNECTION
+              value: "sqlite"
+            - name: PUBLIC_DASHBOARD
+              value: "true"
+            - name: SPEEDTEST_SCHEDULE
+              value: "0 * * * *"
+          securityContext:
+            allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
+            capabilities:
+              add: ["NET_RAW"]
+            runAsNonRoot: false
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: speedtest-tracker-config
+              mountPath: /config
+          livenessProbe:
+            httpGet:
+              path: /api/healthcheck
+              port: 80
+            initialDelaySeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/healthcheck
+              port: 80
+            initialDelaySeconds: 30
+  volumeClaimTemplates:
+    - metadata:
+        name: speedtest-tracker-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 4Gi
+        storageClassName: longhorn

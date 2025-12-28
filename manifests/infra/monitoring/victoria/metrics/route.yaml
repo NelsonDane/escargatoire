@@ -28,7 +28,7 @@ spec:
     - name: cilium-gateway
       namespace: cilium
   hostnames:
-    - targets.cluster.nelsondane.com
+    - vmagent.cluster.nelsondane.com
   rules:
     - matches:
       - path:
