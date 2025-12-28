@@ -6,6 +6,7 @@ resources:
   - backup-target.yaml
   - helm-release.yaml
   - helm-repo.yaml
+  - local-storage-class.yaml
   - namespace.yaml
   - recurring-job.yaml
   - route.yaml
