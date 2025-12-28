@@ -17,15 +17,23 @@
     {
       "customType": "regex",
       "description": "Update GitHub release references in kustomization.yaml",
-      "fileMatch": ["manifests\/.+\/kustomization.ya?ml$"],
-      "matchStrings": ["https:\\/\\/github\\.com\\/(?<depName>.*\\/.*?)\\/releases\\/download\\/(?<currentValue>.*?)\\/"],
+      "managerFilePatterns": [
+        "/manifests/.+/kustomization.ya?ml$/"
+      ],
+      "matchStrings": [
+        "https:\\/\\/github\\.com\\/(?<depName>.*\\/.*?)\\/releases\\/download\\/(?<currentValue>.*?)\\/"
+      ],
       "datasourceTemplate": "github-releases"
     },
     {
       "customType": "regex",
       "description": "Update GitHub tag references in kustomization.yaml",
-      "fileMatch": ["manifests\/.+\/kustomization.ya?ml$"],
-      "matchStrings": ["https://raw\\.githubusercontent\\.com/(?<depName>[^/]*/[^/]*)/(?<currentValue>v?\\d+\\.\\d+\\.\\d+)/"],
+      "managerFilePatterns": [
+        "/manifests/.+/kustomization.ya?ml$/"
+      ],
+      "matchStrings": [
+        "https://raw\\.githubusercontent\\.com/(?<depName>[^/]*/[^/]*)/(?<currentValue>v?\\d+\\.\\d+\\.\\d+)/"
+      ],
       "datasourceTemplate": "github-tags"
     }
   ]
