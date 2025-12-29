@@ -40,10 +40,11 @@
       "customType": "regex",
       "description": "Update version references in YAML files",
       "managerFilePatterns": [
-        "/^manifests/.+\\.yaml$/"
+        "/^manifests/.+\\.yaml$/",
+        "controlplane.yaml"
       ],
       "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\s*[\\r\\n]+\\s*[^:#]+:\\s*(?<currentValue>v?[0-9][^\\s\"']*)"
+        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\s*[\\r\\n]+\\s*[^:#]+:\\s*(?:[^\\s\"']+:)?(?<currentValue>v?[0-9][^\\s\"']*)"
       ]
     }
   ]
