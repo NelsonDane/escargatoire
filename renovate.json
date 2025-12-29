@@ -35,6 +35,16 @@
         "https://raw\\.githubusercontent\\.com/(?<depName>[^/]*/[^/]*)/(?<currentValue>v?\\d+\\.\\d+\\.\\d+)/"
       ],
       "datasourceTemplate": "github-tags"
+    },
+    {
+      "customType": "regex",
+      "description": "Update version references in YAML files",
+      "managerFilePatterns": [
+        "/^manifests/.+\\.yaml$/"
+      ],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\s*[\\r\\n]+\\s*[^:#]+:\\s*(?<currentValue>v?[0-9][^\\s\"']*)"
+      ]
     }
   ]
 }

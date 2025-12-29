@@ -7,4 +7,5 @@ spec:
   interval: 24h
   url: oci://ghcr.io/gimlet-io/charts/capacitor-next
   ref:
+    # renovate: datasource=docker depName=ghcr.io/gimlet-io/charts/capacitor-next
     semver: "0.12.0"
