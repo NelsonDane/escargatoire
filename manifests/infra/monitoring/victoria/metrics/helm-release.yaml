@@ -130,6 +130,8 @@ spec:
       enabled: false
       service:
         enabled: false
+    kubelet:
+      enabled: true
     kubeProxy:
       # We use cilium instead
       enabled: false
