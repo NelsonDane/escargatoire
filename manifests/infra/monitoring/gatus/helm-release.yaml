@@ -85,6 +85,10 @@ spec:
           url: https://qbittorrent.cluster.nelsondane.com
           <<: *defaults
         # Infra
+        - name: TrueNAS NFS
+          group: infra
+          url: icmp://10.0.2.20
+          <<: *defaults
         - name: Talos VIP
           group: infra
           url: icmp://10.0.2.50
