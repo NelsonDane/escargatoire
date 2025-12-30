@@ -153,6 +153,9 @@ spec:
                 serverName: 127.0.0.1
                 insecureSkipVerify: true
 
+    prometheus-node-exporter:
+      enabled: true
+
     victoria-metrics-operator:
       crds:
         enabled: true
