@@ -6,6 +6,8 @@ metadata:
 spec:
   serviceName: cleanuparr
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: cleanuparr
@@ -18,6 +20,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: cleanuparr
           image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:4d387adbb67b8c181a6a71e07a9093a250a3d7b6c70570a95077e45037f62738
@@ -39,6 +42,22 @@ spec:
           volumeMounts:
             - name: cleanuparr-config
               mountPath: /config
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 11011
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            timeoutSeconds: 10
+            failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 11011
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 2
   volumeClaimTemplates:
     - metadata:
         name: cleanuparr-config
