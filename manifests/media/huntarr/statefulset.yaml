@@ -45,17 +45,9 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 9705
-            initialDelaySeconds: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
-            failureThreshold: 3
           readinessProbe:
             tcpSocket:
               port: 9705
-            initialDelaySeconds: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
-            failureThreshold: 3
   volumeClaimTemplates:
     - metadata:
         name: huntarr-config

@@ -3,14 +3,15 @@ kind: Deployment
 metadata:
   name: prowlarr
   namespace: media
+  annotations:
+    ignore-check.kube-linter.io/no-read-only-root-fs: "Flaresolverr Chrome doesn't work without it"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: prowlarr
   strategy:
-    rollingUpdate: null
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -22,6 +23,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      restartPolicy: Always
       containers:
         - name: prowlarr
           image: ghcr.io/home-operations/prowlarr:2.3.1@sha256:4394dff2311238bf5c31e006872122ed4e5f6bf042d33528d80acd44a09c57f7
@@ -39,13 +41,18 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+          livenessProbe:
+            tcpSocket:
+              port: 9696
+          readinessProbe:
+            tcpSocket:
+              port: 9696
         - name: flaresolverr
           image: flaresolverr/flaresolverr:v3.4.6@sha256:7962759d99d7e125e108e0f5e7f3cdbcd36161776d058d1d9b7153b92ef1af9e
           ports:
             - containerPort: 8191
           securityContext:
             allowPrivilegeEscalation: false
-            # readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
@@ -54,6 +61,12 @@ spec:
               value: "America/New_York"
             - name: LOG_LEVEL
               value: "info"
+          livenessProbe:
+            tcpSocket:
+              port: 8191
+          readinessProbe:
+            tcpSocket:
+              port: 8191
       volumes:
         - name: config
           persistentVolumeClaim:

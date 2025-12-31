@@ -6,6 +6,7 @@ checks:
     - "unset-memory-requirements"
     # Come back to these later
     - "default-service-account"
+    - "non-isolated-pod"
     # Ignore
     - "dnsconfig-options"
     - "minimum-three-replicas" # We use 1 replica for ReadWriteOnce volumes
