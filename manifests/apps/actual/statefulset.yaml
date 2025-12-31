@@ -6,6 +6,8 @@ metadata:
 spec:
   serviceName: actual
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: actual
@@ -19,6 +21,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: actual
           image: docker.io/actualbudget/actual-server:edge@sha256:708cd1063d14a16d6c8202d745cb3f84b1109164e01e01fccfe7ec8d5c879e20
@@ -40,10 +43,11 @@ spec:
               command:
                 - node
                 - src/scripts/health-check.js
-            initialDelaySeconds: 20
-            periodSeconds: 60
-            timeoutSeconds: 10
-            failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - node
+                - src/scripts/health-check.js
   volumeClaimTemplates:
     - metadata:
         name: actual-data
