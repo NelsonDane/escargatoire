@@ -3,13 +3,14 @@ kind: Deployment
 metadata:
   name: jellyfin
   namespace: media
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: jellyfin
   strategy:
-    rollingUpdate: null
     type: Recreate
   template:
     metadata:
@@ -22,6 +23,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      restartPolicy: Always
       containers:
         - name: jellyfin
           image: jellyfin/jellyfin@sha256:6d819e9ab067efcf712993b23455cc100ee5585919bb297ea5a109ac00cb626e
@@ -44,6 +46,14 @@ spec:
             - name: media
               mountPath: /media
               readOnly: true
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8096
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8096
       volumes:
         - name: config
           persistentVolumeClaim:

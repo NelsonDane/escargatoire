@@ -3,13 +3,14 @@ kind: Deployment
 metadata:
   name: jellyseerr
   namespace: media
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: jellyseerr
   strategy:
-    rollingUpdate: null
     type: Recreate
   template:
     metadata:
@@ -23,6 +24,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      restartPolicy: Always
       containers:
         - name: jellyseerr
           image: seerr/seerr:develop@sha256:a4f1a0614a5f4f1089472e495a6fa040cdd566d867c96a04427d12eb858a5485
@@ -41,6 +43,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app/config
+          livenessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5055
+          readinessProbe:
+            httpGet:
+              path: /api/v1/status
+              port: 5055
       volumes:
         - name: config
           persistentVolumeClaim:
