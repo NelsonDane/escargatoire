@@ -47,17 +47,9 @@ spec:
           livenessProbe:
             tcpSocket:
               port: 6868
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 1
-            failureThreshold: 3
           readinessProbe:
             tcpSocket:
               port: 6868
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            timeoutSeconds: 1
-            failureThreshold: 3
       volumes:
         - name: tmp
           emptyDir: {}

@@ -3,13 +3,14 @@ kind: Deployment
 metadata:
   name: sonarr
   namespace: media
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: sonarr
   strategy:
-    rollingUpdate: null
     type: Recreate
   template:
     metadata:
@@ -22,6 +23,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      restartPolicy: Always
       containers:
         - name: sonarr
           image: ghcr.io/home-operations/sonarr:4.0.16@sha256:3597fd572f4599c67abbeb8afd3cb85bce8a9e389f0779b7ea1273781544d15c
@@ -40,6 +42,12 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /media
+          livenessProbe:
+            tcpSocket:
+              port: 8989
+          readinessProbe:
+            tcpSocket:
+              port: 8989
       volumes:
         - name: config
           persistentVolumeClaim:
