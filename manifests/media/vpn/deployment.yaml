@@ -6,6 +6,9 @@ metadata:
   annotations:
     ignore-check.kube-linter.io/drop-net-raw-capability: "This is required for WireGuard to function properly."
     ignore-check.kube-linter.io/run-as-non-root: "The gluetun container requires root privileges to set up the VPN connection."
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
+    ignore-check.kube-linter.io/liveness-port: "Port is exposed via Gluetun init container."
+    ignore-check.kube-linter.io/readiness-port: "Port is exposed via Gluetun init container."
 spec:
   replicas: 1
   selector:
@@ -18,6 +21,7 @@ spec:
       labels:
         app: qbittorrent
     spec:
+      restartPolicy: Always
       initContainers:
         - name: gluetun
           image: qmcgaw/gluetun:latest@sha256:7b1dafa3d25cfd891deae52c7973c499f619f7d8eac52fad84f9aa1e5e6e01ca
@@ -55,9 +59,9 @@ spec:
                 - sh
                 - -c
                 - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
-            initialDelaySeconds: 5
-            periodSeconds: 3
-            timeoutSeconds: 2
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 3
           livenessProbe:
             exec:
@@ -66,8 +70,8 @@ spec:
                 - -c
                 - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
             initialDelaySeconds: 10
-            periodSeconds: 15
-            timeoutSeconds: 2
+            periodSeconds: 30
+            timeoutSeconds: 5
             failureThreshold: 3
           lifecycle:
             postStart:
@@ -91,11 +95,19 @@ spec:
               subPath: qbittorrent_downloads
           securityContext:
             runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: true
-            # readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+          # Using the actual API requires disabling auth on local, which isn't enabled by default so it would fail initially
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
 
       volumes:
         - name: config
