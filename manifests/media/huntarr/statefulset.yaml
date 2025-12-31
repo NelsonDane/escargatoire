@@ -6,6 +6,8 @@ metadata:
 spec:
   serviceName: huntarr
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: huntarr
@@ -18,6 +20,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: huntarr
           image: docker.io/huntarr/huntarr:latest@sha256:b5a47c2b43806165f433d308d69a21e74a687ce59f4fcccb612d6a7acb3af6d7
@@ -39,6 +42,20 @@ spec:
           volumeMounts:
             - name: huntarr-config
               mountPath: /config
+          livenessProbe:
+            tcpSocket:
+              port: 9705
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 9705
+            initialDelaySeconds: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
   volumeClaimTemplates:
     - metadata:
         name: huntarr-config
