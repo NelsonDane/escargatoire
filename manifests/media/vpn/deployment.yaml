@@ -23,6 +23,17 @@ spec:
     spec:
       restartPolicy: Always
       initContainers:
+        - name: gluetun-server-updater
+          image: qmcgaw/gluetun:latest@sha256:7b1dafa3d25cfd891deae52c7973c499f619f7d8eac52fad84f9aa1e5e6e01ca
+          command: ["/gluetun-entrypoint", "update", "-enduser", "-providers", "airvpn"]
+          volumeMounts:
+            - name: gluetun
+              mountPath: /gluetun
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
         - name: gluetun
           image: qmcgaw/gluetun:latest@sha256:7b1dafa3d25cfd891deae52c7973c499f619f7d8eac52fad84f9aa1e5e6e01ca
           restartPolicy: Always # Keep container running
@@ -53,6 +64,9 @@ spec:
             - name: webui
               containerPort: 8080
               protocol: TCP
+          volumeMounts:
+            - name: gluetun
+              mountPath: /gluetun
           readinessProbe:
             exec:
               command:
@@ -110,6 +124,8 @@ spec:
               port: 8080
 
       volumes:
+        - name: gluetun
+          emptyDir: {}
         - name: config
           persistentVolumeClaim:
             claimName: qbittorrent-config
