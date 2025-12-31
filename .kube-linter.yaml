@@ -13,3 +13,5 @@ checks:
     - "no-node-affinity" # Pods can go anywhere
     - "required-annotation-email" # It's just me
     - "required-label-owner" # Myself and I
+  ignorePaths:
+    - "manifests/flux-system/**" # Generated/unchanging manifests
