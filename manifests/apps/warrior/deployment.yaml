@@ -3,8 +3,12 @@ kind: Deployment
 metadata:
   name: archive
   namespace: apps
+  annotations:
+    ignore-check.kube-linter.io/no-read-only-root-fs: "It clones and runs Python and other scripts, needs write access to root fs"
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: archive
@@ -13,6 +17,11 @@ spec:
       labels:
         app: archive
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: archive
           image: atdr.meo.ws/archiveteam/warrior-dockerfile@sha256:0404579c23edf10f722d6efc02d026721936ffd3531e303b8f9c071cc8de4788
@@ -32,3 +41,9 @@ spec:
               type: RuntimeDefault
           ports:
             - containerPort: 8001
+          livenessProbe:
+            tcpSocket:
+              port: 8001
+          readinessProbe:
+            tcpSocket:
+              port: 8001
