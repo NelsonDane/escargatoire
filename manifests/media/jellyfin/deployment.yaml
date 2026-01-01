@@ -39,6 +39,8 @@ spec:
             claims:
               - name: i915
           volumeMounts:
+            - name: tmp
+              mountPath: /tmp
             - name: config
               mountPath: /config
             - name: cache
@@ -55,6 +57,8 @@ spec:
               path: /health
               port: 8096
       volumes:
+        - name: tmp
+          emptyDir: {}
         - name: config
           persistentVolumeClaim:
             claimName: jellyfin-config
