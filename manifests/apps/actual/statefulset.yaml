@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:edge@sha256:708cd1063d14a16d6c8202d745cb3f84b1109164e01e01fccfe7ec8d5c879e20
+          image: docker.io/actualbudget/actual-server:edge@sha256:0430a323d9a3d0e70801980b195337562d7ef3f8bb9151b3bbf9e20a1415719a
           ports:
             - containerPort: 5006
           securityContext:
