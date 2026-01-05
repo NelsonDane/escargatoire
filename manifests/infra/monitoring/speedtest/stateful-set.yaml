@@ -14,11 +14,14 @@ spec:
   selector:
     matchLabels:
       app: speedtest-tracker
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
         app: speedtest-tracker
     spec:
+      restartPolicy: Always
       containers:
         - name: speedtest-tracker
           image: lscr.io/linuxserver/speedtest-tracker:latest@sha256:d3a733cb62b67866fcae7d8e982feeeee48635dc09a5ecf730c37088de55803c
