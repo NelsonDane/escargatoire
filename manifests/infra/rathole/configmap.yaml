@@ -3,32 +3,34 @@ kind: ConfigMap
 metadata:
     name: rathole-config
     namespace: rathole
+    annotations:
+        ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
 data:
-    config.toml: ENC[AES256_GCM,data:RVPJ4nl37uQrcSzzPY5OBOhPR1Qg92m8DgxZKHc00YIwfn/Jo7tjB17+rc24cua9Z/Cp1WlLdFE2KbtNEhJtKqjL6xf6OiGycne6DNVNfXABhyh1KydEtP/2HT4xrKWrZaLW4JA1r7Zxam5Fk7YpvYfFSAeAUpIM4ynQxYeuEXMzAfOCkXPWfvyqXpcJPjAiDhk7Jm6RFzfnI8kMjE2qt5ba+e5DFN2qxhX4CxJNTkOaYg6WPkSmrLbyrZgNqe3LITo2AEtx6AwhGupOVIwvseXS7Q==,iv:dFgOZryqlCZ+wyJjcqQgzTyfIFokWtvIfHZvEf/nIqc=,tag:oRj8ng6OCkitzZkh8byVIQ==,type:str]
+    config.toml: ENC[AES256_GCM,data:u2FcnsGkWiMc99e/N2GCz9ruEHOrd4lLUs5hJ/JZP7PZ/aHxoMj/VaroBVCjlPP75sQMODQ+MzmSHk7V5h8vBUNjaQL4kZ0BqBS86KZH7JUSeA6i1mdAY3OQolC365wT+/+aO5n2v3yzt3BzBjPtSUZ2awtvP1PhQPOAmP1wN9CGp8l6quPrUdP/op8jWlJ/o/td1tmq9k9mAwbEgQHJfq+PumHGuIWYLmlTKWzcISN6tr2IGINwTRtTaOvmSGYRTpEJ9ZIcy6TsrcySGPaHXUXw3w==,iv:zBhQTu4n6THMGlnRW7MweCrZ/Qt7wwDtA402f0xAl0o=,tag:sHFr4jWUo2FyRWPSyDeVVA==,type:str]
 sops:
     age:
         - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBwWmg0Qk1DZ1kxYXMxNHBM
-            TmlvYUwraHl5YUZkdFZYUTNrUjFYLyt0QURNCnBwK2FDYW9ZdU82WGIxLzNSdXRr
-            RDdsVEJ6dG0vRGo3RXBmaE5ZWnRDWjgKLS0tIE45bGNtK2s2dzJpc2ExVkREekxK
-            bmlFbExudS9CcmNNMTVtRGNTSnVhcmMKZ8gpnhXo1/c2Tp+auga7b9e7vUiaHEZs
-            u/q055XGsQqDuxMUHvLknZs/MmxViksW4kqrbqykhMiIGjumU/CNOw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvNzdiVEpIbDFZaDNIZExR
+            VHZUQlg5MlFjM0dNcUx6ZGVoQWF1RzFlZXd3CnNodTJ3QithTkhWY05PM3loeTFl
+            QXh6TkFZWUdPZForYXJZZnV1YWxyUzgKLS0tIHkxZGMxUTJOdWt1cWxTVjBGTnFF
+            ZGNGVTlHMHAxL3VxTEE4cDZHSnlzK1UKHC/MNJsPOs0PhrKMNxTeG8izSAcMGLJg
+            3VNlGpI75MZ3Ha68heZIi1jdoumbekcvqJDmGNX+nN/B+yKk8qJL6Q==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-11-20T18:42:18Z"
-    mac: ENC[AES256_GCM,data:fSKPfilT9qzsVhZUXawp2AwajcAV7S3GDkIIsPT+81PZ419S4dHJjLwfNshDhcPMrBTBruUORt6CyxHfxLGu1wDSEUx2QG1JGMA0ogPnOZn9vawkMeRRTyF9D1qzkCktZTNI3Kp6l/qllG4z2dDKvtQ+njfh8WLV9N6TfPNN7Gc=,iv:b4SWM7dj7dH0Gi9MPU44l5a6/88xnbYPLyw7tl6uIGY=,tag:vmFJ4r4CZtNqWAaVDtG16w==,type:str]
+    lastmodified: "2026-01-05T00:12:43Z"
+    mac: ENC[AES256_GCM,data:0DD3fauggwg0d4/0kU2v6eYClpPnMZBIQP+1k7wI4IayP28Re59/vGDdisqcMjB9l0Gv54lPfj+NPAfLJE/UepTBgVRBOsoJg0RTcPUbIibAuY9fZR1+gM2EbeZ3PzOjridk5oJRB/joj5ZBIJHy1Z9+ID2fsYqfPyoICaf5fyE=,iv:DH9xL32ip3hsWMBuZ3ITPHB/wn/jLmEaDBJnAr+WmAw=,tag:Exg82Ac/C58JkaPrk4IyPw==,type:str]
     pgp:
-        - created_at: "2025-11-20T18:42:18Z"
+        - created_at: "2026-01-05T00:12:43Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4DedmP+m+bgeISAQdAxRWAkNRvr7mwWGrxPEaPu4oVRL9p/w+xqgsOay4fDD8w
-            NYInyL8LxlQxc2Ks5aWwiTwNPQpYYmQJRBoMmM9kXNUBS2mC+0qByDTxcOIrzJ4A
-            1GgBCQIQgsni8F8HRib2+FJ89ud4cMczG7opoY5emBO2Y8OfKT3Bq4XsVEuNulJ4
-            oMcMkzs7iw2h5O1CI561ij2FhipmWTuh1l3EP18t8yJk6R2nE5JKnztccPn3CKlt
-            4F4X7sf+TgYq3g==
-            =l8DB
+            hF4DedmP+m+bgeISAQdAkD1z6xuIgyCfvnOJx1kE5EwK5/iTMys0Ut0Ezd9pdlkw
+            o+wMqNjc+CvXGPd+PhZAqJXbkQMgDqNQ3H0Y0XJWH2yVpGm+BIjStS07hUw/RA1t
+            1GYBCQIQAUwjVaruRWi+tmpR0tZPda20DkAtZHaW0z9avVn91zqSiKL/iLcwOlBq
+            uxb+rqDgMrxBskiBHVSfS3Jg11SoHRBEeBRBWVlnyPN4LKmoPoBrwArtYj7I9lOb
+            WEvBDB3qSyM=
+            =EKnu
             -----END PGP MESSAGE-----
           fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
     encrypted_regex: ^(data|stringData)$

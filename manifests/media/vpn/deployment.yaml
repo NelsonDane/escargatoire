@@ -72,21 +72,19 @@ spec:
           readinessProbe:
             exec:
               command:
-                - sh
-                - -c
-                - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
+                - /gluetun-entrypoint
+                - healthcheck
             initialDelaySeconds: 10
-            periodSeconds: 10
+            periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 3
           livenessProbe:
             exec:
               command:
-                - sh
-                - -c
-                - "ping -c 1 $(echo $WIREGUARD_ADDRESSES | cut -d'/' -f1)"
+                - /gluetun-entrypoint
+                - healthcheck
             initialDelaySeconds: 10
-            periodSeconds: 30
+            periodSeconds: 5
             timeoutSeconds: 5
             failureThreshold: 3
           lifecycle:
@@ -112,7 +110,7 @@ spec:
             runAsUser: 1000
             runAsGroup: 1000
             runAsNonRoot: true
-            readOnlyRootFilesystem: false
+            readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
