@@ -5,6 +5,8 @@ metadata:
   namespace: rathole
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: rathole
@@ -19,6 +21,7 @@ spec:
         fsGroup: 1000
         seccompProfile:
           type: RuntimeDefault
+      restartPolicy: Always
       containers:
         - name: rathole
           image: rapiz1/rathole:latest@sha256:a31b9178e985d4a84f46d4c3af6aa200ee0c5e7f821c7075a1f6669fb77392b1
