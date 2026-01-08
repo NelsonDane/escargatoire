@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qui
+  namespace: vpn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qui
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: qui
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: qui
+          image: ghcr.io/autobrr/qui:latest
+          restartPolicy: Always
+          env:
+            - name: TZ
+              value: "America/New_York"
+          ports:
+            - name: qui
+              containerPort: 7476
+              protocol: TCP
+          volumeMounts:
+            - name: qui-config
+              mountPath: /config
+            - name: media
+              mountPath: /downloads
+              subPath: qbittorrent_downloads
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+          livenessProbe:
+            tcpSocket:
+              port: 7476
+          readinessProbe:
+            tcpSocket:
+              port: 7476
+      volumes:
+        - name: qui-config
+          persistentVolumeClaim:
+            claimName: qui-config
+        - name: media
+          nfs:
+            server: 10.0.2.20
+            path: /mnt/Shell/media
