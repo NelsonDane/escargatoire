@@ -75,24 +75,24 @@ spec:
           volumeMounts:
             - name: gluetun
               mountPath: /gluetun
-          readinessProbe:
-            exec:
-              command:
-                - /gluetun-entrypoint
-                - healthcheck
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            exec:
-              command:
-                - /gluetun-entrypoint
-                - healthcheck
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - /gluetun-entrypoint
+          #       - healthcheck
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - /gluetun-entrypoint
+          #       - healthcheck
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
+          #   timeoutSeconds: 5
+          #   failureThreshold: 3
           lifecycle:
             postStart:
               exec:
