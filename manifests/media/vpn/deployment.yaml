@@ -128,12 +128,12 @@ spec:
               memory: "4Gi"
               cpu: "2000m"
           # Using the actual API requires disabling auth on local, which isn't enabled by default so it would fail initially
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-          readinessProbe:
-            tcpSocket:
-              port: 8080
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8080
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 8080
 
       volumes:
         - name: gluetun
