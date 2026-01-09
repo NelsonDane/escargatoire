@@ -58,6 +58,12 @@ spec:
               value: "America/New_York"
             - name: UPDATER_PERIOD
               value: "24h"
+            - name: WIREGUARD_MTU
+              value: "1280"
+            - name: DNS_ADDRESSS
+              value: "9.9.9.9"
+            - name: SERVER_COUNTRIES
+              value: "Netherlands"
             - name: VPN_PORT_FORWARDING_UP_COMMAND
               value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
             - name: VPN_PORT_FORWARDING_DOWN_COMMAND
@@ -114,6 +120,13 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "2000m"
           # Using the actual API requires disabling auth on local, which isn't enabled by default so it would fail initially
           livenessProbe:
             tcpSocket:
