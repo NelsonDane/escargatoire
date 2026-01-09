@@ -22,6 +22,8 @@ spec:
         app: qbittorrent
     spec:
       restartPolicy: Always
+      securityContext:
+        fsGroup: 1000
       initContainers:
         - name: gluetun-server-updater
           image: qmcgaw/gluetun:latest@sha256:7b1dafa3d25cfd891deae52c7973c499f619f7d8eac52fad84f9aa1e5e6e01ca
@@ -52,8 +54,6 @@ spec:
               value: "54101"
             - name: FIREWALL_INPUT_PORTS
               value: "8080"
-            - name: SERVER_COUNTRIES
-              value: "United States"
             - name: TZ
               value: "America/New_York"
             - name: UPDATER_PERIOD
@@ -63,7 +63,7 @@ spec:
             - name: DNS_ADDRESSS
               value: "9.9.9.9"
             - name: SERVER_COUNTRIES
-              value: "Netherlands"
+              value: "United States"
             - name: VPN_PORT_FORWARDING_UP_COMMAND
               value: "/bin/sh -c 'wget -O- --retry-connrefused --post-data \"json={\\\"listen_port\\\":{{PORTS}}}\" http://127.0.0.1:8080/api/v2/app/setPreferences 2>&1'"
             - name: VPN_PORT_FORWARDING_DOWN_COMMAND
