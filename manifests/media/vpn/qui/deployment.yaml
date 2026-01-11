@@ -18,7 +18,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: qui
-          image: ghcr.io/autobrr/qui:latest
+          image: ghcr.io/autobrr/qui:latest@sha256:b3b18f82f340642fc19ffb8935c112673008e7e6ae0ead5b6e8bb39c9b4462a3
           restartPolicy: Always
           env:
             - name: TZ
