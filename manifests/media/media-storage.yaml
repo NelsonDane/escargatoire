@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   mountOptions:
     - hard
-    - nfsvers=3
+    - nfsvers=4.1
   storageClassName: ""
 ---
 apiVersion: v1
