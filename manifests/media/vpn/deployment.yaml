@@ -78,24 +78,28 @@ spec:
           volumeMounts:
             - name: gluetun
               mountPath: /gluetun
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #       - /gluetun-entrypoint
-          #       - healthcheck
-          #   initialDelaySeconds: 10
-          #   periodSeconds: 5
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #       - /gluetun-entrypoint
-          #       - healthcheck
-          #   initialDelaySeconds: 10
-          #   periodSeconds: 5
-          #   timeoutSeconds: 5
-          #   failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+                - ping
+                - -c
+                - "1"
+                - "9.9.9.9"
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - ping
+                - -c
+                - "1"
+                - "9.9.9.9"
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
           lifecycle:
             postStart:
               exec:
@@ -130,13 +134,17 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "2000m"
-          # Using the actual API requires disabling auth on local, which isn't enabled by default so it would fail initially
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 8080
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 8080
+          # If VPN fails, port is blocked by firewall. So we want to check the process instead of the port.
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - qbittorrent-nox
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - qbittorrent-nox
 
       volumes:
         - name: gluetun
