@@ -81,23 +81,13 @@ spec:
           readinessProbe:
             exec:
               command:
-                - sh
-                - -c
-                - "ping -c 1 9.9.9.9"
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
+                - pgrep
+                - gluetun
           livenessProbe:
             exec:
               command:
-                - sh
-                - -c
-                - "ping -c 1 9.9.9.9"
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
+                - pgrep
+                - gluetun
           lifecycle:
             postStart:
               exec:
