@@ -78,28 +78,16 @@ spec:
           volumeMounts:
             - name: gluetun
               mountPath: /gluetun
-          readinessProbe:
-            exec:
-              command:
-                - ping
-                - -c
-                - "1"
-                - "9.9.9.9"
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
-          livenessProbe:
-            exec:
-              command:
-                - ping
-                - -c
-                - "1"
-                - "9.9.9.9"
-            initialDelaySeconds: 10
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - pgrep
+          #       - gluetun
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - pgrep
+          #       - gluetun
           lifecycle:
             postStart:
               exec:
@@ -127,24 +115,24 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-          resources:
-            requests:
-              memory: "1Gi"
-              cpu: "500m"
-            limits:
-              memory: "4Gi"
-              cpu: "2000m"
+          # resources:
+          #   requests:
+          #     memory: "1Gi"
+          #     cpu: "500m"
+          #   limits:
+          #     memory: "4Gi"
+          #     cpu: "2000m"
           # If VPN fails, port is blocked by firewall. So we want to check the process instead of the port.
-          livenessProbe:
-            exec:
-              command:
-                - pgrep
-                - qbittorrent-nox
-          readinessProbe:
-            exec:
-              command:
-                - pgrep
-                - qbittorrent-nox
+          # livenessProbe:
+          #   exec:
+          #     command:
+          #       - pgrep
+          #       - qbittorrent-nox
+          # readinessProbe:
+          #   exec:
+          #     command:
+          #       - pgrep
+          #       - qbittorrent-nox
 
       volumes:
         - name: gluetun
