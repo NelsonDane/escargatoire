@@ -115,13 +115,13 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop: ["ALL"]
-          resources:
-            requests:
-              memory: "1Gi"
-              cpu: "500m"
-            limits:
-              memory: "4Gi"
-              cpu: "2000m"
+          # resources:
+          #   requests:
+          #     memory: "1Gi"
+          #     cpu: "500m"
+          #   limits:
+          #     memory: "4Gi"
+          #     cpu: "2000m"
           # If VPN fails, port is blocked by firewall. So we want to check the process instead of the port.
           # livenessProbe:
           #   exec:
