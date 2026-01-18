@@ -8,6 +8,8 @@ metadata:
 spec:
   serviceName: files
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: files
@@ -20,11 +22,13 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: filestash
           image: machines/filestash:latest@sha256:c60cd8e220dbd37ee8a8a7c63c167767b23333aaf495d137cf9c96714e2cb383
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
@@ -37,6 +41,12 @@ spec:
               mountPath: /media
           ports:
             - containerPort: 8334
+          livenessProbe:
+            tcpSocket:
+              port: 8334
+          readinessProbe:
+            tcpSocket:
+              port: 8334
       volumes:
         - name: media
           persistentVolumeClaim:
