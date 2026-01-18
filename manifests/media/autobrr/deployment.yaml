@@ -34,6 +34,8 @@ spec:
           volumeMounts:
             - name: autobrr-config
               mountPath: /config
+            - name: tmp
+              mountPath: /tmp
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -54,3 +56,5 @@ spec:
         - name: autobrr-config
           persistentVolumeClaim:
             claimName: autobrr-config
+        - name: tmp
+          emptyDir: {}
