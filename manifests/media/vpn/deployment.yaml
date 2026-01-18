@@ -9,6 +9,7 @@ metadata:
     ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
     ignore-check.kube-linter.io/liveness-port: "Port is exposed via Gluetun init container."
     ignore-check.kube-linter.io/readiness-port: "Port is exposed via Gluetun init container."
+    ignore-check.kube-linter.io/no-read-only-root-fs: "Gluetun writes config in multiple spots and creates users."
 spec:
   replicas: 1
   selector:
@@ -42,7 +43,7 @@ spec:
           image: qmcgaw/gluetun:latest@sha256:7b1dafa3d25cfd891deae52c7973c499f619f7d8eac52fad84f9aa1e5e6e01ca
           restartPolicy: Always # Keep container running
           securityContext:
-            # readOnlyRootFilesystem: true
+            readOnlyRootFilesystem: false
             capabilities:
               add: ["NET_ADMIN"]
           envFrom:
@@ -78,16 +79,16 @@ spec:
           volumeMounts:
             - name: gluetun
               mountPath: /gluetun
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #       - pgrep
-          #       - gluetun
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #       - pgrep
-          #       - gluetun
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - gluetun
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - gluetun
           lifecycle:
             postStart:
               exec:
@@ -123,16 +124,16 @@ spec:
           #     memory: "4Gi"
           #     cpu: "2000m"
           # If VPN fails, port is blocked by firewall. So we want to check the process instead of the port.
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #       - pgrep
-          #       - qbittorrent-nox
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #       - pgrep
-          #       - qbittorrent-nox
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - qbittorrent-nox
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - qbittorrent-nox
 
       volumes:
         - name: gluetun
