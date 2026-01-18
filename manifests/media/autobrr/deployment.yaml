@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autobrr
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autobrr
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: autobrr
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      restartPolicy: Always
+      containers:
+        - name: autobrr
+          image: ghcr.io/autobrr/autobrr:latest@sha256:db9794958a0f9db93059c1e9f06193a063ce3846d346d7a7c9eca607c6617c51
+          restartPolicy: Always
+          env:
+            - name: TZ
+              value: "America/New_York"
+          ports:
+            - name: autobrr
+              containerPort: 7474
+              protocol: TCP
+          volumeMounts:
+            - name: autobrr-config
+              mountPath: /config
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          livenessProbe:
+            tcpSocket:
+              port: 7474
+          readinessProbe:
+            tcpSocket:
+              port: 7474
+      volumes:
+        - name: autobrr-config
+          persistentVolumeClaim:
+            claimName: autobrr-config
