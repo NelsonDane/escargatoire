@@ -24,13 +24,13 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: token-generator
-              image: nelsondane/renovate-token-injector:latest@sha256:3959dc3ee9a8ac5b9c4b88ed126552ef2260d6d4bdda8f0a71d453cdf023f16b
+              image: nelsondane/renovate-token-injector:latest@sha256:798a8649e31843e0eb57effa71238c77a94154999a1546c8d1364e30ac5ed607
               envFrom:
                 - secretRef:
                     name: renovate-env
               volumeMounts:
                 - name: tmp
-                  mountPath: /app/out
+                  mountPath: /out
               securityContext:
                 allowPrivilegeEscalation: false
                 readOnlyRootFilesystem: true
