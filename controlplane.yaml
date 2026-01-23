@@ -41,7 +41,7 @@ machine:
         # The disk used for installations.
         disk: /dev/nvme0n1
         # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-        image: factory.talos.dev/metal-installer-secureboot/056d8e12ba2b9711c613665c43f0ebf86eb451839a22f360a42110362f84faa1:v1.12.0
+        image: factory.talos.dev/metal-installer-secureboot/056d8e12ba2b9711c613665c43f0ebf86eb451839a22f360a42110362f84faa1:v1.12.2
         # Indicates if the installation disk should be wiped at installation time.
         wipe: true
     # Used to configure the machine's container image registry mirrors.
