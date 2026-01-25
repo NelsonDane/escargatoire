@@ -6,6 +6,5 @@ metadata:
 data:
   config.json: |-
     {
-      "extends": ["config:best-practices"],
-      "labels": ["renovate", "dependencies"]
+      "extends": ["github>NelsonDane/styles:renovate.json5"]
     }
