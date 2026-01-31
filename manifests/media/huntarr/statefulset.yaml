@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: huntarr
-          image: docker.io/huntarr/huntarr:latest@sha256:3a0422dd2201bfcee0d38526d170362b467847c611ddcf68ea8aba94b4a54133
+          image: docker.io/huntarr/huntarr:latest@sha256:8f6f2ba9e7c0b7dbc52e6b1fdc7503327d7f3725b9c9bc3dbe5dd93644d99c55
           ports:
             - containerPort: 9705
           env:
