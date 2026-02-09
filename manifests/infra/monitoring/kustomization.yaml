@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   # Metrics API
   # https://docs.siderolabs.com/kubernetes-guides/monitoring-and-observability/deploy-metrics-server
-  - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/v0.10.2/deploy/standalone-install.yaml
+  - https://raw.githubusercontent.com/alex1989hu/kubelet-serving-cert-approver/v0.10.3/deploy/standalone-install.yaml
   - https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.8.1/components.yaml
   # Monitoring
   - namespace.yaml
