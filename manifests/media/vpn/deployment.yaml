@@ -27,7 +27,7 @@ spec:
         fsGroup: 1000
       initContainers:
         - name: gluetun-server-updater
-          image: qmcgaw/gluetun:latest@sha256:1aa28a0db802279d852b08d2358867bd75e2e319431a5da53d3cbb9a6c19fdab
+          image: qmcgaw/gluetun:latest@sha256:2f22357079e106494323123f78f0dc89c98d825e09ab9f198212da02aa93b2dc
           command: ["/gluetun-entrypoint", "update", "-enduser", "-providers", "airvpn"]
           volumeMounts:
             - name: gluetun
@@ -40,7 +40,7 @@ spec:
 
       containers:
         - name: gluetun
-          image: qmcgaw/gluetun:latest@sha256:1aa28a0db802279d852b08d2358867bd75e2e319431a5da53d3cbb9a6c19fdab
+          image: qmcgaw/gluetun:latest@sha256:2f22357079e106494323123f78f0dc89c98d825e09ab9f198212da02aa93b2dc
           restartPolicy: Always # Keep container running
           securityContext:
             readOnlyRootFilesystem: false
