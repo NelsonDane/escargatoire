@@ -1,0 +1,39 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: matrix
+  namespace: apps
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cilium
+  hostnames:
+    - matrix.nelsondane.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: matrix
+          port: 6167
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: coturn
+  namespace: apps
+spec:
+  parentRefs:
+    - name: cilium-gateway
+      namespace: cilium
+  hostnames:
+    - turn.nelsondane.com
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: coturn
+          port: 3478

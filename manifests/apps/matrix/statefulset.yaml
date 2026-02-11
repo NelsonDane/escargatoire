@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matrix
+  namespace: apps
+spec:
+  serviceName: matrix
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: matrix
+  template:
+    metadata:
+      labels:
+        app: matrix
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      restartPolicy: Always
+      containers:
+        - name: matrix
+          image: registry.gitlab.com/famedly/conduit/matrix-conduit:next
+          ports:
+            - containerPort: 6167
+          envFrom:
+            - configMapRef:
+                name: matrix
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: matrix-config
+              mountPath: /var/lib/matrix-conduit/
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 6167
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 6167
+        - name: coturn
+          image: coturn/coturn:latest@sha256:10514b502709263f3e7216873f42b48b7f8a2679090eedb5be0954fd1bba9f94
+          ports:
+            - containerPort: 3478
+              name: coturn
+          volumeMounts:
+            - name: coturn-config
+              mountPath: /etc/coturn/turnserver.conf
+              subPath: turnserver.conf
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: coturn-config
+          configMap:
+            name: coturn-config
+  volumeClaimTemplates:
+    - metadata:
+        name: matrix-config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 16Gi
+        storageClassName: longhorn

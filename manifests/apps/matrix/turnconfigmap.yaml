@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: coturn-config
+    namespace: apps
+    annotations:
+        ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
+data:
+    turnserver.conf: ENC[AES256_GCM,data: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,iv:0OmvrGCgozluwZf4lJRRkT88PZYmLpRWTgQT/SFRyXs=,tag:nEQBFdKrvF0v04f0PWtBuQ==,type:str]
+sops:
+    age:
+        - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBraGdwdW9FYytyb3BPQzRY
+            Z2VCYkdIVXN3YlJwNXJSL28zcDhwcE5nbDFZCllsbE9HSlpocnNva0pJV084RnZq
+            Uy9SOVNqVHluSkp6V2ZNelY1MWU0UjgKLS0tIDRkakQwcUE3a25PMkk3V3BaRHVj
+            c2xHbVRxWGx6SmpGMk1lWHREWEhRckUKbtw5xrPwfmJy6hIymcb9KH1zP5EyiINt
+            +aApBBcG4LxGRIiq4UKmyMpTc5D5gWZVj5CxYTjxLk+PQH4gPLK4Bg==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-02-11T00:26:34Z"
+    mac: ENC[AES256_GCM,data:sz5P3tmsRUezYLwQ5jhezimHtoLWyKdW+YdUGJwAq00TaN3jpE5ulEbwjlC7gWk+CABR/bsRNZ5LGwYpeW4XWDU1f06Yj3sFI+TeG1zj7kCcVw7pgTIuRUHqZoEcxSVRv6JEUnHkd8nvzdc4QZtb5Ef7nGnH12zimgugsBRXfpI=,iv:JolEWGZl9D3EYoWrdqVieJ/Ak5b8mLMFOXHSqiwys10=,tag:f60sLkAjPq14B+bnKaRAhw==,type:str]
+    pgp:
+        - created_at: "2026-02-11T00:26:34Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DedmP+m+bgeISAQdAuwWxX1Q4mTUt6dA+CT7qr3AmLt3wpbKgeN2otlSNKzkw
+            WhLJlCByIbexSnKPxst0Ze7vNDouB4/by6wQm975q306CLmASqYETA3QgQa3msfu
+            1GYBCQIQeM49KYGA+UOz2fLdY3x2Cny6Rntfb7GA8zDUCNhZZQ1BhdIXKxAchjCz
+            P/upjRYhC28r9kpZ4/EkSJ4J2TiNLof3dvO1lww4k4NG3ieFpVm7bQEIz1d6XSl6
+            pDmKTDSXCtI=
+            =jmmL
+            -----END PGP MESSAGE-----
+          fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0
