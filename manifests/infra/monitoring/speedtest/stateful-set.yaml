@@ -8,6 +8,7 @@ metadata:
     ignore-check.kube-linter.io/run-as-non-root: "I hate s6-overlay"
     ignore-check.kube-linter.io/no-read-only-root-fs: "I hate s6-overlay"
     ignore-check.kube-linter.io/privilege-escalation-container: "I hate s6-overlay"
+    ignore-check.kube-linter.io/privileged-ports: "Doesn't let you change internal bind port"
 spec:
   serviceName: speedtest-tracker
   replicas: 1
@@ -27,6 +28,9 @@ spec:
           image: lscr.io/linuxserver/speedtest-tracker:latest@sha256:d681fae50e16908a9a392c3d07f990d52d5f773aca07dd2818bd1c50dbe93462
           ports:
             - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: speedtest-config
           env:
             - name: PUID
               value: "1000"
@@ -40,11 +44,6 @@ spec:
               value: "true"
             - name: APP_TIMEZONE
               value: "America/New_York"
-            - name: APP_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: speedtest-tracker-app-key
-                  key: app-key
             - name: DB_CONNECTION
               value: "sqlite"
             - name: PUBLIC_DASHBOARD

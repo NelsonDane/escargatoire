@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rathole
-  namespace: rathole
+  name: frp
+  namespace: frp
 spec:
   replicas: 1
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: rathole
+      app: frp
   template:
     metadata:
       labels:
-        app: rathole
+        app: frp
     spec:
       securityContext:
         runAsNonRoot: true
@@ -23,16 +23,20 @@ spec:
           type: RuntimeDefault
       restartPolicy: Always
       containers:
-        - name: rathole
-          image: rapiz1/rathole:latest@sha256:a31b9178e985d4a84f46d4c3af6aa200ee0c5e7f821c7075a1f6669fb77392b1
-          command: ["/app/rathole", "/app/config.toml"]
+        - name: frp
+          image: ghcr.io/fatedier/frpc:v0.67.0@sha256:000178d7d8e55c2b639587c8a6413f07d72ce340899896b11a64acd405d1994c
+          args: ["-c", "/etc/frpc.toml"]
+          ports:
+            - name: api
+              containerPort: 7400
+              protocol: TCP
           resources:
             requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
               cpu: "1"
               memory: "1Gi"
-            limits:
-              cpu: "2"
-              memory: "4Gi"
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -41,9 +45,17 @@ spec:
             runAsNonRoot: true
           volumeMounts:
             - name: config
-              mountPath: /app/config.toml
-              subPath: config.toml
+              mountPath: /etc/frpc.toml
+              subPath: frpc.toml
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 7400
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 7400
       volumes:
         - name: config
           configMap:
-            name: rathole-config
+            name: frp-config
