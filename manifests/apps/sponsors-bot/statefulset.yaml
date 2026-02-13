@@ -6,6 +6,8 @@ metadata:
 spec:
   serviceName: sponsors-bot
   replicas: 1
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: sponsors-bot
@@ -18,11 +20,13 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
         fsGroup: 1000
+      restartPolicy: Always
       containers:
         - name: sponsors-bot-worker
           image: ghcr.io/nelsondane/sponsors-bot:latest@sha256:34aaa93b97f2675095379554215717f0f81b6002782a9370693c38f19653521e
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
@@ -32,12 +36,19 @@ spec:
             - name: config
               mountPath: /app/config.yaml
               subPath: config.yaml
+          readinessProbe:
+            exec:
+              command: ["pgrep", "-f", "main"]
+          livenessProbe:
+            exec:
+              command: ["pgrep", "-f", "main"]
         - name: sponsors-bot-web
           image: ghcr.io/nelsondane/sponsors-bot-web:latest@sha256:7972372a50c1ff0374174e802f0cd9c18294c8d6675bcaaf98dbb25228541922
           ports:
             - containerPort: 8000
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
@@ -47,17 +58,44 @@ spec:
             - name: config
               mountPath: /app/config.yaml
               subPath: config.yaml
+          readinessProbe:
+            exec:
+              command: ["pgrep", "-f", "web"]
+          livenessProbe:
+            exec:
+              command: ["pgrep", "-f", "web"]
         - name: cloudflare
           image: cloudflare/cloudflared:latest@sha256:404528c1cd63c3eb882c257ae524919e4376115e6fe57befca8d603656a91a4c
-          command: ["cloudflared", "tunnel", "--no-autoupdate", "run", "--token", "$(TUNNEL_TOKEN)"]
-          env:
-            - name: TUNNEL_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: sponsors-bot-config
-                  key: CLOUDFLARE_TUNNEL_TOKEN
+          command:
+            [
+              "cloudflared",
+              "tunnel",
+              "--no-autoupdate",
+              "--loglevel",
+              "info",
+              "--metrics",
+              "0.0.0.0:2000",
+              "run",
+              "--token",
+              "$(TUNNEL_TOKEN)",
+            ]
+          envFrom:
+            - secretRef:
+                name: sponsors-bot-config
+          ports:
+            - containerPort: 2000
+              name: metrics
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 2000
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 2000
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop: ["ALL"]
             runAsNonRoot: true
