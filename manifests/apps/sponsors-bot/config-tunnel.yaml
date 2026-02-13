@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: sponsors-bot-tunnel
+    namespace: apps
+    annotations:
+        ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
+data:
+    CLOUDFLARE_TUNNEL_TOKEN: ENC[AES256_GCM,data:4JDCab0JCUPtZT7RojFdw2x8H93XIJrVS9S4mfwo8A8nhqmFyxwb86BGVCX5oiAl5NCbka0AH59v1XrelWXrM63aprhMjFsmK0N0CRgPMVj2GjpviUYH9JD5OMSF9CFrqKss2RHPrDdmNLxcbBMk7bbm23B+aTJvpM+8JnIY9/xnTkFKQ5fPJ+ze4mEihgFEcSoFBNAAfvs0dP5UgOmmsLh+0TPyrBKon8ihf57bBGEj6xoWbsT+ZA==,iv:22e5y5Ey0xUwvyMfvYdLGuLK0kqoMesFCiXZk9/okGI=,tag:TiYK+sm7GeMV6JkbNxg1yA==,type:str]
+sops:
+    age:
+        - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0NjJkL2o1eG9STkk0WmxH
+            cU5pRWtDcnNscFNhd3ZaMWc2TktTMlNVYXk0CkZXbEZER0YrcWRnNGUrallqeFFF
+            L25rdWdidjNERC9FS0xJdXJVZ1VvMDAKLS0tIC8rVlNsTHlCYWh6QnY4cVVGQTho
+            b3V4ckZMdURGcmZBL1dzN1E5dGJRN1kKQI79agbFEAthjcOPXTyiHXHdy45xCnHL
+            i5UAtxNqKYuh3MI7bUg7Z9BgGZZ7CfwG8nIP6x++YSSSPvHV2/8fgA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-02-13T18:14:51Z"
+    mac: ENC[AES256_GCM,data:HxO2/9QHvjI7n9o78ZEgYcKOddCoc2Yu6c1bL1PHn1T6FkEkRuCTl7Zyd6tNIH00dV0l+FT/FkubLT1R8IpZyZsDAvIXCevbDPBaHovWidEzesr/oIbPPjOknmyLwfkxA9S7Xt8Gd/4dhZKYip98yIua1CMRw9ZlLBRTSETb7MQ=,iv:hf7aTxYV34iuG7LDi9RZiyHCr9HbdCa7wsu31ZxApkQ=,tag:oBCmqKF9nyp+N/Ij/9FDVQ==,type:str]
+    pgp:
+        - created_at: "2026-02-13T18:14:51Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DedmP+m+bgeISAQdAf2JBlT/M3+3X7BooShz9wAMlUjL5HnDF9WbSrUoyDiYw
+            sDm2WFFSXpw3dwkRtl8bQrhdv+8p6DRSkDsLOMnaFxk4QpW1H6seUV/eacYlkXyq
+            1GYBCQIQkXwYFhzfOga/G2vrute5GqE457XTWyUgr2HCMPgZLBh0nmYJ7JaKyDqy
+            CPqZRAi2euyFGYdHBFNL+kH2W5NOZmXWry5x+z3hH2Gi98u/UhTSqUSIGFj1JCJ1
+            GHbAYS6vUec=
+            =BZAm
+            -----END PGP MESSAGE-----
+          fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0
