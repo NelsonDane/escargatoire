@@ -6,31 +6,31 @@ metadata:
     annotations:
         ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
 data:
-    frpc.toml: ENC[AES256_GCM,data:TPHwMBB01m5U33Ue6kci3Bv6WJjTlz/Gwdkg3MXdJ6aFGSOUgf8+kO+HgXu+BLLu0sxMF9v4QYEpTeGE6i87SRK2p/moIz2IT5JpBzXK3xAYS80epTYL4ovT9O6OFesxUkZhKKl7dea+BDkXyVGynJO0+AFP6u2BLnBLgik1KNu59Ff7tvvNvRnSb4Mn+pzsK7HFZ+0rw2msxpEkMZGzLDHMd5aRyRX+AMfaqO1MLn0XKKVHkJkG1eWwNi50WWeg1Nh88JfdoEZBVa7FN4YMAj93qSd8cwxjvklZlBXkZ1QwxXEs4G46eO51uE3dOdE4gX8U3fy1soKvSfNchIe/ys+s44NI961w+wmAHFkrMrGbnvSGtLFgu4nE,iv:gqGk6/dMx6NVcvx48Lf88EeTLX3R87MExymrRSi6fMo=,tag:dh1XZNyoBOtA6OqSmuLYjg==,type:str]
+    frpc.toml: ENC[AES256_GCM,data:/xGy1e92JsWw/TKd8jjlUpK83P++4w/Muv7X/1JPqUBDj5dFQDhx0lt1WC3RngRbGEXmUQsjHlvnFDkaBzQv4r9bPkYzf+P+LcBDPgkarq3L8hEXtsXDaEJ1ZUWV/0/H2QuTa5LP40nFYKqqg0C5Se1RjGUNlaj6ba4DM2mDRTiF6jU3PcX0nw0urSsgC4ZszoYfsgP9Bblsb7ui2sYrUTkKO1Oy72MvGIg/SmZrZuYb9d4zo4utk4tbdZz8HrGFpIm0xAnHhkkB9+1GfwkpGlOxp7oSIb90yLag/1Nu8uMNSmKj0VLUFSqmedDkOaLlOddD02ibjNIicq5QPeFKkSUoWKXAzfmHbDu0GT/fotGRd+GT3efiToRVPuyosSyHCpdNLixEY94LcV9gCYxmRoKU6mb83/UN/AEtncMjDLAfEuZHW7BuFasj,iv:qkjaQtJg8A0qZTcXEdda/tP0S/bNREIaO8U81X/FU3U=,tag:fNu9DHCrly/MgiZIrK8s1g==,type:str]
 sops:
     age:
         - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHTlNkUXdyS2g1SEdnT05W
-            dUFBbEkvT0RsNUk2VXBxYWhOVk5xd0RBaTNvCm9IUWc4QXhpbXJKTDhiTmd1V2c0
-            anB5ZlJoUVFQVlhBWDJ6VmdWQ20yUFkKLS0tIHJVZjRDY3JabWN1cGhhUzJ0Uk9H
-            dHNxSjBhaW5oSUo0RUtoWGMwb0l3azgKraqQVGPGx/akKpiuFmAPwSbMOmNx+vkC
-            cKVSodUCb3xB9ck58MGVH34iw65z68tIla4lhBzGUtoC7FNoe8IdIw==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiMHdDQnVhMndzQTZYTmk0
+            M2NaMVVGaU8xbWFkNUhaWXJBbDRPNVRpTUhZCjZvTm5ISStDeHpUOFROT0I5UEJF
+            V3F0aEhyUXNZeEpjeDdYb3c3dzhucDAKLS0tIHNTRG5ueVZJKzdvQ3hUR3AyYW5T
+            UjQ4Mkw1QUNScnpBaHp2a2F3TzVPSXMKhczFwuuBkS0qUHkVbEfgcPaay0Akz1QB
+            L7GJ1Ouvgrjc0wdkzBbmjmzukHEzZQUne0gIVoKTkez91dZoCAkx/A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-02-13T15:50:22Z"
-    mac: ENC[AES256_GCM,data:ZhCn9LLjTe1Wd2Cg0afvXP5/6gyPiQUJ0bJNR1HfI3xnE29cbaFJXJl0zXdvmXoF2KCMeoY6Nd43YRScEevJriNpRCGXzE4jAgk1Cjtrok/VkGwsR3qw4SYeoGbvznfHA1Iwcd7aaLaKqdW4rmdj0SbwltpmWolvsjlFnsJBIT8=,iv:cQgofoHfM0Vh/bHygv7T2Klrqi7JTAT9nyj1xiwPZyg=,tag:b0l+bX9uWkXK41BeKJM/3Q==,type:str]
+    lastmodified: "2026-02-13T16:38:50Z"
+    mac: ENC[AES256_GCM,data:+v/sWd/W5kSqQrZtXkAk4G7QA1Qbp2Ale2YnLJBq7jEQY1dfw+x2MpDU9WBjhfuuRhvTf+blmorKo7/Ebum9U6Ra9Yj6wgJ35GrmRRY9vo5eY+paMWLWvClx7cVe/ctDqGRsiiYOKHhhVRqhBXecms8mWtgXYdFlCKXJ6V4rYyE=,iv:5dZEJBQLZTCAwmAxJjt/qpLHB+7COcqgenTbIr6DVq0=,tag:0+R6rbg7x15Ns6IpSX9Odg==,type:str]
     pgp:
-        - created_at: "2026-02-13T15:50:22Z"
+        - created_at: "2026-02-13T16:38:50Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4DedmP+m+bgeISAQdA2gSAyP8A01h77hdt4zoPzHDL7iYeiiJxHYA0jrTXuSAw
-            uEzfELkLo+o+OAxGKQn2H6sTLCd5Mn9WoIZzhQTusWaUTKni/nh8AyaJfddtvgsf
-            1GYBCQIQL0nB22CWKrRiK+o76eAvNo96y51vOpdgkH6svXdknfdtzZ6zzoyHXrou
-            KkoD2alo98W98+xI4GvkgrjvonI4yaLGAaieHt0wyx7BsoTwKRA0x7tgs18Xo7OZ
-            fWwzabig7vI=
-            =KPoZ
+            hF4DedmP+m+bgeISAQdABeY2XaFE/veqGe2no16wAOIXOSxRoV/pg5zbVCdWpGow
+            8n9/rCKjGS1TOR/dnkehwUzXLFhz8MD5Q5uvKDO5uHP4THaM3+M59tPQ2Yu6hDWI
+            1GgBCQIQ7qcRl9rFhMwgG0wAgWbUODw0zhohzq4av6L+Cz6oqEO2p5h5EvfE4fP9
+            WUm1EGBolrLi0HIUjCk+hPtO1ghyTFByyUDBPLqZpjJSva+Q2LQAFWD2LCxLjf9+
+            elX27hSsrzZ3Jg==
+            =rGcu
             -----END PGP MESSAGE-----
           fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
     encrypted_regex: ^(data|stringData)$
