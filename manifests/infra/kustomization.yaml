@@ -4,11 +4,11 @@ resources:
   - ./capacitor-next
   - ./cert-manager
   - ./cilium
+  - ./frp
   - ./gpu-resource-driver
   - ./longhorn
   - ./monitoring
   - ./nfd
-  - ./rathole
   - ./reflector
   - ./renovate
   - ./tuppr
