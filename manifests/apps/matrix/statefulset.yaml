@@ -40,12 +40,12 @@ spec:
           volumeMounts:
             - name: matrix-config
               mountPath: /var/lib/matrix-conduit/
-          # livenessProbe:
-          #   tcpSocket:
-          #     port: 6167
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 6167
+          livenessProbe:
+            tcpSocket:
+              port: 6167
+          readinessProbe:
+            tcpSocket:
+              port: 6167
         # - name: coturn
         #   image: coturn/coturn:latest@sha256:10514b502709263f3e7216873f42b48b7f8a2679090eedb5be0954fd1bba9f94
         #   ports:
