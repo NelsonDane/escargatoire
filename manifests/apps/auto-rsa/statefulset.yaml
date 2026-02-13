@@ -41,6 +41,16 @@ spec:
           volumeMounts:
             - name: rsa-data
               mountPath: /app/creds
+          readinessProbe:
+            exec:
+              command:
+                - pgrep
+                - auto_rsa_bot
+          livenessProbe:
+            exec:
+              command:
+                - pgrep
+                - auto_rsa_bot
   volumeClaimTemplates:
     - metadata:
         name: rsa-data

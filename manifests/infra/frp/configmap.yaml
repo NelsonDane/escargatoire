@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: frp-config
+    namespace: frp
+    annotations:
+        ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
+data:
+    frpc.toml: ENC[AES256_GCM,data:/xGy1e92JsWw/TKd8jjlUpK83P++4w/Muv7X/1JPqUBDj5dFQDhx0lt1WC3RngRbGEXmUQsjHlvnFDkaBzQv4r9bPkYzf+P+LcBDPgkarq3L8hEXtsXDaEJ1ZUWV/0/H2QuTa5LP40nFYKqqg0C5Se1RjGUNlaj6ba4DM2mDRTiF6jU3PcX0nw0urSsgC4ZszoYfsgP9Bblsb7ui2sYrUTkKO1Oy72MvGIg/SmZrZuYb9d4zo4utk4tbdZz8HrGFpIm0xAnHhkkB9+1GfwkpGlOxp7oSIb90yLag/1Nu8uMNSmKj0VLUFSqmedDkOaLlOddD02ibjNIicq5QPeFKkSUoWKXAzfmHbDu0GT/fotGRd+GT3efiToRVPuyosSyHCpdNLixEY94LcV9gCYxmRoKU6mb83/UN/AEtncMjDLAfEuZHW7BuFasj,iv:qkjaQtJg8A0qZTcXEdda/tP0S/bNREIaO8U81X/FU3U=,tag:fNu9DHCrly/MgiZIrK8s1g==,type:str]
+sops:
+    age:
+        - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBiMHdDQnVhMndzQTZYTmk0
+            M2NaMVVGaU8xbWFkNUhaWXJBbDRPNVRpTUhZCjZvTm5ISStDeHpUOFROT0I5UEJF
+            V3F0aEhyUXNZeEpjeDdYb3c3dzhucDAKLS0tIHNTRG5ueVZJKzdvQ3hUR3AyYW5T
+            UjQ4Mkw1QUNScnpBaHp2a2F3TzVPSXMKhczFwuuBkS0qUHkVbEfgcPaay0Akz1QB
+            L7GJ1Ouvgrjc0wdkzBbmjmzukHEzZQUne0gIVoKTkez91dZoCAkx/A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-02-13T16:38:50Z"
+    mac: ENC[AES256_GCM,data:+v/sWd/W5kSqQrZtXkAk4G7QA1Qbp2Ale2YnLJBq7jEQY1dfw+x2MpDU9WBjhfuuRhvTf+blmorKo7/Ebum9U6Ra9Yj6wgJ35GrmRRY9vo5eY+paMWLWvClx7cVe/ctDqGRsiiYOKHhhVRqhBXecms8mWtgXYdFlCKXJ6V4rYyE=,iv:5dZEJBQLZTCAwmAxJjt/qpLHB+7COcqgenTbIr6DVq0=,tag:0+R6rbg7x15Ns6IpSX9Odg==,type:str]
+    pgp:
+        - created_at: "2026-02-13T16:38:50Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hF4DedmP+m+bgeISAQdABeY2XaFE/veqGe2no16wAOIXOSxRoV/pg5zbVCdWpGow
+            8n9/rCKjGS1TOR/dnkehwUzXLFhz8MD5Q5uvKDO5uHP4THaM3+M59tPQ2Yu6hDWI
+            1GgBCQIQ7qcRl9rFhMwgG0wAgWbUODw0zhohzq4av6L+Cz6oqEO2p5h5EvfE4fP9
+            WUm1EGBolrLi0HIUjCk+hPtO1ghyTFByyUDBPLqZpjJSva+Q2LQAFWD2LCxLjf9+
+            elX27hSsrzZ3Jg==
+            =rGcu
+            -----END PGP MESSAGE-----
+          fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
+    encrypted_regex: ^(data|stringData)$
+    version: 3.11.0

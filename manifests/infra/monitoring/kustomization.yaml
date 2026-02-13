@@ -10,3 +10,27 @@ resources:
   - ./gatus
   - ./speedtest
   - ./victoria
+patches:
+  - target:
+      kind: Deployment
+      name: kubelet-serving-cert-approver
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value: {}
+      - op: add
+        path: /metadata/annotations/ignore-check.kube-linter.io~1no-rolling-update-strategy
+        value: "Can't control this"
+      - op: add
+        path: /metadata/annotations/ignore-check.kube-linter.io~1restart-policy
+        value: "Can't control this"
+  - target:
+      kind: Deployment
+      name: metrics-server
+    patch: |-
+      - op: add
+        path: /metadata/annotations/ignore-check.kube-linter.io~1no-rolling-update-strategy
+        value: "Can't control this"
+      - op: add
+        path: /metadata/annotations/ignore-check.kube-linter.io~1restart-policy
+        value: "Can't control this"
