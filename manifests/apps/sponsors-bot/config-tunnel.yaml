@@ -6,31 +6,31 @@ metadata:
     annotations:
         ignore-check.kube-linter.io/schema-validation: Encrypted by SOPS
 data:
-    CLOUDFLARE_TUNNEL_TOKEN: ENC[AES256_GCM,data:4JDCab0JCUPtZT7RojFdw2x8H93XIJrVS9S4mfwo8A8nhqmFyxwb86BGVCX5oiAl5NCbka0AH59v1XrelWXrM63aprhMjFsmK0N0CRgPMVj2GjpviUYH9JD5OMSF9CFrqKss2RHPrDdmNLxcbBMk7bbm23B+aTJvpM+8JnIY9/xnTkFKQ5fPJ+ze4mEihgFEcSoFBNAAfvs0dP5UgOmmsLh+0TPyrBKon8ihf57bBGEj6xoWbsT+ZA==,iv:22e5y5Ey0xUwvyMfvYdLGuLK0kqoMesFCiXZk9/okGI=,tag:TiYK+sm7GeMV6JkbNxg1yA==,type:str]
+    TUNNEL_TOKEN: ENC[AES256_GCM,data:+5s2BP1WAOO+OY9Bf6b6qU+IvIdaM4rOoMa3Zrpv4cfLjswc0nB2MHnQ/M4hdv8T+0kPSkUULbHXvR5llRa/FA3TaEdvyhNBfG5BFExapvN9C6BNACtAHvMb0PdBtuS6fwJNVxfYdmF5p3fVlqJa7vVanyv3SW6erm8f/jx4sA0/QEimRskat33H13hqOBurjNb1BEzQgof6QbW3Zb+O39/SmE+dqm8RXoMSglL2a9PZY28ccz+9Dg==,iv:2hWTl42JJ7PYpI5bT8bSh4NXNvo0Mq+T+vpVG2lQeqw=,tag:ZaMj8KRFN09bLruA6HPn6g==,type:str]
 sops:
     age:
         - recipient: age1dm2uej5x6cpvclx7azp5h3ez4dp5kdggx6a30eqf0uul2deead9q2w29sf
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB0NjJkL2o1eG9STkk0WmxH
-            cU5pRWtDcnNscFNhd3ZaMWc2TktTMlNVYXk0CkZXbEZER0YrcWRnNGUrallqeFFF
-            L25rdWdidjNERC9FS0xJdXJVZ1VvMDAKLS0tIC8rVlNsTHlCYWh6QnY4cVVGQTho
-            b3V4ckZMdURGcmZBL1dzN1E5dGJRN1kKQI79agbFEAthjcOPXTyiHXHdy45xCnHL
-            i5UAtxNqKYuh3MI7bUg7Z9BgGZZ7CfwG8nIP6x++YSSSPvHV2/8fgA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuZHUwOUdXU2Z5dzhFUHFt
+            eXh5MWVCeWpJUUhFc05qZ3BUT0txVGdBdUJNCnBQZlBvWHdJdzhmSVlwWDNRNkk1
+            RTRscUxIV0dFZCt4R1UvWCtUYUZldlEKLS0tIGJrZlpEM3U2YTNuUWQ5eCt4c2pz
+            Q1BTdm9XKzVGNVprVG5ZU083aGQ3V00KDhb/oB3bjC+0I8Js3hkN8YI7ajkWypR9
+            RvDEvAbWChKozMo9Ft6indnAIWZjmqCBUoZhhjisU2wTGjnaOnW3Tw==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-02-13T18:14:51Z"
-    mac: ENC[AES256_GCM,data:HxO2/9QHvjI7n9o78ZEgYcKOddCoc2Yu6c1bL1PHn1T6FkEkRuCTl7Zyd6tNIH00dV0l+FT/FkubLT1R8IpZyZsDAvIXCevbDPBaHovWidEzesr/oIbPPjOknmyLwfkxA9S7Xt8Gd/4dhZKYip98yIua1CMRw9ZlLBRTSETb7MQ=,iv:hf7aTxYV34iuG7LDi9RZiyHCr9HbdCa7wsu31ZxApkQ=,tag:oBCmqKF9nyp+N/Ij/9FDVQ==,type:str]
+    lastmodified: "2026-02-13T18:29:06Z"
+    mac: ENC[AES256_GCM,data:u+BmT/B1cAbOgappwMMsQU3/+TycAjAn1vNnavNASyfVPaq/ylL4R37qzsTy1Nfpx3HHZxz87J6CnvNw8zjG+QcZ+NkPrgw92eDPqO8bSLdbhPnInhjs63BgzTWtt6udfpRz0G4vKfgIGnCZkuNm79Nv18xQcJhdx6qifBB/EJs=,iv:Y0BlFdvxNVh4gUazA2BHD6Lc85hC58kqZ1BqJoHUhTc=,tag:D7SYa3zfa25S1LF3sR6yxw==,type:str]
     pgp:
-        - created_at: "2026-02-13T18:14:51Z"
+        - created_at: "2026-02-13T18:29:06Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hF4DedmP+m+bgeISAQdAf2JBlT/M3+3X7BooShz9wAMlUjL5HnDF9WbSrUoyDiYw
-            sDm2WFFSXpw3dwkRtl8bQrhdv+8p6DRSkDsLOMnaFxk4QpW1H6seUV/eacYlkXyq
-            1GYBCQIQkXwYFhzfOga/G2vrute5GqE457XTWyUgr2HCMPgZLBh0nmYJ7JaKyDqy
-            CPqZRAi2euyFGYdHBFNL+kH2W5NOZmXWry5x+z3hH2Gi98u/UhTSqUSIGFj1JCJ1
-            GHbAYS6vUec=
-            =BZAm
+            hF4DedmP+m+bgeISAQdA4rjQMozT2ilY6klybgFnNUjT1jQonSpgB5TismeaeH8w
+            DNsoIrDnHgNliIrm8odu63BbNObP09e05a7qV4KyXEqcyp/EW+kQJc6Dcpf0iojB
+            1GgBCQIQuFtfaO5FbcBVFkEVbn0x5Vn0kJ756VAA2YawNLvPM4U/YvV1O470PU6M
+            sc0OOOoXBfDjuHgvWAZRo+W0ELX4ZbyZVUXL7J8OQ1BRsZqsBRktMQWZkxY0DzQh
+            Yw0CLMLoj5pDvQ==
+            =FTgG
             -----END PGP MESSAGE-----
           fp: EA202DD680C3621ACE5D23171EE414C5597BC9A2
     encrypted_regex: ^(data|stringData)$
