@@ -6,6 +6,7 @@ metadata:
   annotations:
     ignore-check.kube-linter.io/no-liveness-probe: "Renovate CronJob does not need a liveness probe"
     ignore-check.kube-linter.io/no-readiness-probe: "Renovate CronJob does not need a readiness probe"
+    ignore-check.kube-linter.io/no-read-only-root-fs: "Renovate installs tools it doesn't have, follow: https://github.com/renovatebot/renovate/discussions/24842"
 spec:
   schedule: "@hourly"
   concurrencyPolicy: Forbid
