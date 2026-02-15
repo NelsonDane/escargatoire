@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pdf
+  namespace: apps
+spec:
+  serviceName: pdf
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pdf
+  template:
+    metadata:
+      labels:
+        app: pdf
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      restartPolicy: Always
+      containers:
+        - name: pdf
+          image: ghcr.io/alam00000/bentopdf-simple:latest@sha256:31fdc1559f90e37656338cdde4039e3504ff09ec29c347b61d9468ab61151c4e
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+          volumeMounts:
+            - name: nginx_conf_tmp
+              mountPath: /etc/nginx/conf.d
+            - name: nginx_tmp
+              mountPath: /etc/nginx/tmp
+            - name: nginx_cache
+              mountPath: /var/cache/nginx/
+      volumes:
+        - name: nginx_conf_tmp
+          emptyDir: {}
+        - name: nginx_tmp
+          emptyDir: {}
+        - name: nginx_cache
+          emptyDir: {}
