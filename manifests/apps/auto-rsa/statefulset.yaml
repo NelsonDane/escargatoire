@@ -25,7 +25,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: auto-rsa
-          image: docker.io/nelsondane/auto-rsa:latest@sha256:55379d4162da83b85bd539bf12ec6eddc0ed7ef389e608590e081f9595e62898
+          image: docker.io/nelsondane/auto-rsa:latest@sha256:c46a12c3e42c0020ad79c18efa7642449785cb698607a4d83c351bbb7145f9c8
           tty: true
           envFrom:
             - secretRef:
