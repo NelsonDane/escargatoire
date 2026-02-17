@@ -9,7 +9,7 @@ spec:
     spec:
       chart: cilium
       # Broken in versions above: https://github.com/cilium/cilium/issues/42786
-      version: 1.19.0
+      version: 1.19.1
       sourceRef:
         kind: HelmRepository
         name: cilium
