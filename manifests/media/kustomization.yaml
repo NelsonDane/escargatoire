@@ -6,8 +6,6 @@ resources:
   - namespace.yaml
   # Apps
   - ./autobrr
-  - ./cleanuparr
-  - ./huntarr
   - ./jellyfin
   - ./jellyseerr
   - ./profilarr
