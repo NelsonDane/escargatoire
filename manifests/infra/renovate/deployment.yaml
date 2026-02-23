@@ -25,7 +25,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: token-generator
-              image: nelsondane/renovate-token-injector:latest@sha256:106150cce41341f34a41d807ccec6de9e86cc3ebe159cc53a0bfb937cc3611da
+              image: nelsondane/renovate-token-injector:latest@sha256:4fbf7da7cc82e9cebffe916aba537626a4ed2e1b090de2a7135e4aa24e7d385e
               envFrom:
                 - secretRef:
                     name: renovate-env
