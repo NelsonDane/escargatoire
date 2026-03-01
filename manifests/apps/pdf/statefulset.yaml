@@ -46,16 +46,16 @@ spec:
             tcpSocket:
               port: 8080
           volumeMounts:
-            - name: nginx_conf_tmp
+            - name: nginx-conf-tmp
               mountPath: /etc/nginx/conf.d
-            - name: nginx_tmp
+            - name: nginx-tmp
               mountPath: /etc/nginx/tmp
-            - name: nginx_cache
+            - name: nginx-cache
               mountPath: /var/cache/nginx/
       volumes:
-        - name: nginx_conf_tmp
+        - name: nginx-conf-tmp
           emptyDir: {}
-        - name: nginx_tmp
+        - name: nginx-tmp
           emptyDir: {}
-        - name: nginx_cache
+        - name: nginx-cache
           emptyDir: {}
