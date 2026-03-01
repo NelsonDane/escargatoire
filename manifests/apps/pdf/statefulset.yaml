@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: pdf
-          image: ghcr.io/alam00000/bentopdf-simple:latest@sha256:f8def95a6a5e852fb6ccfd94a8ec4a1d2c10f56124c85f12dfa502b3672f3870
+          image: ghcr.io/alam00000/bentopdf-simple:latest@sha256:fc4f232dcf4343f33db6ed55646c35846d990df10144c25ef1b2c32847d6bd03
           ports:
             - containerPort: 8080
           env:
