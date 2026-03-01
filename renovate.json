@@ -13,6 +13,14 @@
   "ignorePaths": [
     "manifests/flux-system/gotk-components.yaml"
   ],
+  "packageRules": [
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/siderolabs/installer"],
+      "separateMajorMinor": true,
+      "separateMinorPatch": true
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
