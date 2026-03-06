@@ -9,4 +9,5 @@ resources:
   - ./matrix
   - ./pdf
   - ./sponsors-bot
+  - ./umami
   - ./warrior
