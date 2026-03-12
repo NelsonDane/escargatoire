@@ -25,7 +25,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: filestash
-          image: machines/filestash:latest@sha256:6829e05946ebcb9bd280bf4d8dbde813c5019ccf01aeae8634fa06f67147288e
+          image: machines/filestash:latest@sha256:e8c2b8183121d0c632d65770900826a7a8bc84dca526dfb9115bbd3bc0e16fa4
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
