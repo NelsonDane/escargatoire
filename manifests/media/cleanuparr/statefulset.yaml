@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: cleanuparr
-          image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:4eaae61479c1a1d1f0b0f9ec988cf97a3ac445065de2a9a54ab33515c1a5adf1
+          image: ghcr.io/cleanuparr/cleanuparr:latest@sha256:086470c766e2e2f6f010fc192ba728daa0a1ba77a7b17ff5e451f7c98c379a16
           command: ["./Cleanuparr"]
           workingDir: /app
           ports:
