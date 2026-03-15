@@ -40,6 +40,8 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /config
+            - name: tmp
+              mountPath: /tmp
             - name: media
               mountPath: /media
           livenessProbe:
@@ -52,6 +54,8 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: sonarr-config
+        - name: tmp
+          emptyDir: {}
         - name: media
           persistentVolumeClaim:
             claimName: media

@@ -4,6 +4,7 @@ metadata:
   name: prowlarr
   namespace: media
   annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
     ignore-check.kube-linter.io/no-read-only-root-fs: "Flaresolverr Chrome doesn't work without it"
 spec:
   replicas: 1
@@ -11,7 +12,7 @@ spec:
     matchLabels:
       app: prowlarr
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
