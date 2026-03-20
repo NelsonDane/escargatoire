@@ -27,7 +27,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: jellyseerr
-          image: seerr/seerr:develop@sha256:100a45255f32628ced5e0cf214f3156ee32cfb8767a27716f71c954238206384
+          image: seerr/seerr:develop@sha256:e49a2f222e48c7ccc30103b51cace3ef47111f57c251bca0366f2abf7e6f831e
           ports:
             - containerPort: 5055
           securityContext:
