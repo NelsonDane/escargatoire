@@ -22,7 +22,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: autobrr
-          image: ghcr.io/autobrr/autobrr:latest@sha256:6f37217bbc0496fff0c7ffb4264545036bf735775e484188b80b31f21daa06e2
+          image: ghcr.io/autobrr/autobrr:latest@sha256:712cf8ffa11eba28e286d632dc8ad6b17fb6d754573848a07ec91043eb03d87e
           restartPolicy: Always
           env:
             - name: TZ
