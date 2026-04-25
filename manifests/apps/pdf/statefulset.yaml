@@ -52,10 +52,14 @@ spec:
               mountPath: /etc/nginx/tmp
             - name: nginx-cache
               mountPath: /var/cache/nginx/
+            - name: nginx-var
+              mountPath: /var/lib/nginx/
       volumes:
         - name: nginx-conf-tmp
           emptyDir: {}
         - name: nginx-tmp
           emptyDir: {}
         - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-var
           emptyDir: {}
