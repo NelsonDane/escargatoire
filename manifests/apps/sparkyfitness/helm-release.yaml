@@ -12,7 +12,6 @@ spec:
   values:
     config:
       timezone: America/New_York
-      frontendUrl: https://fitness.nelsondane.com
     postgresql:
       enabled: false
     externalDatabase:
@@ -43,4 +42,8 @@ spec:
     ingress:
       enabled: false
     httpRoute:
-      enabled: false
+      enabled: true
+      hostname: fitness.nelsondane.com
+      parentRef:
+        name: cilium-gateway
+        namespace: cilium
