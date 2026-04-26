@@ -9,6 +9,7 @@ resources:
   - ./matrix
   - ./pdf
   - ./rss
+  - ./sparkyfitness
   - ./sponsors-bot
   - ./umami
   - ./warrior
