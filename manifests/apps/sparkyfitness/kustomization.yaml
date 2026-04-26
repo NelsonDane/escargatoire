@@ -5,5 +5,4 @@ resources:
   - db.yaml
   - helm-release.yaml
   - helm-repo.yaml
-  - route.yaml
   - secret.yaml
