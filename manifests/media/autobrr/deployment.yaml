@@ -3,13 +3,15 @@ kind: Deployment
 metadata:
   name: autobrr
   namespace: media
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with Sqlite volumes"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: autobrr
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
