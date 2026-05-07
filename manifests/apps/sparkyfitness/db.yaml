@@ -1,0 +1,50 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: sparkyfitness-db
+  namespace: sparkyfitness
+spec:
+  instances: 1
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:15
+
+  storage:
+    storageClass: longhorn-strict-local
+    size: 8Gi
+
+  postgresql:
+    shared_preload_libraries:
+      - pg_stat_statements
+
+  bootstrap:
+    initdb:
+      database: sparkyfitness
+      owner: sparkyowner
+      secret:
+        name: sparkyfitness-db-owner-secret
+
+      postInitSQL:
+      - ALTER ROLE sparkyowner CREATEROLE;
+
+      postInitApplicationSQL:
+        # uuid-ossp and pgcrypto are trusted extensions — can be created by the DB owner
+        - CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+        - CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+        # Pre-create sparkyapp role so ownership grants work
+        - CREATE ROLE sparkyapp LOGIN;
+        - GRANT ALL PRIVILEGES ON DATABASE sparkyfitness TO sparkyapp;
+        - GRANT ALL ON SCHEMA public TO sparkyapp;
+        - GRANT pg_monitor TO sparkyapp;
+
+  managed:
+    roles:
+      - name: sparkyapp
+        ensure: present
+        login: true
+        passwordSecret:
+          name: sparkyfitness-appdb-secret
+
+  enableSuperuserAccess: true
+
+  monitoring:
+    enablePodMonitor: false

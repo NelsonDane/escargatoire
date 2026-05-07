@@ -12,4 +12,5 @@ resources:
   - ./prowlarr
   - ./radarr
   - ./sonarr
+  - ./unmanic
   - ./vpn

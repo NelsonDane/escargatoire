@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: unmanic
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: unmanic
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: unmanic
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      restartPolicy: Always
+      containers:
+        - name: unmanic
+          image: josh5/unmanic:latest@sha256:3751881e8129e412c64453e6d11ff3fb1469121eeb271c73ad63f925a9f5c910
+          ports:
+            - containerPort: 8888
+              protocol: TCP
+              name: http
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+          env:
+            - name: HOME # Hard requirement for running rootless
+              value: /config
+          volumeMounts:
+            - name: unmanic-config
+              mountPath: /config
+            - name: tmp
+              mountPath: /tmp
+            - name: media
+              mountPath: /media
+          livenessProbe:
+            tcpSocket:
+              port: 8888
+          readinessProbe:
+            tcpSocket:
+              port: 8888
+      volumes:
+        - name: unmanic-config
+          persistentVolumeClaim:
+            claimName: unmanic-config
+        - name: tmp
+          emptyDir: {}
+        - name: media
+          persistentVolumeClaim:
+            claimName: media

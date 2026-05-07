@@ -8,6 +8,8 @@ resources:
   - ./irc
   - ./matrix
   - ./pdf
+  - ./rss
+  - ./sparkyfitness
   - ./sponsors-bot
   - ./umami
   - ./warrior
