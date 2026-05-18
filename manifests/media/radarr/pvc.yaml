@@ -10,3 +10,4 @@ spec:
     requests:
       storage: 4Gi
   storageClassName: longhorn
+  volumeName: radarr-config-restored
