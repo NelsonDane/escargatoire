@@ -23,9 +23,9 @@ spec:
       restartPolicy: Always
       containers:
         - name: profilarr
-          image: santiagosayshey/profilarr:latest@sha256:8a514f8429cd33885166facc9eb6504fa9ded056c737609e5e8ef32ae0afb350
-          command: ["gunicorn", "--bind", "0.0.0.0:6868", "--timeout", "600", "app.main:create_app()"]
-          workingDir: /app
+          image: ghcr.io/dictionarry-hub/profilarr:latest@sha256:f66cfde53ba85987d699f56783193bc5b6a42aa40ca9e0d2115135fad733e017
+          # command: ["gunicorn", "--bind", "0.0.0.0:6868", "--timeout", "600", "app.main:create_app()"]
+          # workingDir: /app
           ports:
             - containerPort: 6868
           env:
