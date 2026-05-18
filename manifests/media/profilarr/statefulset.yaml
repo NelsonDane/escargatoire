@@ -24,13 +24,13 @@ spec:
       containers:
         - name: profilarr
           image: ghcr.io/dictionarry-hub/profilarr:latest@sha256:f66cfde53ba85987d699f56783193bc5b6a42aa40ca9e0d2115135fad733e017
-          # command: ["gunicorn", "--bind", "0.0.0.0:6868", "--timeout", "600", "app.main:create_app()"]
-          # workingDir: /app
           ports:
             - containerPort: 6868
           env:
             - name: TZ
               value: "America/New_York"
+            - name: ORIGIN
+              value: "https://profilarr.cluster.nelsondane.com"
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
