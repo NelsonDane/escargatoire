@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:latest-alpine@sha256:996f3a59d297ec9699cb36ce558b61ab16d79c76763a5c3158d5387f71161499
+          image: docker.io/actualbudget/actual-server:latest-alpine@sha256:12082ca89dbc5e93b6f806074c19282d97ff04579c784bcdfbe996ce5c52bd0d
           ports:
             - containerPort: 5006
           securityContext:
