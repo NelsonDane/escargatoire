@@ -21,28 +21,9 @@
       "separateMinorPatch": true
     },
     {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "matchFileNames": ["manifests/apps/**"],
-      "groupName": "Apps Digest Updates"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "matchFileNames": ["manifests/infra/**"],
-      "groupName": "Infra Digest Updates"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "matchFileNames": ["manifests/media/**"],
-      "groupName": "Media Digest Updates"
-    },
-    {
-      "matchDatasources": ["docker"],
-      "matchUpdateTypes": ["digest"],
-      "matchFileNames": ["manifests/media/vpn/**"],
-      "groupName": "VPN Digest Updates"
+      "matchFileNames": ["manifests/**"],
+      "groupName": "{{parentDir}} Updates",
+      "branchName": "renovate/{{parentDir}}-updates"
     }
   ],
   "customManagers": [
