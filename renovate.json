@@ -19,9 +19,26 @@
       "matchPackageNames": ["ghcr.io/siderolabs/installer"],
       "separateMajorMinor": true,
       "separateMinorPatch": true
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "groupName": "{{namespace}} digest updates"
     }
   ],
   "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Group digest updates by namespace",
+      "managerFilePatterns": [
+        "/manifests/.+\\.yaml$/"
+      ],
+      "matchStrings": [
+        "\\s*namespace:\\s*(?<namespace>[^\\n\\r]+)[\\s\\S]*?image:\\s*(?<depName>[^\\n\\r]+):[^\\n\\r]+@(?<currentDigest>sha256:[a-f0-9]{64})"
+      ],
+      "datasourceTemplate": "docker",
+      "extractVersionTemplate": "^(?<version>.*)$"
+    },
     {
       "customType": "regex",
       "description": "Update GitHub release references in kustomization.yaml",
