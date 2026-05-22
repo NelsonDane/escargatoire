@@ -15,6 +15,11 @@ spec:
         name: intel-gpu-resource-driver
         namespace: intel-gpu-resource-driver
   values:
+    # https://github.com/intel/intel-resource-drivers-for-kubernetes/blob/main/charts/intel-gpu-resource-driver/README.md
+    kubeletPlugin:
+      privileged: true
+      healthMonitoring:
+        enabled: false
     cdi:
       staticPath: /var/cdi/static
       dynamicPath: /var/cdi/dynamic
