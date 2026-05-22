@@ -23,22 +23,29 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["digest"],
-      "groupName": "{{namespace}} digest updates"
+      "matchFileNames": ["manifests/apps/**"],
+      "groupName": "Apps Digest Updates"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "matchFileNames": ["manifests/infra/**"],
+      "groupName": "Infra Digest Updates"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "matchFileNames": ["manifests/media/**"],
+      "groupName": "Media Digest Updates"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "matchFileNames": ["manifests/media/vpn/**"],
+      "groupName": "VPN Digest Updates"
     }
   ],
   "customManagers": [
-    {
-      "customType": "regex",
-      "description": "Group digest updates by namespace",
-      "managerFilePatterns": [
-        "/manifests/.+\\.yaml$/"
-      ],
-      "matchStrings": [
-        "\\s*namespace:\\s*(?<namespace>[^\\n\\r]+)[\\s\\S]*?image:\\s*(?<depName>[^\\n\\r]+):[^\\n\\r]+@(?<currentDigest>sha256:[a-f0-9]{64})"
-      ],
-      "datasourceTemplate": "docker",
-      "extractVersionTemplate": "^(?<version>.*)$"
-    },
     {
       "customType": "regex",
       "description": "Update GitHub release references in kustomization.yaml",
