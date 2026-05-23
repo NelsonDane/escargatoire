@@ -5,6 +5,7 @@ resources:
   - ./actual
   - ./auto-rsa
   - ./filestash
+  - ./homepage
   - ./irc
   - ./matrix
   - ./pdf
