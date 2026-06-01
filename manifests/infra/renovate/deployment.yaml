@@ -25,7 +25,7 @@ spec:
           restartPolicy: OnFailure
           initContainers:
             - name: token-generator
-              image: nelsondane/renovate-token-injector:latest@sha256:9264ed900ecc1b7ecba1a1b8421e6356f841297ac465cffb61ca4806bdf9d45a
+              image: nelsondane/renovate-token-injector:latest@sha256:8b772bf4400b7ba5aa8afff9d1adee196135c90ba5250073c9667086c17d40c5
               envFrom:
                 - secretRef:
                     name: renovate-env
@@ -42,7 +42,7 @@ spec:
                   type: RuntimeDefault
           containers:
             - name: renovate
-              image: renovate/renovate:43.194.0@sha256:8b0529e2502c61e5af507ed4a12fd042b68ae5441c9861694238206f06516228
+              image: renovate/renovate:43.207.4@sha256:087bab575172b1926bbc57124d988015d899b0a82d45028514377b10a392f69d
               env:
                 - name: LOG_LEVEL
                   value: debug
