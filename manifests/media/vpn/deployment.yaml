@@ -61,8 +61,12 @@ spec:
               value: "24h"
             - name: WIREGUARD_MTU
               value: "1280"
-            - name: DNS_ADDRESSS
-              value: "9.9.9.9"
+            # use k8s dns servers
+            - name: DNS_KEEP_NAMESERVER
+              value: "on"
+            # allow cluster internal traffic to bypass the VPN
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.96.0.0/12,10.244.0.0/16"
             - name: SERVER_CITIES
               value: "New York City"
             # - name: SERVER_COUNTRIES
@@ -89,10 +93,6 @@ spec:
               command:
                 - pgrep
                 - gluetun
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "(ip rule del table 51820; ip -6 rule del table 51820) || true"]
 
         - name: qbittorrent
           image: ghcr.io/home-operations/qbittorrent:5.1.4@sha256:24f2d793cb7f7a93e755e5d22e533be818e62eadc864f4a82315b901b6ffe807
