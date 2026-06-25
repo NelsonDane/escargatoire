@@ -47,7 +47,7 @@ spec:
               mountPath: /cache
             - name: media
               mountPath: /media
-              readOnly: true
+              # readOnly: true
           livenessProbe:
             httpGet:
               path: /health
