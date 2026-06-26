@@ -21,9 +21,10 @@
       "separateMinorPatch": true
     },
     {
-      "matchFileNames": ["manifests/**"],
-      "groupName": "{{parentDir}} Updates",
-      "branchName": "renovate/{{parentDir}}-updates"
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["digest"],
+      "groupName": "{{packageFile}} Updates",
+      "groupSlug": "digest-updates"
     }
   ],
   "customManagers": [
@@ -48,17 +49,6 @@
         "https://raw\\.githubusercontent\\.com/(?<depName>[^/]*/[^/]*)/(?<currentValue>v?\\d+\\.\\d+\\.\\d+)/"
       ],
       "datasourceTemplate": "github-tags"
-    },
-    {
-      "customType": "regex",
-      "description": "Update version references in YAML files",
-      "managerFilePatterns": [
-        "/^manifests/.+\\.yaml$/",
-        "controlplane.yaml"
-      ],
-      "matchStrings": [
-        "#\\s*renovate:\\s*datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?(?:\\s+extractVersion=(?<extractVersion>\\S+))?\\s*[\\r\\n]+\\s*[^:#]+:\\s*(?:[^\\s\"']+:)?(?<currentValue>v?[0-9][^\\s\"']*)"
-      ]
     }
   ]
 }
