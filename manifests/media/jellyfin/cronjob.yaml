@@ -1,0 +1,61 @@
+# Cron to manually fix https://github.com/jellyfin/jellyfin/issues/15658 until a patch is released in v12
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: jellyfin-db-dupe-cleaner
+  namespace: media
+spec:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            fsGroup: 1000
+            seccompProfile:
+              type: RuntimeDefault
+          restartPolicy: OnFailure
+          containers:
+            - name: jellyfin-dupe-cleaner
+              image: keinos/sqlite3:latest@sha256:252363ef3cbbe11f1100dcbc734b89969b264df99a49008b34ca4578f503ff2a
+              command:
+                - sh
+                - -c
+                - |
+                  sqlite3 /config/data/jellyfin.db "
+                    DELETE FROM UserData
+                    WHERE CustomDataKey IN (
+                      SELECT CustomDataKey
+                      FROM UserData
+                      GROUP BY UserId, CustomDataKey
+                      HAVING COUNT(*) > 1
+                    )
+                  "
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                capabilities:
+                  drop: ["ALL"]
+                runAsNonRoot: true
+              volumeMounts:
+                - name: config
+                  mountPath: /config
+              livenessProbe:
+                exec:
+                  command:
+                    - sqlite3
+                    - /config/data/jellyfin.db
+                    - "PRAGMA integrity_check;"
+              readinessProbe:
+                exec:
+                  command:
+                    - sqlite3
+                    - /config/data/jellyfin.db
+                    - "PRAGMA integrity_check;"
+          volumes:
+            - name: config
+              persistentVolumeClaim:
+                claimName: jellyfin-config
