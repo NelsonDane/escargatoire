@@ -95,7 +95,7 @@ spec:
                 - gluetun
 
         - name: qbittorrent
-          image: ghcr.io/home-operations/qbittorrent:5.1.4@sha256:24f2d793cb7f7a93e755e5d22e533be818e62eadc864f4a82315b901b6ffe807
+          image: ghcr.io/home-operations/qbittorrent:5.2.2@sha256:24f2d793cb7f7a93e755e5d22e533be818e62eadc864f4a82315b901b6ffe807
           restartPolicy: Always
           env:
             - name: TZ
