@@ -8,10 +8,9 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    path: /mnt/Shell/media
+    path: /Shell/media
     server: 10.0.2.20
   persistentVolumeReclaimPolicy: Delete
   mountOptions:
     - hard
-    - nfsvers=3
   storageClassName: ""
