@@ -28,7 +28,7 @@ spec:
         kind: HelmRepository
         name: victoria-metrics
         namespace: monitoring
-      version: 0.79.1
+      version: 0.85.9
   values:
     nameOverride: "vmks" # Shorten name to avoid long name issues
     alertmanager:
