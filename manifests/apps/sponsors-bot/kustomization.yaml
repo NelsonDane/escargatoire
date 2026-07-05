@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
   - config-tunnel.yaml
   - config.yaml
+  - db.yaml
+  - secret.yaml
   - statefulset.yaml
