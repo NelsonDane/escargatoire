@@ -27,7 +27,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: prowlarr
-          image: ghcr.io/home-operations/prowlarr:2.5.1@sha256:d9938cb1f575f4fc4c7131dac81d71ae3895111c8b73ead18ad036aa2458678c
+          image: ghcr.io/home-operations/prowlarr:2.5.2@sha256:dbe7685eb134cd63eaa130fbf60060f33f26d7482b5fc5a81da9fca8552aa4ed
           ports:
             - containerPort: 9696
           securityContext:
