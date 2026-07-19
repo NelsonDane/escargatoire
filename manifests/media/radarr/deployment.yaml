@@ -26,7 +26,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: radarr
-          image: ghcr.io/home-operations/radarr:6.3.0@sha256:4a253d16ecaec7adbd50f4e4142483f69aa116519d0511317d74b3a65bc13e68
+          image: ghcr.io/home-operations/radarr:6.4.0@sha256:846f8574f2745d9f713981dd6dea3041cab27110b5517f30b533252283d6d25d
           ports:
             - containerPort: 7878
           securityContext:
