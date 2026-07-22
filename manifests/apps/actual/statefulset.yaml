@@ -48,6 +48,52 @@ spec:
               command:
                 - node
                 - src/scripts/health-check.js
+        - name: sync
+          image: docker.io/seriouslag/actual-auto-sync:latest@sha256:a8f531f5d398591bc2cf6f1dd996b6452c17ff85e4eb8d0c371b43f1cccaace5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+            - secretRef:
+                name: actual-auto-sync
+          env:
+            - name: CRON_SCHEDULE
+              value: "0 1 * * *"
+            - name: TIMEZONE
+              value: "America/New_York"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: RUN_ON_START
+              value: "false"
+            - name: SKIP_FAILED_ACCOUNTS
+              value: "false"
+          livenessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - process.exit(0)
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            exec:
+              command:
+                - node
+                - -e
+                - process.exit(0)
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: sync-data
+              mountPath: /data
+      volumes:
+        - name: sync-data
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: actual-data
