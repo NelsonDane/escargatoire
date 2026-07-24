@@ -8,5 +8,5 @@ spec:
   url: oci://ghcr.io/home-operations/charts/tuppr
   ref:
     # renovate: datasource=docker depName=ghcr.io/home-operations/charts/tuppr
-    tag: 0.2.9
-    digest: sha256:3250fcbe3dd28c8398b069812075dc621d082358b46e70fa7f1a745c22af89b7
+    tag: 0.4.1
+    digest: sha256:a3333bf36964e1d08afc50c9bb111a71193b0f49309012046d863c024d0f5ebc
