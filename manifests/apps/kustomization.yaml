@@ -8,6 +8,7 @@ resources:
   - ./homepage
   - ./irc
   - ./matrix
+  - ./paperless
   - ./pdf
   - ./rss
   - ./sparkyfitness
