@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: profilarr
-          image: ghcr.io/dictionarry-hub/profilarr:latest@sha256:c0d330ced11a777de32fbd71b4b7a2b22088b5f06ddad88199dacc7f14b82668
+          image: ghcr.io/dictionarry-hub/profilarr:latest@sha256:7a9b5112ff227320d17c65ab643a5d875713e6235991ef04a8e482ec51427902
           ports:
             - containerPort: 6868
           env:

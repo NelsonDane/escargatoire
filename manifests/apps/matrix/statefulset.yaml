@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: matrix
-          image: registry.gitlab.com/famedly/conduit/matrix-conduit:next@sha256:fb9e20a1dcf0a54a4483ac59bc0dc38ef0e36c90b87ec21b76f751686e1d6442
+          image: registry.gitlab.com/famedly/conduit/matrix-conduit:next@sha256:f47ea5ab383190c17dcaaf81f372071ab16ee035b8d56c604a52c4c18fb51f97
           ports:
             - containerPort: 6167
           envFrom:

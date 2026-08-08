@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: actual
-          image: docker.io/actualbudget/actual-server:latest-alpine@sha256:1449173e2221eb9387da866723808a1fa32a3e92e5cca5df65dc90a532c81ac8
+          image: docker.io/actualbudget/actual-server:latest-alpine@sha256:136b1aa9c3070583cb5493cba370c36290b7d2505c0222bf38a4b097fcac6a40
           ports:
             - containerPort: 5006
           securityContext:
@@ -49,7 +49,7 @@ spec:
                 - node
                 - src/scripts/health-check.js
         - name: sync
-          image: docker.io/seriouslag/actual-auto-sync:latest@sha256:a8f531f5d398591bc2cf6f1dd996b6452c17ff85e4eb8d0c371b43f1cccaace5
+          image: docker.io/seriouslag/actual-auto-sync:latest@sha256:e37c27f70ee1a09f4925eb83ce5f4765a24d820a63286115eb78a64cd63875ef
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
