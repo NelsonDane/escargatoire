@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: sponsors-bot-worker
-          image: ghcr.io/nelsondane/sponsors-bot:latest@sha256:34aaa93b97f2675095379554215717f0f81b6002782a9370693c38f19653521e
+          image: ghcr.io/nelsondane/sponsors-bot:latest@sha256:e933b7b9d2c4b852fc304826176de88835463e07e5d202e306c6c26a2716f845
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -43,7 +43,7 @@ spec:
             exec:
               command: ["pgrep", "-f", "main"]
         - name: sponsors-bot-web
-          image: ghcr.io/nelsondane/sponsors-bot-web:latest@sha256:7972372a50c1ff0374174e802f0cd9c18294c8d6675bcaaf98dbb25228541922
+          image: ghcr.io/nelsondane/sponsors-bot-web:latest@sha256:5df27965c8ba8d16be3e1e065bd43a62c1ae9b32a5e44b4afdd8937bf3029e61
           ports:
             - containerPort: 8000
           securityContext:
