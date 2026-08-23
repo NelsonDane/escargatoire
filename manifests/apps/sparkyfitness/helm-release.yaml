@@ -15,7 +15,7 @@ spec:
     postgresql:
       enabled: false
     externalDatabase:
-      host: sparkyfitness-db-rw.apps.svc.cluster.local
+      host: sparkyfitness-db-rw.sparkyfitness.svc.cluster.local
       port: 5432
       database: sparkyfitness
       auth:
