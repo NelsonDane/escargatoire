@@ -8,4 +8,4 @@ spec:
   url: oci://ghcr.io/codewithcj/charts/sparkyfitness
   ref:
     # renovate: datasource=docker depName=ghcr.io/codewithcj/charts/sparkyfitness
-    tag: 0.16.5-8
+    tag: 1.6.2
