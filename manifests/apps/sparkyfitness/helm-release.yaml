@@ -21,6 +21,9 @@ spec:
       auth:
         existingSecret: sparkyfitness-db-owner-secret
     server:
+      env:
+        - name: SPARKY_FITNESS_DISABLE_SIGNUP
+          value: "true"
       secrets:
         existingSecret: sparkyfitness-app-secret
       appDatabase:
