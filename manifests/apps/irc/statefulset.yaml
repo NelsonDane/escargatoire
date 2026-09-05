@@ -23,7 +23,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: thelounge
-          image: ghcr.io/thelounge/thelounge:latest@sha256:c2aa0916203b298ffaf3a36c4eb60ef73c1006448d430e218d37840472e84e50
+          image: ghcr.io/thelounge/thelounge:latest@sha256:3cc53915661c923e89769f61185db89ad7a2ab682d1fe20b48e8ab287fd753d3
           ports:
             - containerPort: 9000
           env:

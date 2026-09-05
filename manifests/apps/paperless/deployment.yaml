@@ -87,7 +87,7 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 10
         - name: broker
-          image: valkey/valkey:9-alpine@sha256:ee91f7a174ac4d6a6b0685b3a60e321f0a9dbbb691f9b0e285be2ba1d1be8328
+          image: valkey/valkey:9-alpine@sha256:ccfa19b0d743e48927e1c8c14e39e0acb97b5cea347fef0bfe340247fea920cd
           command: ["valkey-server"]
           args: ["--save", "", "--appendonly", "no"]
           ports:
