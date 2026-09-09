@@ -25,7 +25,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: unmanic
-          image: josh5/unmanic:latest@sha256:3751881e8129e412c64453e6d11ff3fb1469121eeb271c73ad63f925a9f5c910
+          image: josh5/unmanic:latest@sha256:36a705923193db6b8ca7abd5b57b81a7309d04aedd320ec0ef4e9ac5970be885
           ports:
             - containerPort: 8888
               protocol: TCP

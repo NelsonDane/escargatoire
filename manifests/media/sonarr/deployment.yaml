@@ -26,7 +26,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: sonarr
-          image: ghcr.io/home-operations/sonarr:4.0.19@sha256:f9dec0cf69a45b16c698ef2a25fe6c70ff4ec8d0b2315897c0d48b3b5a456c87
+          image: ghcr.io/home-operations/sonarr:4.0.19@sha256:47d56de90c81eb2a8f0d36771328a95e7299609579b88db82b1473c314f26a47
           ports:
             - containerPort: 8989
           securityContext:

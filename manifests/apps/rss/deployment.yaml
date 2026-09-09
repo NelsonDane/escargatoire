@@ -22,7 +22,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: miniflux
-          image: miniflux/miniflux:latest-distroless@sha256:c752402519127b6eb4081bace4bea3ca89465b2c7e3f354b7be020a822e3d8a3
+          image: miniflux/miniflux:latest-distroless@sha256:59e4e31b349f008ecd34b547f23498b1d8abc0c03d5f6d12bdb713ab7f7c04bf
           env:
             - name: CREATE_ADMIN
               value: "1"
