@@ -22,6 +22,8 @@
             sops
             talosctl
           ];
+          KUBECONFIG = "${toString ./.}/kubeconfig";
+          TALOSCONFIG = "${toString ./.}/talosconfig";
         };
       }
     );
