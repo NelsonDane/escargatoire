@@ -3,13 +3,15 @@ kind: Deployment
 metadata:
   name: qui
   namespace: vpn
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: qui
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
