@@ -15,6 +15,7 @@
         devShells.default = pkgs.mkShellNoCC {
           packages = with pkgs; [
             fluxcd
+            just
             k9s
             kubectl
             kube-linter
