@@ -23,8 +23,14 @@
     {
       "matchDatasources": ["docker"],
       "matchUpdateTypes": ["digest"],
-      "groupName": "{{packageFile}} Updates",
+      "groupName": "Container Digests",
       "groupSlug": "digest-updates"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest"],
+      "groupName": "Actions Digests",
+      "groupSlug": "all-digest"
     }
   ],
   "customManagers": [
