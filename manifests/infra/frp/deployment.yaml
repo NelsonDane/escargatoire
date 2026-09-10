@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: frp
-          image: ghcr.io/fatedier/frpc:v0.70.1@sha256:890a6546941918aa32a41a55913cfdbdd4e3e8dbce05bc4cead15edd06e7490a
+          image: ghcr.io/fatedier/frpc:v0.71.0@sha256:99ece6a2b62cfc68731e0df289af804ff1c699911cfc47871856434f1d6d53ee
           args: ["-c", "/etc/frpc.toml"]
           ports:
             - name: api
