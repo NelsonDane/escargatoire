@@ -15,6 +15,7 @@
         devShells.default = pkgs.mkShellNoCC {
           packages = with pkgs; [
             fluxcd
+            gnupg
             just
             k9s
             kubectl
@@ -24,6 +25,7 @@
           ];
           KUBECONFIG = "${toString ./.}/kubeconfig";
           TALOSCONFIG = "${toString ./.}/talosconfig";
+          SOPS_AGE_KEY_FILE = "${toString ./.}/key.txt";
         };
       }
     );
