@@ -24,7 +24,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: archive
-          image: atdr.meo.ws/archiveteam/warrior-dockerfile@sha256:cdacda79bc812672975d34867e0a3d08a7681370b3c64633d413e9e1e7a9ab78
+          image: atdr.meo.ws/archiveteam/warrior-dockerfile@sha256:9eaa5a345e7f1eb9a13ce407eb7943463bfa17ad14c0f0174469af8f4c5447c2
           env:
             - name: DOWNLOADER
               value: "GamerSnail"
