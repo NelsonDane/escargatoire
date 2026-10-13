@@ -30,7 +30,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: homepage
-          image: ghcr.io/gethomepage/homepage:latest@sha256:a53cc29a838858950ad3f2e93b2dbfebacbae1c1718cc7b78b1e598867f9dbc1
+          image: ghcr.io/gethomepage/homepage:latest@sha256:5f938df11a6318c0b1d1128f74b93ffdd95f00d03796c11898ebee133723b49b
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
