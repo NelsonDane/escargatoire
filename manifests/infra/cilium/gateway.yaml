@@ -6,10 +6,15 @@ metadata:
 spec:
   gatewayClassName: cilium
   listeners:
-    - name: http
-      protocol: HTTP
+    - name: https-cluster
+      protocol: HTTPS
       hostname: "*.cluster.nelsondane.com"
-      port: 80
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: wildcard-cert-tls
       allowedRoutes:
         namespaces:
           from: All

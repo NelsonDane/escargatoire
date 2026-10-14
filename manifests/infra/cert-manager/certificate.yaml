@@ -11,6 +11,7 @@ spec:
   dnsNames:
     - nelsondane.com
     - "*.nelsondane.com"
+    - "*.cluster.nelsondane.com"
   secretTemplate:
     annotations:
       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
