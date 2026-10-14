@@ -6,6 +6,13 @@ metadata:
 spec:
   gatewayClassName: cilium
   listeners:
+    - name: http-redirect
+      # redirect http -> https
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: https-cluster
       protocol: HTTPS
       hostname: "*.cluster.nelsondane.com"

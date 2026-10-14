@@ -14,5 +14,6 @@ resources:
   - gateway.yaml
   - helm-release.yaml
   - helm-repo.yaml
+  - http-redirect.yaml
   - namespace.yaml
   - route.yaml
