@@ -12,7 +12,7 @@ spec:
       port: 80
       allowedRoutes:
         namespaces:
-          from: All
+          from: Same
     - name: https-cluster
       protocol: HTTPS
       hostname: "*.cluster.nelsondane.com"
