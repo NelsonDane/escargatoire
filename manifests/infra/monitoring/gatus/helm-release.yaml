@@ -16,6 +16,12 @@ spec:
   values:
     image:
       tag: v5.33.1
+    env:
+      DISCORD_WEBHOOK_URL:
+        valueFrom:
+          secretKeyRef:
+            name: gatus-discord-webhook
+            key: address
     config:
       storage:
         type: memory
@@ -28,7 +34,7 @@ spec:
 
       alerting:
         discord:
-          webhook-url: https://discord.com/api/webhooks/1450536334761525452/An5SadqXOZ5GGhaxEByZxk93Zg0WEHSlwStWJwysRsbYl28JTDF6PTMFOwyifwTAD9Rp
+          webhook-url: ${DISCORD_WEBHOOK_URL}
 
       default-endpoint: &defaults
         interval: 1m
