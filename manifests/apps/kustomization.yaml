@@ -8,6 +8,7 @@ resources:
   - ./homepage
   - ./irc
   - ./matrix
+  - ./mealie
   - ./paperless
   - ./pdf
   - ./rss

@@ -1,0 +1,58 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mealie
+  namespace: apps
+spec:
+  interval: 15m
+  chartRef:
+    kind: OCIRepository
+    name: mealie
+    namespace: flux-system
+  values:
+    controllers:
+      main:
+        containers:
+          main:
+            env:
+              TZ: America/New_York
+              ALLOW_SIGNUP: "false"
+              BASE_URL: "https://mealie.cluster.nelsondane.com"
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: false
+              capabilities:
+                drop: ["ALL"]
+              runAsNonRoot: true
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+
+    persistence:
+      data:
+        storageClass: longhorn
+        size: 8Gi
+
+    cluster:
+      enabled: true
+      cluster:
+        storage:
+          storageClass: longhorn-strict-local
+
+    ingress:
+      main:
+        enabled: false
+
+    route:
+      main:
+        enabled: true
+        hostnames:
+          - mealie.cluster.nelsondane.com
+        parentRefs:
+          - name: cilium-gateway
+            namespace: cilium

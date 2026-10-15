@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: mealie
+  namespace: flux-system
+spec:
+  interval: 24h
+  url: oci://ghcr.io/jvalskis/mealie-helm/mealie
+  ref:
+    # renovate: datasource=docker depName=ghcr.io/jvalskis/mealie-helm/mealie
+    tag: 3.1.0
+    digest: sha256:a6a3e8ab64cf01cf1ef4eac1442922d346f0bf562fae47b8f2cf68eca8ae2664
