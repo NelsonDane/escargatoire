@@ -49,7 +49,7 @@ spec:
                 - node
                 - src/scripts/health-check.js
         - name: sync
-          image: docker.io/seriouslag/actual-auto-sync:latest@sha256:ffd8c318900caec19d0edf38bd4f41b0136a31c98ec8bb54bfc14d537379a6f9
+          image: docker.io/seriouslag/actual-auto-sync:latest@sha256:19fb93e71ce530585c745b821c3ed4b3b6acd2fc6057c95b6e1b91a6c38de66f
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
