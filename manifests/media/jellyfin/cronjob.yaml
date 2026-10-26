@@ -20,7 +20,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: jellyfin-dupe-cleaner
-              image: keinos/sqlite3:latest@sha256:a5610a155a8c9007f2050120406a0abcffab246570d6ac1ffe370f5f23e14dc1
+              image: keinos/sqlite3:latest@sha256:9064091a943982e2a90f095219d0d6adec03472f9042529563e3e66c9632af66
               command:
                 - sh
                 - -c
