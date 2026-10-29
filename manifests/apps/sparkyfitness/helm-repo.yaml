@@ -8,5 +8,5 @@ spec:
   url: oci://ghcr.io/codewithcj/charts/sparkyfitness
   ref:
     # renovate: datasource=docker depName=ghcr.io/codewithcj/charts/sparkyfitness
-    tag: 1.9.0
-    digest: sha256:ae2de0a9122807d2885876fc25dec1a3f933c788dda002c0008b6ca68827b51f
+    tag: 1.10.0
+    digest: sha256:74b45f373170ae522983f26b96c990a8c1fc94aa729a38af541fdcba687b643d
