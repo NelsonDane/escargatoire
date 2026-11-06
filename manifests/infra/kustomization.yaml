@@ -9,5 +9,6 @@ resources:
   - ./monitoring
   - ./nfd
   - ./reflector
+  - ./reloader
   - ./renovate
   - ./tuppr
