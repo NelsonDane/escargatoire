@@ -5,6 +5,8 @@ metadata:
   namespace: apps
   labels:
     app: dawarich
+  annotations:
+    ignore-check.kube-linter.io/no-rolling-update-strategy: "Using Recreate strategy to avoid issues with ReadWriteOnce volumes"
 spec:
   replicas: 1
   strategy:
