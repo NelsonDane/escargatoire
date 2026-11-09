@@ -1,0 +1,25 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: dawarich-postgres
+  namespace: apps
+spec:
+  instances: 1
+
+  # Dawarich requires the PostGIS extension, which the stock CNPG Postgres
+  # image doesn't ship. Use CNPG's own PostGIS-flavored image so UIDs and
+  # tooling stay compatible with the operator.
+  imageName: ghcr.io/cloudnative-pg/postgis:15-3.3@sha256:f56e7aaada2dbf651e91e603a8a77477ebf775c0d0326eabfa1ce65a610f574d
+
+  storage:
+    size: 10Gi
+    storageClass: "longhorn-strict-local"
+
+  bootstrap:
+    initdb:
+      database: dawarich
+      owner: dawarich
+      secret:
+        name: dawarich-postgres-credentials
+      postInitApplicationSQL:
+        - CREATE EXTENSION IF NOT EXISTS postgis;

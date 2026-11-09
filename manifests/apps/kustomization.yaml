@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - ./actual
   - ./auto-rsa
+  - ./dawarich
   - ./filestash
   - ./homepage
   - ./irc
