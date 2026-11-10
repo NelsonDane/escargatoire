@@ -115,6 +115,8 @@ spec:
               value: "30"
             - name: ZIP_ENABLE
               value: "TRUE"
+            - name: RCLONE_GLOBAL_FLAG
+              value: "--s3-no-check-bucket"
             - name: RCLONE_CONFIG_ACTUAL-BUDGET-PERSONAL_TYPE
               value: "s3"
             - name: RCLONE_CONFIG_ACTUAL-BUDGET-PERSONAL_PROVIDER
