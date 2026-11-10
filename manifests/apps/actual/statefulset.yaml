@@ -69,7 +69,7 @@ spec:
             - name: LOG_LEVEL
               value: "info"
             - name: RUN_ON_START
-              value: "true"
+              value: "false"
             - name: SKIP_FAILED_ACCOUNTS
               value: "false"
           livenessProbe:
@@ -126,13 +126,15 @@ spec:
           livenessProbe:
             exec:
               command:
-                - /app/healthcheck.sh
+                - pgrep
+                - supercronic
             initialDelaySeconds: 30
             periodSeconds: 60
           readinessProbe:
             exec:
               command:
-                - /app/healthcheck.sh
+                - pgrep
+                - supercronic
             initialDelaySeconds: 5
             periodSeconds: 10
           volumeMounts:
