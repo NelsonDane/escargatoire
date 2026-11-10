@@ -69,7 +69,7 @@ spec:
             - name: LOG_LEVEL
               value: "info"
             - name: RUN_ON_START
-              value: "false"
+              value: "true"
             - name: SKIP_FAILED_ACCOUNTS
               value: "false"
           livenessProbe:
