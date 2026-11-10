@@ -91,8 +91,61 @@ spec:
           volumeMounts:
             - name: sync-data
               mountPath: /data
+        - name: backup
+          image: docker.io/rodriguestiago0/actualbudget-backup:latest@sha256:3426f990964fcc241ae7a49cd6c22f4d18988c13d17214f68dcb28afae09f6cc
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          envFrom:
+            - secretRef:
+                name: actual-backup
+          env:
+            - name: ACTUAL_BUDGET_URL
+              value: "http://actual:5006"
+            - name: CRON
+              value: "0 2 * * *"
+            - name: TIMEZONE
+              value: "America/New_York"
+            - name: BACKUP_KEEP_DAYS
+              value: "30"
+            - name: ZIP_ENABLE
+              value: "TRUE"
+            - name: RCLONE_CONFIG_ACTUALBUDGETBACKUP_TYPE
+              value: "s3"
+            - name: RCLONE_CONFIG_ACTUALBUDGETBACKUP_PROVIDER
+              value: "Cloudflare"
+            - name: RCLONE_REMOTE_NAME
+              value: "actual-budget-personal"
+            - name: RCLONE_REMOTE_DIR
+              value: "/actual-backups/"
+          livenessProbe:
+            exec:
+              command:
+                - /app/healthcheck.sh
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          readinessProbe:
+            exec:
+              command:
+                - /app/healthcheck.sh
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: backup-config
+              mountPath: /config
+            - name: backup-tmp
+              mountPath: /tmp
       volumes:
         - name: sync-data
+          emptyDir: {}
+        - name: backup-config
+          emptyDir: {}
+        - name: backup-tmp
           emptyDir: {}
   volumeClaimTemplates:
     - metadata:
