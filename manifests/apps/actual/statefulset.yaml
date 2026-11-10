@@ -115,9 +115,9 @@ spec:
               value: "30"
             - name: ZIP_ENABLE
               value: "TRUE"
-            - name: RCLONE_CONFIG_ACTUALBUDGETBACKUP_TYPE
+            - name: RCLONE_CONFIG_ACTUAL_BUDGET_PERSONAL_TYPE
               value: "s3"
-            - name: RCLONE_CONFIG_ACTUALBUDGETBACKUP_PROVIDER
+            - name: RCLONE_CONFIG_ACTUAL_BUDGET_PERSONAL_PROVIDER
               value: "Cloudflare"
             - name: RCLONE_REMOTE_NAME
               value: "actual-budget-personal"
