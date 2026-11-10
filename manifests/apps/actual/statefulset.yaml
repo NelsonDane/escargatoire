@@ -122,7 +122,7 @@ spec:
             - name: RCLONE_REMOTE_NAME
               value: "actual-budget-personal"
             - name: RCLONE_REMOTE_DIR
-              value: "/actual-backups/"
+              value: "/actual-budget-personal/"
           livenessProbe:
             exec:
               command:
