@@ -61,9 +61,6 @@ spec:
               value: "24h"
             - name: WIREGUARD_MTU
               value: "1280"
-            # use k8s dns servers
-            - name: DNS_KEEP_NAMESERVER
-              value: "on"
             # allow cluster internal traffic to bypass the VPN
             - name: FIREWALL_OUTBOUND_SUBNETS
               value: "10.96.0.0/12,10.244.0.0/16"
