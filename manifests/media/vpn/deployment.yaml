@@ -105,6 +105,8 @@ spec:
             - name: media
               mountPath: /downloads
               subPath: qbittorrent_downloads
+            - name: cache
+              mountPath: /qbittorrent-downloads
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -144,3 +146,7 @@ spec:
           nfs:
             server: 10.0.2.20
             path: /Shell/media
+        - name: cache
+          nfs:
+            server: 10.0.2.20
+            path: /mnt/cache/qbittorrent-downloads
