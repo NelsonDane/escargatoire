@@ -25,7 +25,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: speedtest-tracker
-          image: lscr.io/linuxserver/speedtest-tracker:latest@sha256:14d56d7c4ff0af18f0a09be8494352ba40d23196e78c5f812cee69afaa1edc45
+          image: lscr.io/linuxserver/speedtest-tracker:latest@sha256:132d35a355474be17822e2ff3df4866407187ca978a768935fea06f52ae24493
           ports:
             - containerPort: 80
           envFrom:
