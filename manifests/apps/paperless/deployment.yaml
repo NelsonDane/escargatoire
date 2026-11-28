@@ -137,7 +137,7 @@ spec:
               port: 9998
             initialDelaySeconds: 20
         - name: gotenberg
-          image: gotenberg/gotenberg:8.40@sha256:53073e798c8ef39ea2187e44cb67bab77894ea2509100b94c4fe3b461f7b2996
+          image: gotenberg/gotenberg:9.10@sha256:a7726e0f52a4344656031393f0f61fdf35cd28aaf697c7ac3aea9519d72d726e
           args:
             - "gotenberg"
             - "--chromium-disable-javascript=true"
