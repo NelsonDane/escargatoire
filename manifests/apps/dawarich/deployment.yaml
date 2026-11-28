@@ -116,7 +116,7 @@ spec:
               memory: "3Gi"
               cpu: "2000m"
         - name: redis
-          image: valkey/valkey:9-alpine@sha256:48332870af354a799964c0012ae1194a0bf2bf894eb508f945810596dc2d8d11
+          image: valkey/valkey:9-alpine@sha256:3ad5a213cb1bc2fd4a113c89b6248a88655a6bf1dda69519d04e03cd3e3d2742
           command: ["valkey-server"]
           args: ["--save", "", "--appendonly", "no"]
           ports:
